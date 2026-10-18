@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Логотип в интерфейсе · startupbase.uno</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../blog.css">
+<style>
+  .acc,.up,.dot{color:var(--teal)}
+
+  /* ЗНАК ЛОГОТИПА — брендовый элемент: заливка бирюзой разрешена внутри .mk.
+     Это зафиксированное исключение из правила «бирюза только текст / 1px рамка / свечение». */
+  .mk{display:block}
+  .mk .t{fill:var(--teal)}
+  .mk .s{fill:none;stroke:var(--teal)}
+  .mk path{stroke-linecap:round;stroke-linejoin:round}
+  .mk .panel{fill:var(--bg-3);stroke:var(--border-2)}
+  .mk .panel--deep{fill:#050807;stroke:rgba(255,255,255,.12)}
+
+  /* знак в навбаре: 24px, выровнен по оптической середине строки 17px */
+  .nav-wordmark{gap:9px}
+  .nav-wordmark .mk{width:24px;height:24px;margin:-3px 0;flex:0 0 auto}
+
+  /* каркас страницы предпросмотра */
+  .pv{max-width:1240px;margin:0 auto;padding:40px 24px 96px}
+  .pv h1{font-size:30px;letter-spacing:-.035em;margin:0 0 14px}
+  .lead{color:var(--fg-2);font-size:16px;line-height:1.6;max-width:900px;margin:0 0 10px}
+  .hint{font-family:var(--font-mono);font-size:13px;color:var(--fg-3);margin:0 0 40px}
+  .blk{margin-bottom:44px}
+  .blk__cap{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;color:var(--teal);margin-bottom:10px}
+  .blk__note{color:var(--fg-2);font-size:13px;line-height:1.6;margin-top:10px;max-width:840px}
+  .frame{border:1px solid var(--border-1);border-radius:var(--r-xl);overflow:hidden;background:#050807}
+  .frame--pad{padding:22px}
+  /* в предпросмотре навбар не липнет, чтобы пять блоков не накладывались */
+  .pv .nav{position:static}
+
+  .favline{display:flex;align-items:flex-end;gap:22px;padding:12px 0;border-bottom:1px solid var(--border-1)}
+  .favline:last-child{border-bottom:0;padding-bottom:0}
+  .mono-id{font-family:var(--font-mono);font-size:11px;color:var(--fg-4);width:104px;flex:0 0 auto}
+  .fav{display:inline-flex;flex-direction:column;align-items:center;gap:7px}
+  .fav i{font-family:var(--font-mono);font-size:10px;font-style:normal;color:var(--fg-4)}
+
+  .tiles{display:grid;gap:16px;grid-template-columns:repeat(2,1fr)}
+  .tile{display:flex;align-items:center;gap:14px;padding:22px 24px;background:var(--bg-light-1);border:1px solid var(--border-light-1);border-radius:var(--r-xl);
+        --teal:var(--teal-on-light)}
+  .tile .mk{color:var(--fg-light-1)}
+  .tile .mk .panel{fill:var(--bg-light-2);stroke:var(--border-light-2)}
+  .tile__w{font-weight:600;font-size:24px;letter-spacing:-.03em;color:var(--fg-light-1);white-space:nowrap}
+  @media (max-width:720px){
+    .pv{padding:28px 16px 72px}
+    .favline{flex-wrap:wrap;gap:16px}
+    .tiles{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="pv">
+  <div class="eyebrow">startupbase.uno · предпросмотр</div>
+  <h1>Логотип в интерфейсе</h1>
+  <p class="lead">Пять навбаров блога с разными лок-апами, полоса фавиконов 16 / 32 / 64px на фоне #050807 и плитки на светлом фоне. Стили подключены напрямую — ../colors_and_type.css и ../blog.css, то есть токены и классы боевых страниц.</p>
+  <p class="hint"><a href="logos.html">← все варианты знака и написания (logos.html)</a></p>
+
+  <div class="blk">
+    <div class="blk__cap">эталон · навбар как сейчас</div>
+    <nav class="nav">
+      <div class="container nav-inner">
+        <div class="nav-left">
+          <a class="nav-wordmark" href="index.html">startupbase<span class="acc">.uno</span></a>
+          <div class="nav-links">
+            <a href="index.html" class="on">Блог</a>
+            <a href="category.html">Рубрики</a>
+            <a href="search.html">Поиск</a>
+            <a href="author.html">Авторы</a>
+          </div>
+        </div>
+        <div class="nav-right">
+          <a href="index.html" class="nav-login">startupbase.uno</a>
+          <a href="index.html#subscribe" class="btn-sm">Подписаться →</a>
+        </div>
+      </div>
+    </nav>
+    <p class="blk__note">Разметка и классы навбара взяты из index.html без изменений; для предпросмотра ссылки относительные, а .nav переведён в position:static, чтобы пять блоков не липли друг к другу при прокрутке.</p>
+  </div>
+
+  <div class="blk">
+    <div class="blk__cap">M1 + W1</div>
+    <nav class="nav">
+      <div class="container nav-inner">
+        <div class="nav-left">
+          <a class="nav-wordmark" href="index.html"><svg class="mk" viewBox="0 0 32 32" width="24" height="24" role="img" aria-label="M1 Ступени"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg>startupbase<span class="acc">.uno</span></a>
+          <div class="nav-links">
+            <a href="index.html" class="on">Блог</a>
+            <a href="category.html">Рубрики</a>
+            <a href="search.html">Поиск</a>
+            <a href="author.html">Авторы</a>
+          </div>
+        </div>
+        <div class="nav-right">
+          <a href="index.html" class="nav-login">startupbase.uno</a>
+          <a href="index.html#subscribe" class="btn-sm">Подписаться →</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="blk">
+    <div class="blk__cap">M3 + W1</div>
+    <nav class="nav">
+      <div class="container nav-inner">
+        <div class="nav-left">
+          <a class="nav-wordmark" href="index.html"><svg class="mk" viewBox="0 0 32 32" width="24" height="24" role="img" aria-label="M3 Ноды"><path d="M8 23H24" fill="none" stroke="currentColor" stroke-width="2" opacity=".25"/><path d="M16 9L8 23" fill="none" stroke="currentColor" stroke-width="2" opacity=".5"/><path d="M16 9L24 23" fill="none" stroke="currentColor" stroke-width="2" opacity=".5"/><circle cx="8" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle cx="24" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle class="t" cx="16" cy="9" r="3.6"/></svg>startupbase<span class="acc">.uno</span></a>
+          <div class="nav-links">
+            <a href="index.html" class="on">Блог</a>
+            <a href="category.html">Рубрики</a>
+            <a href="search.html">Поиск</a>
+            <a href="author.html">Авторы</a>
+          </div>
+        </div>
+        <div class="nav-right">
+          <a href="index.html" class="nav-login">startupbase.uno</a>
+          <a href="index.html#subscribe" class="btn-sm">Подписаться →</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="blk">
+    <div class="blk__cap">M4 + W3</div>
+    <nav class="nav">
+      <div class="container nav-inner">
+        <div class="nav-left">
+          <a class="nav-wordmark" href="index.html"><svg class="mk" viewBox="0 0 32 32" width="24" height="24" role="img" aria-label="M4 Промпт"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg>Start<span class="up">UP</span>Base</a>
+          <div class="nav-links">
+            <a href="index.html" class="on">Блог</a>
+            <a href="category.html">Рубрики</a>
+            <a href="search.html">Поиск</a>
+            <a href="author.html">Авторы</a>
+          </div>
+        </div>
+        <div class="nav-right">
+          <a href="index.html" class="nav-login">startupbase.uno</a>
+          <a href="index.html#subscribe" class="btn-sm">Подписаться →</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="blk">
+    <div class="blk__cap">M5 + W1</div>
+    <nav class="nav">
+      <div class="container nav-inner">
+        <div class="nav-left">
+          <a class="nav-wordmark" href="index.html"><svg class="mk" viewBox="0 0 32 32" width="24" height="24" role="img" aria-label="M5 Ромб"><rect class="panel--deep" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="t" d="M16 8.5 L23.5 16 L16 23.5 L8.5 16 Z"/></svg>startupbase<span class="acc">.uno</span></a>
+          <div class="nav-links">
+            <a href="index.html" class="on">Блог</a>
+            <a href="category.html">Рубрики</a>
+            <a href="search.html">Поиск</a>
+            <a href="author.html">Авторы</a>
+          </div>
+        </div>
+        <div class="nav-right">
+          <a href="index.html" class="nav-login">startupbase.uno</a>
+          <a href="index.html#subscribe" class="btn-sm">Подписаться →</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="blk">
+    <div class="blk__cap">фавиконы 16 / 32 / 64px · фон #050807</div>
+    <div class="frame frame--pad">
+      <div class="favline"><span class="mono-id">M1 · Ступени</span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="16" height="16"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg><i>16</i></span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg><i>32</i></span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="64" height="64"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg><i>64</i></span></div>
+      <div class="favline"><span class="mono-id">M2 · Шевроны</span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="16" height="16"><path class="s" d="M6 17 L16 8 L26 17" stroke-width="3"/><path d="M6 25 L16 16 L26 25" fill="none" stroke="currentColor" stroke-width="3" opacity=".8"/></svg><i>16</i></span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><path class="s" d="M6 17 L16 8 L26 17" stroke-width="3"/><path d="M6 25 L16 16 L26 25" fill="none" stroke="currentColor" stroke-width="3" opacity=".8"/></svg><i>32</i></span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="64" height="64"><path class="s" d="M6 17 L16 8 L26 17" stroke-width="3"/><path d="M6 25 L16 16 L26 25" fill="none" stroke="currentColor" stroke-width="3" opacity=".8"/></svg><i>64</i></span></div>
+      <div class="favline"><span class="mono-id">M3 · Ноды</span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="16" height="16"><path d="M8 23H24" fill="none" stroke="currentColor" stroke-width="2" opacity=".25"/><path d="M16 9L8 23" fill="none" stroke="currentColor" stroke-width="2" opacity=".5"/><path d="M16 9L24 23" fill="none" stroke="currentColor" stroke-width="2" opacity=".5"/><circle cx="8" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle cx="24" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle class="t" cx="16" cy="9" r="3.6"/></svg><i>16</i></span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><path d="M8 23H24" fill="none" stroke="currentColor" stroke-width="2" opacity=".25"/><path d="M16 9L8 23" fill="none" stroke="currentColor" stroke-width="2" opacity=".5"/><path d="M16 9L24 23" fill="none" stroke="currentColor" stroke-width="2" opacity=".5"/><circle cx="8" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle cx="24" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle class="t" cx="16" cy="9" r="3.6"/></svg><i>32</i></span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="64" height="64"><path d="M8 23H24" fill="none" stroke="currentColor" stroke-width="2" opacity=".25"/><path d="M16 9L8 23" fill="none" stroke="currentColor" stroke-width="2" opacity=".5"/><path d="M16 9L24 23" fill="none" stroke="currentColor" stroke-width="2" opacity=".5"/><circle cx="8" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle cx="24" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle class="t" cx="16" cy="9" r="3.6"/></svg><i>64</i></span></div>
+      <div class="favline"><span class="mono-id">M4 · Промпт</span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="16" height="16"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><i>16</i></span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><i>32</i></span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="64" height="64"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><i>64</i></span></div>
+      <div class="favline"><span class="mono-id">M5 · Ромб</span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="16" height="16"><rect class="panel--deep" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="t" d="M16 8.5 L23.5 16 L16 23.5 L8.5 16 Z"/></svg><i>16</i></span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect class="panel--deep" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="t" d="M16 8.5 L23.5 16 L16 23.5 L8.5 16 Z"/></svg><i>32</i></span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="64" height="64"><rect class="panel--deep" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="t" d="M16 8.5 L23.5 16 L16 23.5 L8.5 16 Z"/></svg><i>64</i></span></div>
+      <div class="favline"><span class="mono-id">M6 · Модуль</span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="16" height="16"><rect x="5" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="16" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="5" y="16" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect class="t" x="16" y="16" width="11" height="11" rx="3"/></svg><i>16</i></span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect x="5" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="16" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="5" y="16" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect class="t" x="16" y="16" width="11" height="11" rx="3"/></svg><i>32</i></span><span class="fav"><svg class="mk" viewBox="0 0 32 32" width="64" height="64"><rect x="5" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="16" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="5" y="16" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect class="t" x="16" y="16" width="11" height="11" rx="3"/></svg><i>64</i></span></div>
+    </div>
+    <p class="blk__note">Знак M5 — текущий фавикон, приведённый к сетке 32×32: он идёт первым в списке сравнения по читаемости в 16px вместе со ступенями.</p>
+  </div>
+
+  <div class="blk">
+    <div class="blk__cap">логотип на светлом фоне · --bg-light-1</div>
+    <div class="tiles">
+      <div class="tile"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg><span class="tile__w">startupbase<span class="acc">.uno</span></span></div>
+      <div class="tile"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg><span class="tile__w">Start<span class="up">UP</span>Base</span></div>
+      <div class="tile"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="tile__w">startupbase<span class="acc">.uno</span></span></div>
+      <div class="tile"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="tile__w">Start<span class="up">UP</span>Base</span></div>
+    </div>
+    <p class="blk__note">На светлом фоне бирюза заменена на --teal-on-light (#009E8A) — иначе контраст к #FAFBFA не проходит по AA, а нейтральные части знака уходят в --fg-light-1.</p>
+  </div>
+</div>
+</body>
+</html>
