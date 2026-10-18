@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Логотип: анимация · startupbase.uno</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../blog.css">
+<link rel="stylesheet" href="ds.css">
+<style>
+
+  html,body{background:var(--bg-1)}
+  body{padding:56px 40px 110px}
+  .pg-wrap{max-width:1240px;margin:0 auto}
+  h1{font-size:34px;font-weight:600;letter-spacing:-.035em;margin:0 0 16px}
+  .lead{color:var(--text-2);font-size:16px;line-height:1.65;max-width:940px;margin-bottom:12px}
+  .hint{font-family:var(--font-mono);font-size:13px;color:var(--text-3);margin-bottom:48px}
+  .pg-note{font-family:var(--font-mono);font-size:13px;line-height:1.6;color:var(--text-3);max-width:940px;margin:-14px 0 22px}
+  section{margin-bottom:76px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+  .sec-num{font-family:var(--font-mono);font-size:13px;color:var(--teal)}
+  h2{font-size:22px;font-weight:600;letter-spacing:-.02em;margin:0}
+  .sec-sub{color:var(--text-2);font-size:14px;line-height:1.6;max-width:860px;margin-bottom:26px}
+  .grid{display:grid;gap:20px}
+  .grid--2{grid-template-columns:repeat(2,1fr)}
+  .grid--3{grid-template-columns:repeat(3,1fr)}
+  .grid--4{grid-template-columns:repeat(4,1fr)}
+  .card{padding:22px}
+  .lg-id{font-family:var(--font-mono);font-size:13px;letter-spacing:.04em;color:var(--teal);display:flex;align-items:center;gap:10px}
+  .lg-why{color:var(--text-2);font-size:13px;line-height:1.5;margin:8px 0 18px;min-height:56px}
+  .lg-stage{display:flex;align-items:center;min-height:64px}
+  .lg-mono{font-family:var(--font-mono);font-size:12px;line-height:1.5;color:var(--text-3);margin-top:14px;padding-top:12px;border-top:1px solid var(--border-1)}
+  .pg-navwrap{margin-bottom:14px}
+  .pg-navwrap .nav{position:static;top:auto;z-index:auto;border-radius:var(--r-lg);overflow:hidden}
+  .pg-navwrap .nav .container{max-width:none;padding-left:20px;padding-right:20px}
+  .pg-navcap{font-family:var(--font-mono);font-size:12px;color:var(--text-3);margin:0 0 26px 4px}
+  .tile{display:flex;align-items:center;justify-content:center;background:var(--bg-light-1);border:1px solid var(--border-light-1);border-radius:var(--r-lg);padding:22px;min-height:104px}
+  .tile .mk{--teal:var(--teal-on-light);color:var(--fg-light-1)}
+  .tile .mk .panel{fill:var(--bg-light-2);stroke:var(--border-light-2)}
+  .tile .pg-lg{--teal:var(--teal-on-light);color:var(--fg-light-1)}
+  .tile .pg-lg .mk .panel{fill:var(--bg-light-2);stroke:var(--border-light-2)}
+  .pg-sizes{display:grid;gap:18px;grid-template-columns:repeat(4,1fr);align-items:end}
+  .pg-size{display:flex;flex-direction:column;align-items:flex-start;gap:14px;min-height:104px;justify-content:flex-end}
+  .pg-size i{font-family:var(--font-mono);font-size:11px;font-style:normal;color:var(--text-3)}
+  .pg-staticrow{display:flex;align-items:center;gap:20px}
+  .links{display:flex;gap:22px;flex-wrap:wrap;margin-top:6px}
+  .links a{font-family:var(--font-mono);font-size:14px;border-bottom:1px solid var(--border-2);padding-bottom:3px;text-decoration:none}
+  pre.code{font-family:var(--font-mono);font-size:13px;line-height:1.6;color:var(--text-1);background:var(--bg-2);border:1px solid var(--border-1);border-radius:var(--r-lg);padding:18px 20px;margin:0 0 22px;white-space:pre-wrap}
+  ul.todo{list-style:none;padding:0;margin:0}
+  ul.todo li{color:var(--text-2);font-size:14px;line-height:1.7;padding-left:18px;position:relative}
+  ul.todo li::before{content:"—";position:absolute;left:0;color:var(--text-3);font-family:var(--font-mono)}
+  @media (max-width:900px){
+    body{padding:32px 20px 72px}
+    .grid--2,.grid--3,.grid--4,.pg-sizes{grid-template-columns:1fr}
+    .lg-why{min-height:0}
+  }
+
+/* ---------- токены светлой темы (как в logos.html, локально) ---------- */
+:root{
+  --bg-light-1:#FAFBFA; --bg-light-2:#F2F4F3; --fg-light-1:#0A0F0D;
+  --border-light-1:rgba(10,15,13,.08); --border-light-2:rgba(10,15,13,.14);
+  --teal-on-light:#009E8A;
+}
+
+/* ---------- ЗНАК M4: брендовый элемент, заливка бирюзой разрешена внутри .mk ---------- */
+.mk{display:block}
+.mk .t{fill:var(--teal)}
+.mk .s{fill:none;stroke:var(--teal)}
+.mk path{stroke-linecap:round;stroke-linejoin:round}
+.mk .panel{fill:var(--bg-3);stroke:var(--border-2)}
+
+/* ---------- КОМПОНЕНТ: лок-ап M4 + печать + курсор ---------- */
+@keyframes pg-type{to{clip-path:inset(0 0 0 0)}}
+@keyframes pg-caret-move{from{left:0}to{left:calc(100% - .14em)}}
+@keyframes pg-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes pg-type-a2{
+  0%{clip-path:inset(0 100% 0 0)}
+  28.571%{clip-path:inset(0 0 0 0)}
+  73.214%{clip-path:inset(0 0 0 0)}
+  82.143%{clip-path:inset(0 100% 0 0)}
+  100%{clip-path:inset(0 100% 0 0)}
+}
+@keyframes pg-caret-a2{
+  0%{left:0}
+  28.571%{left:calc(100% - .14em)}
+  73.214%{left:calc(100% - .14em)}
+  82.143%{left:0}
+  100%{left:0}
+}
+
+.pg-lg{
+  display:inline-flex;align-items:center;gap:.52em;
+  font-weight:600;letter-spacing:-.02em;color:var(--fg-1);
+  text-decoration:none;white-space:nowrap;
+  --pg-mark:18px;--pg-type:1.6s;--pg-blink:1.2s;
+}
+.pg-lg .acc{color:var(--teal)}
+.pg-lg__box{display:inline-flex;align-items:center;gap:.52em;white-space:nowrap}
+.pg-lg__mark{width:var(--pg-mark);height:var(--pg-mark);flex:0 0 auto}
+.pg-lg__type{position:relative;display:inline-block;white-space:nowrap}
+/* резервирует полную ширину слова: навбар не прыгает ни на одном кадре */
+.pg-lg__ghost{visibility:hidden}
+.pg-lg__clip{
+  position:absolute;left:0;top:0;white-space:nowrap;
+  clip-path:inset(0 100% 0 0);
+  animation:pg-type var(--pg-type) steps(15,end) 0s both;
+}
+/* курсор: полоса, идёт синхронно с открытым текстом, потом мигает */
+.pg-lg__caret{
+  position:absolute;top:auto;bottom:.02em;left:0;
+  width:.14em;height:.1em;border-radius:.02em;background:var(--teal);
+  animation:pg-caret-move var(--pg-type) steps(15,end) 0s both,
+            pg-blink var(--pg-blink) steps(1,end) var(--pg-type) infinite;
+}
+/* мигающий _ внутри знака: <rect class="t blink" .../> */
+.mk .t.blink{animation:pg-blink 1.2s steps(1,end) infinite}
+.pg-lg .mk .t.blink{animation:pg-blink var(--pg-blink) steps(1,end) infinite}
+.mk .t.blink--06{animation-duration:.6s}
+
+/* S — скорость: печать / мигание */
+.pg-lg--s1{--pg-type:1.6s;--pg-blink:1.2s}
+.pg-lg--s2{--pg-type:1.1s;--pg-blink:.9s}
+.pg-lg--s3{--pg-type:.8s;--pg-blink:.6s}
+
+/* размеры: 17px — размер навбара, далее рабочие */
+.pg-lg--17{--pg-mark:18px;font-size:17px}
+.pg-lg--24{--pg-mark:24px;font-size:24px}
+.pg-lg--32{--pg-mark:32px;font-size:32px}
+.pg-lg--48{--pg-mark:48px;font-size:48px}
+
+/* C — стиль курсора */
+.pg-lg--c2 .pg-lg__caret{top:0;bottom:auto;width:.1em;height:1.02em;border-radius:0}
+.pg-lg--c3 .pg-lg__caret{
+  top:0;bottom:auto;width:.5em;height:1.02em;background:none;color:var(--teal);
+  font-size:.85em;display:inline-flex;align-items:center;justify-content:center;
+}
+.pg-lg--c3 .pg-lg__caret::after{content:"\203A"}
+.pg-lg--c4 .pg-lg__caret{display:none}
+.pg-lg--c4 .mk .t.blink{animation:pg-blink var(--pg-blink) steps(1,end) infinite}
+
+/* A — сценарии */
+.pg-lg--a2 .pg-lg__clip{animation:pg-type-a2 5.6s steps(15,end) 0s infinite}
+.pg-lg--a2 .pg-lg__caret{animation:pg-caret-a2 5.6s steps(15,end) 0s infinite}
+.pg-lg--a3 .pg-lg__clip{clip-path:none;animation:none}
+.pg-lg--a3 .pg-lg__caret{
+  left:calc(100% - .14em);
+  animation:pg-blink var(--pg-blink) steps(1,end) infinite;
+}
+
+/* статичный финальный кадр: слово целиком, курсор видим, мигания нет */
+.pg-lg--static .pg-lg__clip{clip-path:none;animation:none}
+.pg-lg--static .pg-lg__caret{left:calc(100% - .14em);opacity:1;animation:none}
+.pg-lg--static .mk .t.blink{animation:none}
+
+/* снижение движения: показываем финальный кадр без анимации */
+@media (prefers-reduced-motion: reduce){
+  .pg-lg__clip{clip-path:none;animation:none}
+  .pg-lg__caret{left:calc(100% - .14em);animation:none;opacity:1}
+  .mk .t.blink,.mk .t.blink--06,
+  .pg-lg .mk .t.blink,.pg-lg--c4 .mk .t.blink{animation:none;opacity:1}
+  /* перебиваем вариантные селекторы по специфичности */
+  .pg-lg.pg-lg--a2 .pg-lg__clip,
+  .pg-lg.pg-lg--a3 .pg-lg__clip,
+  .pg-lg.pg-lg--static .pg-lg__clip{clip-path:none;animation:none}
+  .pg-lg.pg-lg--a2 .pg-lg__caret,
+  .pg-lg.pg-lg--a3 .pg-lg__caret{left:calc(100% - .14em);animation:none;opacity:1}
+  .pg-lg.pg-lg--a2 .mk .t.blink,
+  .pg-lg.pg-lg--a3 .mk .t.blink,
+  .pg-lg.pg-lg--c4 .mk .t.blink,
+  .pg-lg.pg-lg--static .mk .t.blink{animation:none}
+}
+
+</style>
+</head>
+<body>
+<div class="pg-wrap">
+  <div class="eyebrow">startupbase.uno · предпросмотр</div>
+  <h1>Логотип: анимация</h1>
+  <p class="lead">Выбран знак M4 («Промпт»: плитка + каретка + подчёркивание). Здесь показано, как он работает в паре со словесным знаком: M4 набирает «startupbase.uno» и держит медленно мигающий курсор. Три скорости, три сценария, четыре стиля курсора и рабочие размеры — чтобы выбрать один вариант.</p>
+  <p class="hint">Как отвечать: A1 · S2 · C1 — коды подписаны моно-шрифтом.</p>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><h2>В навбаре</h2></div>
+    <p class="sec-sub">Сверху — настоящий навбар блога как есть, без знака. Ниже тот же навбар, где словесный знак заменён на лок-ап M4 с печатью. Слово набирается 15 шагами, ширина резервируется скрытой копией слова, поэтому навбар не двигается ни на одном кадре.</p>
+    <p class="pg-note">разметка навбара взята из index.html дословно; единственное отличие — ссылка в правом углу ведёт на ../index.html, чтобы на этой превью-странице не было внешних ссылок.</p>
+<div class="pg-navwrap"><nav class="nav"><div class="container nav-inner"><div class="nav-left"><a class="nav-wordmark" href="index.html">startupbase<span class="acc">.uno</span></a><div class="nav-links"><a href="index.html" class="on">Блог</a><a href="category.html">Рубрики</a><a href="search.html">Поиск</a><a href="author.html">Авторы</a></div></div><div class="nav-right"><a href="../index.html" class="nav-login">startupbase.uno</a><a href="index.html#subscribe" class="btn-sm">Подписаться →</a></div></div></nav></div><p class="pg-navcap">эталон: навбар из index.html как есть, без знака</p><div class="pg-navwrap"><nav class="nav"><div class="container nav-inner"><div class="nav-left"><a class="nav-wordmark pg-lg pg-lg--17 pg-lg--c1 pg-lg--s1" href="index.html"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></a><div class="nav-links"><a href="index.html" class="on">Блог</a><a href="category.html">Рубрики</a><a href="search.html">Поиск</a><a href="author.html">Авторы</a></div></div><div class="nav-right"><a href="../index.html" class="nav-login">startupbase.uno</a><a href="index.html#subscribe" class="btn-sm">Подписаться →</a></div></div></nav></div><p class="pg-navcap">S1 · печать 1.6 s · мигание 1.2 s</p><div class="pg-navwrap"><nav class="nav"><div class="container nav-inner"><div class="nav-left"><a class="nav-wordmark pg-lg pg-lg--17 pg-lg--c1 pg-lg--s2" href="index.html"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></a><div class="nav-links"><a href="index.html" class="on">Блог</a><a href="category.html">Рубрики</a><a href="search.html">Поиск</a><a href="author.html">Авторы</a></div></div><div class="nav-right"><a href="../index.html" class="nav-login">startupbase.uno</a><a href="index.html#subscribe" class="btn-sm">Подписаться →</a></div></div></nav></div><p class="pg-navcap">S2 · печать 1.1 s · мигание 0.9 s</p><div class="pg-navwrap"><nav class="nav"><div class="container nav-inner"><div class="nav-left"><a class="nav-wordmark pg-lg pg-lg--17 pg-lg--c1 pg-lg--s3" href="index.html"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></a><div class="nav-links"><a href="index.html" class="on">Блог</a><a href="category.html">Рубрики</a><a href="search.html">Поиск</a><a href="author.html">Авторы</a></div></div><div class="nav-right"><a href="../index.html" class="nav-login">startupbase.uno</a><a href="index.html#subscribe" class="btn-sm">Подписаться →</a></div></div></nav></div><p class="pg-navcap">S3 · печать 0.8 s · мигание 0.6 s</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><h2>Сценарии</h2></div>
+    <p class="sec-sub">Три поведения одного и того же лок-апа в 24px. Длительности печати одинаковые (1.6 s, 15 шагов), различается только то, что происходит после.</p>
+    <div class="grid grid--3"><article class="card"><div class="lg-id">A1<span class="chip chip--on">рекомендую</span></div><p class="lg-why">Печать один раз, слово остаётся, курсор мигает дальше. Для навбара блога: логотип набирается при загрузке и больше не отвлекает.</p><div class="lg-stage"><span class="pg-lg pg-lg--24 pg-lg--c1"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></span></div><p class="lg-mono">таймлайн: печать 1.6 s (15 шагов) → стоп → мигание 1.2 s infinite</p></article><article class="card"><div class="lg-id">A2</div><p class="lg-why">Цикл с паузой и стиранием: печать, пауза, стирание ступенями в обратную сторону, пауза, снова печать.</p><div class="lg-stage"><span class="pg-lg pg-lg--24 pg-lg--c1 pg-lg--a2"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></span></div><p class="lg-mono">таймлайн: печать 1.6 s → пауза 2.5 s → стирание 0.5 s (15 шагов назад) → пауза 1 s · цикл 5.6 s</p></article><article class="card"><div class="lg-id">A3</div><p class="lg-why">Текст стоит на месте, мигает только курсор. Самое тихое поведение, хорошо для длинной страницы.</p><div class="lg-stage"><span class="pg-lg pg-lg--24 pg-lg--c1 pg-lg--a3"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></span></div><p class="lg-mono">таймлайн: печать нет · мигание 1.2 s infinite</p></article></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2>Курсор</h2></div>
+    <p class="sec-sub">Четыре стиля курсора на одном лок-апе: меняется только форма, движение по строке одно и то же.</p>
+    <div class="grid grid--4"><article class="card"><div class="lg-id">C1</div><p class="lg-why">Подчёркивание «_»: ширина .14em, высота .1em, стоит внизу строки. Совпадает по форме с подчёркиванием внутри знака M4.</p><div class="lg-stage"><span class="pg-lg pg-lg--24 pg-lg--c1"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></span></div><p class="lg-mono">курсор: _ · .14em × .1em · внизу строки</p></article><article class="card"><div class="lg-id">C2</div><p class="lg-why">Вертикальная полоса «|»: ширина .1em, высота 1.02em. Классический терминальный вид, чуть суше.</p><div class="lg-stage"><span class="pg-lg pg-lg--24 pg-lg--c1 pg-lg--c2"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></span></div><p class="lg-mono">курсор: | · .1em × 1.02em</p></article><article class="card"><div class="lg-id">C3</div><p class="lg-why">Каретка «›» вместо полосы: мигает сам символ. Больше похоже на приглашение к вводу, чем на курсор текста.</p><div class="lg-stage"><span class="pg-lg pg-lg--24 pg-lg--c1 pg-lg--c3"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></span></div><p class="lg-mono">курсор: › · .5em × 1.02em · мигает символ</p></article><article class="card"><div class="lg-id">C4</div><p class="lg-why">Внешнего курсора нет: мигает только «_» внутри знака M4, слово набирается молча.</p><div class="lg-stage"><span class="pg-lg pg-lg--24 pg-lg--c1 pg-lg--c4"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></span></div><p class="lg-mono">курсор: нет · мигание _ внутри знака 1.2 s</p></article></div>
+    <p class="sec-sub" style="margin-top:26px">Курсор внутри знака: подчёркивание «_» внутри M4 мигает на двух скоростях.</p>
+    <div class="grid grid--2"><article class="card"><div class="lg-id">M4 96px · _ мигает 1.2 s</div><div class="lg-stage"><svg class="mk" viewBox="0 0 32 32" width="96" height="96" role="img" aria-label="M4 Промпт"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg></div><p class="lg-mono">анимация: pg-blink 1.2 s steps(1,end) infinite</p></article><article class="card"><div class="lg-id">M4 96px · _ мигает 0.6 s</div><div class="lg-stage"><svg class="mk" viewBox="0 0 32 32" width="96" height="96" role="img" aria-label="M4 Промпт"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink blink--06" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg></div><p class="lg-mono">анимация: pg-blink 0.6 s steps(1,end) infinite</p></article></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">04</span><h2>Размеры и места</h2></div>
+    <p class="sec-sub">Анимированный лок-ап в рабочих размерах: 17px — размер навбара, дальше 24, 32 и 48px. Справа статичный знак 16px.</p>
+    <div class="grid grid--4"><div class="pg-size"><span class="pg-lg pg-lg--17 pg-lg--c1"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="18" height="18" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></span><i>17px · размер навбара</i></div><div class="pg-size"><span class="pg-lg pg-lg--24 pg-lg--c1"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></span><i>24px</i></div><div class="pg-size"><span class="pg-lg pg-lg--32 pg-lg--c1"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></span><i>32px</i></div><div class="pg-size"><span class="pg-lg pg-lg--48 pg-lg--c1"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="48" height="48" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></span><i>48px</i></div><div class="pg-size"><svg class="mk" viewBox="0 0 32 32" width="16" height="16" role="img" aria-label="M4 Промпт"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><i>16px · статично</i></div></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">05</span><h2>Светлый фон</h2></div>
+    <p class="sec-sub">Два сценария на светлой плитке (--bg-light-1): A1 (печать один раз) и A3 (мигает только курсор). Токены те же, что на боевых страницах: --teal-on-light, --bg-light-2.</p>
+    <div class="grid grid--2"><div class="tile"><span class="pg-lg pg-lg--24 pg-lg--c1"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></span></div><div class="tile"><span class="pg-lg pg-lg--24 pg-lg--c1 pg-lg--a3"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></span></div></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">06</span><h2>При „уменьшить движение“</h2></div>
+    <p class="sec-sub">Системная настройка «уменьшить движение» (macOS, iOS) или «уменьшить анимацию» (Windows) выключает анимацию: страница показывает финальный кадр — слово целиком, курсор видим, мигания нет, ширина строки не меняется.</p>
+    <div class="card"><div class="lg-stage"><span class="pg-lg pg-lg--32 pg-lg--c1 pg-lg--static"><span class="pg-lg__box" role="img" aria-label="startupbase.uno"><svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="pg-lg__type"><span class="pg-lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="pg-lg__caret" aria-hidden="true"></span></span></span></span></div><p class="lg-mono">кадр без анимации: слово целиком, курсор видим, opacity 1, ширина та же</p></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">07</span><h2>Код компонента</h2></div>
+    <p class="sec-sub">Готовый фрагмент для вставки в боевые страницы: разметка лок-апа, ключевые кадры и медиазапрос снижения движения. Скриптов нет — только CSS.</p>
+    <pre class="code">&lt;a class="nav-wordmark pg-lg pg-lg--17 pg-lg--s1 pg-lg--c1" href="index.html"&gt;
+  &lt;span class="pg-lg__box" role="img" aria-label="startupbase.uno"&gt;
+    &lt;svg class="mk pg-lg__mark" viewBox="0 0 32 32" width="18" height="18" aria-hidden="true"&gt;
+      &lt;rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/&gt;
+      &lt;path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/&gt;
+      &lt;rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/&gt;
+    &lt;/svg&gt;
+    &lt;span class="pg-lg__type"&gt;
+      &lt;span class="pg-lg__ghost" aria-hidden="true"&gt;startupbase&lt;span class="acc"&gt;.uno&lt;/span&gt;&lt;/span&gt;
+      &lt;span class="pg-lg__clip" aria-hidden="true"&gt;startupbase&lt;span class="acc"&gt;.uno&lt;/span&gt;&lt;/span&gt;
+      &lt;span class="pg-lg__caret" aria-hidden="true"&gt;&lt;/span&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+&lt;/a&gt;
+
+@keyframes pg-type{to{clip-path:inset(0 0 0 0)}}
+@keyframes pg-caret-move{from{left:0}to{left:calc(100% - .14em)}}
+@keyframes pg-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+.pg-lg{display:inline-flex;align-items:center;gap:.52em;font-weight:600;letter-spacing:-.02em;
+  color:var(--fg-1);text-decoration:none;white-space:nowrap;
+  --pg-mark:18px;--pg-type:1.6s;--pg-blink:1.2s}
+.pg-lg .acc{color:var(--teal)}
+.pg-lg__box{display:inline-flex;align-items:center;gap:.52em;white-space:nowrap}
+.pg-lg__mark{width:var(--pg-mark);height:var(--pg-mark);flex:0 0 auto}
+.pg-lg__type{position:relative;display:inline-block;white-space:nowrap}
+.pg-lg__ghost{visibility:hidden} /* резерв полной ширины: навбар не прыгает */
+.pg-lg__clip{position:absolute;left:0;top:0;white-space:nowrap;
+  clip-path:inset(0 100% 0 0);
+  animation:pg-type var(--pg-type) steps(15,end) 0s both}
+.pg-lg__caret{position:absolute;top:auto;bottom:.02em;left:0;width:.14em;height:.1em;
+  border-radius:.02em;background:var(--teal);
+  animation:pg-caret-move var(--pg-type) steps(15,end) 0s both,
+            pg-blink var(--pg-blink) steps(1,end) var(--pg-type) infinite}
+.pg-lg--s1{--pg-type:1.6s;--pg-blink:1.2s} /* S1 спокойная */
+.pg-lg--s2{--pg-type:1.1s;--pg-blink:.9s} /* S2 живее */
+.pg-lg--s3{--pg-type:.8s;--pg-blink:.6s} /* S3 быстро */
+
+@media (prefers-reduced-motion: reduce){
+  .pg-lg__clip{clip-path:none;animation:none}
+  .pg-lg__caret{left:calc(100% - .14em);animation:none;opacity:1}
+  .mk .t.blink,.mk .t.blink--06,
+  .pg-lg .mk .t.blink,.pg-lg--c4 .mk .t.blink{animation:none;opacity:1}
+}</pre>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">08</span><h2>Как ответить</h2></div>
+    <p class="sec-sub">Одна строка с кодами — этого достаточно: сценарий, скорость, курсор.</p>
+    <pre class="code">A1 · S1 · C1</pre>
+    <p class="sec-sub">После выбора применю:</p>
+    <ul class="todo"><li>знак и анимацию в навбаре на 6 страницах: index, category, search, author, 404, страница статьи</li><li>статичный логотип в футере — без анимации</li><li>favicon.svg + favicon.ico и png без анимации</li><li>угол логотипа на OG-карточках и обложках статей</li><li>reduced-motion: слово показано целиком, курсор виден, мигания нет</li></ul>
+  </section>
+</div>
+</body>
+</html>
