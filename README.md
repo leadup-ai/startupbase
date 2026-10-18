@@ -37,3 +37,21 @@
 6. Иконки в корне — `favicon.svg`, `favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`.
 7. После публикации: добавить URL в `sitemap.xml` и обновить карточки в index.html / category.html / author.html / search.html / 404.html.
 8. Бинарные ассеты пересобираются workflow `.github/workflows/render-assets.yml` из `tools/assets/`.
+
+## Подписка на дайджест
+
+Форма «Подписаться →» (главная, рубрика, поиск, автор, статья) отправляет адрес в n8n-webhook.
+
+- Endpoint: `POST https://n8n.flowstudio.cloud/webhook/blog-newsletter-subscribe`
+- Тело: `application/x-www-form-urlencoded`, ровно три поля:
+
+| Поле | Значение |
+| --- | --- |
+| `email` | адрес из поля ввода |
+| `slug` | slug страницы: `index`, `category`, `search`, `author` или slug статьи (берётся из URL) |
+| `source_url` | канонический URL страницы (из `<link rel="canonical">`) |
+
+- Кастомных заголовков нет — запрос остаётся simple request, без CORS-preflight. Endpoint должен отвечать с заголовком `Access-Control-Allow-Origin`, иначе браузер не даст прочитать ответ.
+- Ответы: `{"status":"ok","message":"subscribed"}` → баннер «Готово! Подписка оформлена», форма скрывается; `{"status":"error","message":"invalid_email"}` → подсветка поля и «Введите корректный email»; любой другой ответ или ошибка сети → баннер «Не получилось подписать».
+- Логика — `newsletter.js` (подключён на 5 страницах через `defer`), стили состояний — блок «Подписка на дайджест» в `blog.css` (`.ns-status`, `.ns-success`, `.ns-error`, `.input.err`, `.field-err` из `ui_kits/blog/newsletter-states.html`).
+- Без JS форма уходит обычным POST с теми же полями, но без пользовательских состояний.
