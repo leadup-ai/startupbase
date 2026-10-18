@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Логотип: варианты · startupbase.uno</title>
+<link rel="stylesheet" href="ds.css">
+<style>
+  /* Локально добавлены только токены светлой темы и имена из colors_and_type.css@main
+     (в ds.css есть тёмная часть): --bg-light-1/2, --fg-light-1, --border-light-1/2, --teal-on-light. */
+  :root{
+    --bg-light-1:#FAFBFA; --bg-light-2:#F2F4F3; --fg-light-1:#0A0F0D;
+    --border-light-1:rgba(10,15,13,.08); --border-light-2:rgba(10,15,13,.14);
+    --teal-on-light:#009E8A;
+  }
+  html,body{background:var(--bg-1)}
+  body{padding:56px 40px 110px}
+  .wrap{max-width:1240px;margin:0 auto}
+  h1{font-size:34px;font-weight:600;letter-spacing:-.035em;margin:0 0 16px}
+  .lead{color:var(--text-2);font-size:16px;line-height:1.65;max-width:940px;margin-bottom:12px}
+  .hint{font-family:var(--font-mono);font-size:13px;color:var(--text-3);margin-bottom:48px}
+  section{margin-bottom:76px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+  .sec-num{font-family:var(--font-mono);font-size:13px;color:var(--teal)}
+  h2{font-size:22px;font-weight:600;letter-spacing:-.02em;margin:0}
+  .sec-sub{color:var(--text-2);font-size:14px;line-height:1.6;max-width:860px;margin-bottom:26px}
+
+  /* ЗНАК ЛОГОТИПА — брендовый элемент: заливка бирюзой здесь разрешена.
+     Это исключение из правила «бирюза только текст / 1px рамка / свечение»,
+     зафиксировано сознательно и действует только внутри .mk.             */
+  .mk{display:block}
+  .mk .t{fill:var(--teal)}
+  .mk .s{fill:none;stroke:var(--teal)}
+  .mk path{stroke-linecap:round;stroke-linejoin:round}
+  .mk .panel{fill:var(--bg-3);stroke:var(--border-2)}
+  .mk .panel--deep{fill:#050807;stroke:rgba(255,255,255,.12)}
+  .mk--mono{color:var(--text-1);opacity:.9}
+  .mk--mono .t{fill:currentColor}
+  .mk--mono .s{stroke:currentColor}
+  .mk--mono .panel,.mk--mono .panel--deep{fill:none;stroke:currentColor;stroke-opacity:.4}
+
+  .grid{display:grid;gap:20px}
+  .grid--3{grid-template-columns:repeat(3,1fr)}
+  .grid--2{grid-template-columns:repeat(2,1fr)}
+  .grid--4{grid-template-columns:repeat(4,1fr)}
+  .card{padding:22px}
+  .var__id{font-family:var(--font-mono);font-size:13px;letter-spacing:.04em;color:var(--teal)}
+  .var__why{color:var(--text-2);font-size:13px;line-height:1.5;margin:8px 0 16px;min-height:58px}
+  .var__big{display:flex;align-items:center;height:104px}
+  .var__row{display:flex;align-items:flex-end;gap:24px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border-1)}
+  .sz{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .sz i{font-family:var(--font-mono);font-size:11px;font-style:normal;color:var(--text-3)}
+  .var__foot{display:flex;align-items:center;gap:16px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border-1)}
+  .tile{display:flex;align-items:center;justify-content:center;background:var(--bg-light-1);border:1px solid var(--border-light-1);border-radius:var(--r-lg);padding:12px}
+  .tile .mk{--teal:var(--teal-on-light);color:var(--fg-light-1)}
+  .tile .mk .panel{fill:var(--bg-light-2);stroke:var(--border-light-2)}
+
+  .word{display:flex;align-items:center;gap:14px}
+  .word__w{font-family:var(--font-sans);font-weight:600;font-size:30px;letter-spacing:-.03em;color:var(--text-1);white-space:nowrap}
+  .word__w--mono{font-family:var(--font-mono);font-size:25.5px;letter-spacing:.02em}
+  .word__note{color:var(--text-2);font-size:13px;line-height:1.5;margin-top:14px}
+  .acc,.up,.dot{color:var(--teal)}
+
+  .lock{display:flex;align-items:center;gap:10px}
+  .lock--col{flex-direction:column;gap:12px}
+  .lock__w{font-weight:600;letter-spacing:-.03em;color:var(--text-1);white-space:nowrap;font-size:17px}
+  .lock__w--lg{font-size:22px}
+  .lock__cap{font-family:var(--font-mono);font-size:11px;color:var(--text-3);margin-top:14px}
+  .appicon{width:96px;height:96px;border-radius:22px;background:#050807;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center}
+
+  .links{display:flex;gap:22px;flex-wrap:wrap;margin-top:6px}
+  .links a{font-family:var(--font-mono);font-size:14px;border-bottom:1px solid var(--border-2);padding-bottom:3px;text-decoration:none}
+  .links a:hover{border-bottom-color:var(--teal)}
+  pre.code{font-family:var(--font-mono);font-size:14px;line-height:1.6;color:var(--text-1);background:var(--bg-2);border:1px solid var(--border-1);border-radius:var(--r-lg);padding:18px 20px;margin:0 0 22px;white-space:pre-wrap}
+  ul.todo{list-style:none;padding:0;margin:0}
+  ul.todo li{color:var(--text-2);font-size:14px;line-height:1.7;padding-left:18px;position:relative}
+  ul.todo li::before{content:"—";position:absolute;left:0;color:var(--text-3);font-family:var(--font-mono)}
+  @media (max-width:720px){
+    body{padding:32px 20px 72px}
+    .grid--3,.grid--2,.grid--4{grid-template-columns:1fr}
+    .var__why{min-height:0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">startupbase.uno · предпросмотр</div>
+  <h1>Логотип: варианты</h1>
+  <p class="lead">Страница для выбора логотипа блога: 6 вариантов знака, 4 варианта написания, 4 лок-апа и показ логотипа в реальном навбаре. Боевые страницы не тронуты — здесь только каталог. Что именно изменится после выбора — в разделе 4.</p>
+  <p class="hint">Как отвечать: назови коды, например «берём M3 + W1; в навбаре — A; фавикон — M4». Коды подписаны моно-шрифтом у каждого варианта.</p>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><h2>Знак</h2></div>
+    <p class="sec-sub">6 вариантов знака. Каждый показан крупно (96px), в рабочих размерах 32 / 24 / 16px, в однокрасочном виде и на светлой плитке. Рисуется инлайновым SVG на сетке 32×32 — без текста внутри знака.</p>
+    <div class="grid grid--3">
+
+      <article class="card">
+        <div class="var__id">M1 · Ступени</div>
+        <p class="var__why">Рост зрелости: пилот, внедрение, прод. Три ступени читаются как «следующий уровень» и не теряют форму в 16px.</p>
+        <div class="var__big"><svg class="mk" viewBox="0 0 32 32" width="96" height="96" role="img" aria-label="M1 Ступени"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg></div>
+        <div class="var__row">
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg><i>32px</i></div>
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="24" height="24"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg><i>24px</i></div>
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="16" height="16"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg><i>16px · фавикон</i></div>
+        </div>
+        <div class="var__foot">
+          <div class="sz"><svg class="mk mk--mono" viewBox="0 0 32 32" width="44" height="44"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg><i>1 цвет</i></div>
+          <div class="tile"><svg class="mk" viewBox="0 0 32 32" width="24" height="24"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="var__id">M2 · Шевроны</div>
+        <p class="var__why">Два восходящих шеврона — итерации и движение вверх. На 16px остаётся ясная направленная форма без мелких деталей.</p>
+        <div class="var__big"><svg class="mk" viewBox="0 0 32 32" width="96" height="96" role="img" aria-label="M2 Шевроны"><path class="s" d="M6 17 L16 8 L26 17" stroke-width="3"/><path d="M6 25 L16 16 L26 25" fill="none" stroke="currentColor" stroke-width="3" opacity=".8"/></svg></div>
+        <div class="var__row">
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><path class="s" d="M6 17 L16 8 L26 17" stroke-width="3"/><path d="M6 25 L16 16 L26 25" fill="none" stroke="currentColor" stroke-width="3" opacity=".8"/></svg><i>32px</i></div>
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="24" height="24"><path class="s" d="M6 17 L16 8 L26 17" stroke-width="3"/><path d="M6 25 L16 16 L26 25" fill="none" stroke="currentColor" stroke-width="3" opacity=".8"/></svg><i>24px</i></div>
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="16" height="16"><path class="s" d="M6 17 L16 8 L26 17" stroke-width="3"/><path d="M6 25 L16 16 L26 25" fill="none" stroke="currentColor" stroke-width="3" opacity=".8"/></svg><i>16px · фавикон</i></div>
+        </div>
+        <div class="var__foot">
+          <div class="sz"><svg class="mk mk--mono" viewBox="0 0 32 32" width="44" height="44"><path class="s" d="M6 17 L16 8 L26 17" stroke-width="3"/><path d="M6 25 L16 16 L26 25" fill="none" stroke="currentColor" stroke-width="3" opacity=".8"/></svg><i>1 цвет</i></div>
+          <div class="tile"><svg class="mk" viewBox="0 0 32 32" width="24" height="24"><path class="s" d="M6 17 L16 8 L26 17" stroke-width="3"/><path d="M6 25 L16 16 L26 25" fill="none" stroke="currentColor" stroke-width="3" opacity=".8"/></svg></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="var__id">M3 · Ноды</div>
+        <p class="var__why">Три узла и связи — топология ИИ-агентов: роли, делегирование, передача задачи по цепочке. Схема, знакомая по архитектурным слайдам.</p>
+        <div class="var__big"><svg class="mk" viewBox="0 0 32 32" width="96" height="96" role="img" aria-label="M3 Ноды"><path d="M8 23H24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".25"/><path d="M16 9L8 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/><path d="M16 9L24 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/><circle cx="8" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle cx="24" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle class="t" cx="16" cy="9" r="3.6"/></svg></div>
+        <div class="var__row">
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><path d="M8 23H24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".25"/><path d="M16 9L8 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/><path d="M16 9L24 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/><circle cx="8" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle cx="24" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle class="t" cx="16" cy="9" r="3.6"/></svg><i>32px</i></div>
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="24" height="24"><path d="M8 23H24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".25"/><path d="M16 9L8 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/><path d="M16 9L24 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/><circle cx="8" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle cx="24" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle class="t" cx="16" cy="9" r="3.6"/></svg><i>24px</i></div>
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="16" height="16"><path d="M8 23H24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".25"/><path d="M16 9L8 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/><path d="M16 9L24 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/><circle cx="8" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle cx="24" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle class="t" cx="16" cy="9" r="3.6"/></svg><i>16px · фавикон</i></div>
+        </div>
+        <div class="var__foot">
+          <div class="sz"><svg class="mk mk--mono" viewBox="0 0 32 32" width="44" height="44"><path d="M8 23H24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".25"/><path d="M16 9L8 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/><path d="M16 9L24 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/><circle cx="8" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle cx="24" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle class="t" cx="16" cy="9" r="3.6"/></svg><i>1 цвет</i></div>
+          <div class="tile"><svg class="mk" viewBox="0 0 32 32" width="24" height="24"><path d="M8 23H24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".25"/><path d="M16 9L8 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/><path d="M16 9L24 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/><circle cx="8" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle cx="24" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle class="t" cx="16" cy="9" r="3.6"/></svg></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="var__id">M4 · Промпт</div>
+        <p class="var__why">Поле ввода, каретка и подчёркивание — прямая отсылка к промпту. Форма «плитка» хорошо работает как app icon и аватар.</p>
+        <div class="var__big"><svg class="mk" viewBox="0 0 32 32" width="96" height="96" role="img" aria-label="M4 Промпт"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg></div>
+        <div class="var__row">
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><i>32px</i></div>
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="24" height="24"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><i>24px</i></div>
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="16" height="16"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><i>16px · фавикон</i></div>
+        </div>
+        <div class="var__foot">
+          <div class="sz"><svg class="mk mk--mono" viewBox="0 0 32 32" width="44" height="44"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><i>1 цвет</i></div>
+          <div class="tile"><svg class="mk" viewBox="0 0 32 32" width="24" height="24"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="var__id">M5 · Ромб (текущий)</div>
+        <p class="var__why">Контрольный вариант: этот знак уже стоит фавиконом. Проверяем, держит ли он соседство с более содержательными знаками.</p>
+        <div class="var__big"><svg class="mk" viewBox="0 0 32 32" width="96" height="96" role="img" aria-label="M5 Ромб"><rect class="panel--deep" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="t" d="M16 8.5 L23.5 16 L16 23.5 L8.5 16 Z"/></svg></div>
+        <div class="var__row">
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect class="panel--deep" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="t" d="M16 8.5 L23.5 16 L16 23.5 L8.5 16 Z"/></svg><i>32px</i></div>
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="24" height="24"><rect class="panel--deep" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="t" d="M16 8.5 L23.5 16 L16 23.5 L8.5 16 Z"/></svg><i>24px</i></div>
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="16" height="16"><rect class="panel--deep" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="t" d="M16 8.5 L23.5 16 L16 23.5 L8.5 16 Z"/></svg><i>16px · фавикон</i></div>
+        </div>
+        <div class="var__foot">
+          <div class="sz"><svg class="mk mk--mono" viewBox="0 0 32 32" width="44" height="44"><rect class="panel--deep" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="t" d="M16 8.5 L23.5 16 L16 23.5 L8.5 16 Z"/></svg><i>1 цвет</i></div>
+          <div class="tile"><svg class="mk" viewBox="0 0 32 32" width="24" height="24"><rect class="panel--deep" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="t" d="M16 8.5 L23.5 16 L16 23.5 L8.5 16 Z"/></svg></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="var__id">M6 · Модуль</div>
+        <p class="var__why">Четыре блока сеткой — конструктор из модулей, один блок бирюзовый как точка входа. Самый абстрактный вариант из шести.</p>
+        <div class="var__big"><svg class="mk" viewBox="0 0 32 32" width="96" height="96" role="img" aria-label="M6 Модуль"><rect x="5" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="16" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="5" y="16" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect class="t" x="16" y="16" width="11" height="11" rx="3"/></svg></div>
+        <div class="var__row">
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect x="5" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="16" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="5" y="16" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect class="t" x="16" y="16" width="11" height="11" rx="3"/></svg><i>32px</i></div>
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="24" height="24"><rect x="5" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="16" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="5" y="16" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect class="t" x="16" y="16" width="11" height="11" rx="3"/></svg><i>24px</i></div>
+          <div class="sz"><svg class="mk" viewBox="0 0 32 32" width="16" height="16"><rect x="5" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="16" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="5" y="16" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect class="t" x="16" y="16" width="11" height="11" rx="3"/></svg><i>16px · фавикон</i></div>
+        </div>
+        <div class="var__foot">
+          <div class="sz"><svg class="mk mk--mono" viewBox="0 0 32 32" width="44" height="44"><rect x="5" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="16" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="5" y="16" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect class="t" x="16" y="16" width="11" height="11" rx="3"/></svg><i>1 цвет</i></div>
+          <div class="tile"><svg class="mk" viewBox="0 0 32 32" width="24" height="24"><rect x="5" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="16" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="5" y="16" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect class="t" x="16" y="16" width="11" height="11" rx="3"/></svg></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><h2>Написание и логотип целиком</h2></div>
+    <p class="sec-sub">4 варианта написания рядом со знаком M1 (32px) — чтобы видеть, как текст сочетается с формой. Ниже 4 лок-апа: строка, вторая строка и app icon.</p>
+    <div class="grid grid--2">
+
+      <div class="card">
+        <div class="word">
+          <svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg>
+          <span class="word__w">startupbase<span class="acc">.uno</span></span>
+        </div>
+        <p class="word__note"><b>W1 · как сейчас.</b> Плюс: совпадает с боевыми страницами и с тем, что уже стоит в навбаре; бирюза отмечает доменную зону. Риск: строчные буквы дают ровную, но низкую строку без акцента на «UP».</p>
+      </div>
+
+      <div class="card">
+        <div class="word">
+          <svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg>
+          <span class="word__w">startupbase<span class="dot">.</span>uno</span>
+        </div>
+        <p class="word__note"><b>W2 · тихий акцент.</b> Плюс: всё одним цветом, бирюзовой остаётся одна точка — минимальный шум, хорошо для печати в один цвет и для плотных интерфейсов. Риск: в 16px точка почти не читается как акцент.</p>
+      </div>
+
+      <div class="card">
+        <div class="word">
+          <svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg>
+          <span class="word__w">Start<span class="up">UP</span>Base</span>
+        </div>
+        <p class="word__note"><b>W3 · написание из переписки.</b> Плюс: камелкейс явно читается как StartUP и выделяет «UP» без цвета. Риск: ломает единство с блогом, где везде строчное «startupbase.uno», и спорно для домена .uno в строчном регистре.</p>
+      </div>
+
+      <div class="card">
+        <div class="word">
+          <svg class="mk" viewBox="0 0 32 32" width="32" height="32"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg>
+          <span class="word__w word__w--mono">STARTUPBASE<span class="acc">.UNO</span></span>
+        </div>
+        <p class="word__note"><b>W4 · моно, капсом.</b> Плюс: моно-набор держит технический тон и читается как «инженерный» бренд. Риск: капс делает навбар громче и спорит с заголовками страниц.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">02b</span><h2>Лок-апы</h2></div>
+    <p class="sec-sub">Четыре комбинации для разных мест: строка в навбаре, стек для футера и OG, app icon для фавикона и аватара.</p>
+    <div class="grid grid--4">
+
+      <div class="card">
+        <div class="lock">
+          <svg class="mk" viewBox="0 0 32 32" width="28" height="28"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg>
+          <span class="lock__w">startupbase<span class="acc">.uno</span></span>
+        </div>
+        <div class="lock__cap">A · знак 28px + W1 в строку (навбар, 17px)</div>
+      </div>
+
+      <div class="card">
+        <div class="lock">
+          <svg class="mk" viewBox="0 0 32 32" width="28" height="28"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg>
+          <span class="lock__w">Start<span class="up">UP</span>Base</span>
+        </div>
+        <div class="lock__cap">B · знак 28px + W3 в строку</div>
+      </div>
+
+      <div class="card">
+        <div class="lock lock--col">
+          <svg class="mk" viewBox="0 0 32 32" width="40" height="40"><rect x="5" y="19" width="6" height="8" rx="2.4" fill="currentColor" opacity=".55"/><rect x="13" y="13" width="6" height="14" rx="2.4" fill="currentColor" opacity=".8"/><rect class="t" x="21" y="7" width="6" height="20" rx="2.4"/></svg>
+          <span class="lock__w lock__w--lg">startupbase<span class="acc">.uno</span></span>
+        </div>
+        <div class="lock__cap">C · знак 40px + W1 стеком (футер, OG)</div>
+      </div>
+
+      <div class="card">
+        <div class="lock">
+          <div class="appicon"><svg class="mk" viewBox="0 0 32 32" width="64" height="64"><path class="t" d="M16 8.5 L23.5 16 L16 23.5 L8.5 16 Z"/></svg></div>
+        </div>
+        <div class="lock__cap">D · app icon 96×96 rx=22, знак M5 (фавикон, аватар)</div>
+      </div>
+
+      <div class="card">
+        <div class="lock">
+          <div class="appicon"><svg class="mk" viewBox="0 0 32 32" width="64" height="64"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg></div>
+        </div>
+        <div class="lock__cap">D2 · app icon 96×96 rx=22, знак M4</div>
+      </div>
+
+      <div class="card">
+        <div class="lock">
+          <svg class="mk" viewBox="0 0 32 32" width="28" height="28"><path d="M8 23H24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".25"/><path d="M16 9L8 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/><path d="M16 9L24 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/><circle cx="8" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle cx="24" cy="23" r="3.6" fill="currentColor" opacity=".8"/><circle class="t" cx="16" cy="9" r="3.6"/></svg>
+          <span class="lock__w">startupbase<span class="acc">.uno</span></span>
+        </div>
+        <div class="lock__cap">E · знак M3 + W1 в строку</div>
+      </div>
+
+      <div class="card">
+        <div class="lock">
+          <svg class="mk" viewBox="0 0 32 32" width="28" height="28"><rect x="5" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="16" y="5" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect x="5" y="16" width="11" height="11" rx="3" fill="currentColor" opacity=".75"/><rect class="t" x="16" y="16" width="11" height="11" rx="3"/></svg>
+          <span class="lock__w">startupbase<span class="acc">.uno</span></span>
+        </div>
+        <div class="lock__cap">F · знак M6 + W1 в строку</div>
+      </div>
+
+    </div>
+    <p class="sec-sub" style="margin-top:18px">Лок-апы E и F добавлены к основным A–D, чтобы знак M3 и M6 можно было посмотреть в строке со словом, а не только отдельно.</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2>Как это будет в навбаре</h2></div>
+    <p class="sec-sub">Отдельная страница с настоящим навбаром блога (классы .nav, .nav-inner, .nav-wordmark из blog.css) и четырьмя лок-апами внутри него, полосой фавиконов 16 / 32 / 64px и плитками на светлом фоне.</p>
+    <div class="links">
+      <a href="logo-in-nav.html">навбар</a>
+      <a href="logo-in-nav.html">фавикон 16px</a>
+      <a href="logo-in-nav.html">логотип на светлом фоне</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">04</span><h2>Как ответить</h2></div>
+    <p class="sec-sub">Одна строка с кодами — этого достаточно. Если по пункту мнения нет, напиши «как сейчас».</p>
+    <pre class="code">берём M3 + W1; в навбаре — A; фавикон — M4</pre>
+    <p class="sec-sub">После выбора применю:</p>
+    <ul class="todo">
+      <li>favicon.svg с выбранным знаком на сетке 32×32 + favicon.ico и png 16 / 32 / 48px</li>
+      <li>навбар на 6 страницах: index, category, search, author, 404, страница статьи</li>
+      <li>лок-ап в футере: знак + слово, вариант C</li>
+      <li>угол логотипа на OG-карточках и обложках статей</li>
+      <li>app icon 96×96 и аватар для соцсетей, вариант D</li>
+    </ul>
+  </section>
+</div>
+</body>
+</html>
