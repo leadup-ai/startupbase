@@ -29,13 +29,6 @@
   .cat-head h1 .acc { color: var(--teal); }
   .cat-head .count { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--teal); background: var(--teal-tint); border: 1px solid rgba(0,229,199,0.25); border-radius: 9999px; padding: 4px 12px; letter-spacing: 0.04em; }
   .cat-head .desc { font-size: 16px; color: var(--fg-2); line-height: 1.6; max-width: 600px; margin: 0; }
-
-  .soon-note { border: 1px solid var(--border-1); border-radius: var(--r-2xl); background: var(--bg-2); padding: 28px; margin: 0 0 24px; }
-  .soon-note .lbl { font-family: var(--font-mono); font-size: 11px; color: var(--fg-4); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
-  .soon-note p { font-size: 14px; color: var(--fg-3); margin: 0 0 16px; line-height: 1.6; max-width: 620px; }
-  .soon-note .sug-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-  .soon-note .cta { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--teal); text-decoration: none; margin-top: 18px; }
-  .soon-note .cta:hover { color: var(--teal-hover); }
 </style>
 </head>
 <body>
@@ -52,8 +45,8 @@
       </div>
     </div>
     <div class="nav-right">
-      <a class="nav-login" href="https://startupbase.uno/">startupbase.uno</a>
-      <a class="btn-sm" href="index.html#subscribe">Подписаться →</a>
+      <a href="https://startupbase.uno/" class="nav-login">startupbase.uno</a>
+      <a href="index.html#subscribe" class="btn-sm">Подписаться →</a>
     </div>
   </div>
 </nav>
@@ -106,37 +99,18 @@
         <div class="meta"><span>в очереди</span><span></span></div>
       </div>
     </div>
-    <div class="post post--soon">
-      <div class="post-img"><div class="grid-bg"></div><div class="num">04</div></div>
-      <div class="post-body">
-        <div class="chips"><span class="chip chip-neutral">ИИ-агенты</span><span class="chip chip-soon">скоро</span></div>
-        <h3>Rogue AI-агенты взломали живые системы индийских компаний — отчёт CERT-In</h3>
-        <p>Что известно о компрометации живых систем автономными ИИ-агентами.</p>
-        <div class="meta"><span>в очереди</span><span></span></div>
-      </div>
-    </div>
-    <div class="post post--soon">
-      <div class="post-img"><div class="grid-bg"></div><div class="num">05</div></div>
-      <div class="post-body">
-        <div class="chips"><span class="chip chip-neutral">Инструменты</span><span class="chip chip-soon">скоро</span></div>
-        <h3>Anthropic Dynamic Workflows: Claude координирует агентские оркестрации</h3>
-        <p>Как Claude координирует оркестрации ИИ-агентов в рабочих процессах.</p>
-        <div class="meta"><span>в очереди</span><span></span></div>
-      </div>
-    </div>
   </div>
 
-  <div class="soon-note">
-    <div class="lbl">Материалы по остальным рубрикам готовятся</div>
-    <p>Рубрики ИИ-агенты, Инструменты, Кейсы, Стратегия и Eval пока без опубликованных материалов. Как только разборы выйдут, ссылки появятся здесь и на главной странице блога.</p>
-    <div class="sug-chips">
-      <span class="filter" title="Скоро">ИИ-агенты</span>
-      <span class="filter" title="Скоро">Инструменты</span>
-      <span class="filter" title="Скоро">Кейсы</span>
-      <span class="filter" title="Скоро">Стратегия</span>
-      <span class="filter" title="Скоро">Eval</span>
+  <div id="subscribe">
+    <div class="newsletter" style="margin-bottom:24px;">
+      <h3>Подпишитесь на <span class="acc">дайджест startupbase.uno</span></h3>
+      <p>Новости ИИ и разборы внедрения ИИ-агентов — раз в неделю. Без воды, без спама.</p>
+      <form class="form" onsubmit="return false;">
+        <input class="input" placeholder="email@company.ru"/>
+        <button class="btn">Подписаться →</button>
+      </form>
+      <div class="note">Без спама · Отписка в 1 клик</div>
     </div>
-    <a class="cta" href="index.html#subscribe">Подписаться на новые материалы →</a>
   </div>
 </div>
 
