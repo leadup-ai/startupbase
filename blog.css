@@ -324,3 +324,38 @@ footer .lg__word { font-size: 17px; }
   .burger, .mobile-close { transition: none; }
   .burger span { transition: none; }
 }
+
+/* === Подписка на дайджест: состояния (LeadUp AI DS v3 · ui_kits/blog/newsletter-states.html) === */
+
+.newsletter .nl-status { position: relative; margin-top: 16px; text-align: left; }
+.newsletter .nl-status:empty { display: none; margin: 0; }
+.newsletter .form[hidden] { display: none; }
+.newsletter .btn[disabled] { opacity: 0.6; cursor: default; }
+.newsletter .btn[disabled]:hover { background: var(--teal); }
+
+.ns-status { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border: 1px solid var(--border-1); border-radius: var(--r-lg); background: var(--bg-3); animation: ns-in 160ms cubic-bezier(0.2, 0, 0, 1); }
+.ns-status .ico { flex: 0 0 auto; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; }
+.ns-status .ico svg { width: 16px; height: 16px; }
+.ns-status .txt { font-size: 13px; line-height: 1.5; color: var(--fg-3); }
+.ns-status .txt b { display: block; font-size: 14px; color: var(--fg-1); margin-bottom: 2px; }
+.ns-status .txt a { color: var(--teal); }
+.ns-success { background: var(--success-tint); border-color: rgba(62, 224, 137, 0.25); }
+.ns-success .ico { background: rgba(62, 224, 137, 0.18); color: var(--success); }
+.ns-error { background: var(--danger-tint); border-color: rgba(255, 93, 93, 0.25); }
+.ns-error .ico { background: rgba(255, 93, 93, 0.18); color: var(--danger); }
+
+.newsletter .input.err { border-color: var(--danger); box-shadow: 0 0 0 3px rgba(255, 93, 93, 0.14); }
+.newsletter .input.err:focus { border-color: var(--danger); box-shadow: 0 0 0 3px rgba(255, 93, 93, 0.16); }
+.newsletter .field-err { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 10px 0 0; font-size: 12px; color: var(--danger); position: relative; }
+.newsletter .field-err[hidden] { display: none; }
+.newsletter .field-err svg { width: 14px; height: 14px; flex: 0 0 auto; }
+
+@keyframes ns-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 640px) {
+  .ns-status { padding: 12px; gap: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ns-status { animation: none; }
+}
