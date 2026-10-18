@@ -144,3 +144,14 @@ footer { padding: 32px 0; border-top: 1px solid var(--border-1); margin-top: 64p
 
 /* "скоро" mono chip */
 .chip-soon { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 9999px; border: 1px dashed var(--border-1); color: var(--fg-4); }
+
+/* Reduced motion — mirror of the global rule in colors_and_type.css,
+   scoped here so the blog keeps parity when only blog.css changes. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
