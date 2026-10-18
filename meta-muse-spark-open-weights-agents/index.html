@@ -7,7 +7,9 @@
 <meta name="description" content="Что даёт открытая модель Meta Muse Spark Open для бизнеса? Разбираем 816B параметров, лицензию, бенчмарки и запуск ИИ-агентов."/>
 <link rel="canonical" href="https://blog.startupbase.uno/meta-muse-spark-open-weights-agents/"/>
 <link rel="icon" type="image/svg+xml" href="../favicon.svg"/>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23050807'/%3E%3Cpath d='M11 12 L16 16 L11 20' fill='none' stroke='%2300E5C7' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='17' y='19.4' width='6' height='2.4' rx='1.2' fill='%2300E5C7'/%3E%3C/svg%3E"/>
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <meta property="og:type" content="article"/>
 <meta property="og:site_name" content="startupbase.uno"/>
 <meta property="og:locale" content="ru_RU"/>
@@ -22,6 +24,12 @@
 <meta property="article:tag" content="лицензии"/>
 <meta property="article:tag" content="MoE"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.startupbase.uno/images/blog/meta-muse-spark-open-weights-agents/og.png"/>
+<meta name="twitter:image:alt" content="«Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач» — обложка статьи блога startupbase.uno"/>
+<meta property="og:image" content="https://blog.startupbase.uno/images/blog/meta-muse-spark-open-weights-agents/og.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="«Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач» — обложка статьи блога startupbase.uno"/>
 <link rel="stylesheet" href="../colors_and_type.css"/>
 <link rel="stylesheet" href="../blog.css"/>
 <style>
@@ -151,10 +159,10 @@
   }
 </style>
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Meta Muse Spark Open: открытая модель для агентных задач", "description": "Что даёт открытая модель Meta Muse Spark Open для бизнеса? Разбираем 816B параметров, лицензию, бенчмарки и запуск ИИ-агентов.", "datePublished": "2026-10-18", "inLanguage": "ru", "articleSection": "Новости ИИ", "keywords": "meta muse spark open, meta muse spark, muse spark open, muse spark open weights, muse model license, muse spark бенчмарки, muse spark локальный запуск, muse glimmer", "author": {"@type": "Person", "name": "Владимир Нагин", "url": "https://blog.startupbase.uno/author.html"}, "publisher": {"@type": "Organization", "name": "LeadUp AI", "url": "https://startupbase.uno/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://blog.startupbase.uno/meta-muse-spark-open-weights-agents/"}}
+{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач", "description": "Что даёт открытая модель Meta Muse Spark Open для бизнеса? Разбираем 816B параметров, лицензию, бенчмарки и запуск ИИ-агентов.", "datePublished": "2026-10-18", "inLanguage": "ru", "articleSection": "Новости ИИ", "keywords": "meta muse spark open, meta muse spark, muse spark open, muse spark open weights, muse model license, muse spark бенчмарки, muse spark локальный запуск, muse glimmer", "author": {"@type": "Person", "name": "Владимир Нагин", "url": "https://blog.startupbase.uno/author.html"}, "publisher": {"@type": "Organization", "name": "LeadUp AI", "url": "https://startupbase.uno/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://blog.startupbase.uno/meta-muse-spark-open-weights-agents/"}}
 </script>
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Блог", "item": "https://blog.startupbase.uno/"}, {"@type": "ListItem", "position": 2, "name": "Новости ИИ", "item": "https://blog.startupbase.uno/category.html"}, {"@type": "ListItem", "position": 3, "name": "Meta Muse Spark Open: открытая модель для агентных задач", "item": "https://blog.startupbase.uno/meta-muse-spark-open-weights-agents/"}]}
+{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Блог", "item": "https://blog.startupbase.uno/"}, {"@type": "ListItem", "position": 2, "name": "Новости ИИ", "item": "https://blog.startupbase.uno/category.html"}, {"@type": "ListItem", "position": 3, "name": "Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач", "item": "https://blog.startupbase.uno/meta-muse-spark-open-weights-agents/"}]}
 </script>
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Что такое Meta Muse Spark Open?", "acceptedAnswer": {"@type": "Answer", "text": "Meta Muse Spark Open — открытая по весам (open-weight) модель Meta для агентных и кодинговых задач, выпущенная 15 октября 2026 года (дата релиза — по Reuters). Это разреженная MoE-архитектура: 816B общих параметров при около 42B активных на токен и контекст до 1M токенов. Релиз активно обсуждали в сообществе — тред на Hacker News (id 50107379) набрал 912 points."}}, {"@type": "Question", "name": "Muse Spark Open — это открытая по весам модель?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Веса опубликованы, поэтому модель можно скачать и запустить на своей инфраструктуре, а не только вызывать через чужой API. Локально Meta показывает запуск на двух Apple M5 Ultra Mac Studio через MLX; для облачного развёртывания доступны семь inference-провайдеров. Открытые веса не означают свободную лицензию: права и ограничения задаёт Muse Model License."}}, {"@type": "Question", "name": "Как запустить Muse Spark Open — локально или в облаке?", "acceptedAnswer": {"@type": "Answer", "text": "Локальный вариант — запуск на двух Apple M5 Ultra Mac Studio через MLX: в этом случае данные не покидают периметр. Облачный вариант — использование одного из семи inference-провайдеров: он даёт более быстрый старт, но требует проверки SLA, региона размещения данных и лимитов на длину контекста. Выбор обычно диктует политика работы с данными."}}, {"@type": "Question", "name": "Насколько хороша Muse Spark Open по бенчмаркам?", "acceptedAnswer": {"@type": "Answer", "text": "По вторичным данным: MCP-Atlas 89.2, Terminal-Bench 2.1 76.4 и JobBench 61.8. Источники — siliconangle.com и latent.space; в блоге Meta таблица опубликована как изображение, поэтому машинно-читаемых первоисточных значений нет. Перед решением цифры стоит сверить с первоисточником и прогнать модель на собственном наборе задач."}}, {"@type": "Question", "name": "Можно ли использовать Muse Spark Open бесплатно и в коммерческих сервисах?", "acceptedAnswer": {"@type": "Answer", "text": "Условия задаёт лицензия Muse Model License. Для hosted-сервисов зафиксирован порог выручки $20M, требуется метка «Built with Muse Spark Open», а применение в военной сфере и critical-infrastructure запрещено. Точные формулировки и исключения — по официальному тексту лицензии, а не по пересказам."}}]}
@@ -213,7 +221,7 @@
           <a class="chip chip-neutral" href="../category.html">Meta</a>
           <a class="chip chip-neutral" href="../category.html">открытые модели</a>
         </div>
-        <h1>Meta Muse Spark Open: открытая модель для агентных задач</h1>
+        <h1>Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач</h1>
       </div>
 
       <div class="article-meta">
