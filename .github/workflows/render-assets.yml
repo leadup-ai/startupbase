@@ -1,0 +1,101 @@
+name: render-assets
+
+# Рендерит бинарные ассеты блога (иллюстрации статьи, OG-карточки, логотип, фавиконы)
+# из исходников tools/assets/src и коммитит их в main.
+#
+# Запуск: автоматически на push в tools/assets/**, либо вручную через
+# Actions -> render-assets -> Run workflow (можно указать slug статьи).
+
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: 'Slug статьи (папка images/blog/<slug>/)'
+        required: false
+        default: 'meta-muse-spark-open-weights-agents'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/assets/**'
+      - '.github/workflows/render-assets.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render-assets
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Geist fonts
+        working-directory: tools/assets
+        run: |
+          set -euo pipefail
+          npm i --no-audit --no-fund --silent geist@1.8.1
+          mkdir -p "$HOME/.local/share/fonts/geist"
+          find node_modules/geist -name '*.ttf' -path '*geist-sans*' -exec cp {} "$HOME/.local/share/fonts/geist/" \;
+          find node_modules/geist -name '*.ttf' -path '*geist-mono*' -exec cp {} "$HOME/.local/share/fonts/geist/" \;
+          fc-cache -f >/dev/null
+          faces=$(fc-list | grep -ci geist || true)
+          echo "geist faces: $faces"
+          fc-list | grep -i geist | head -5
+          if [ "$faces" -lt 5 ]; then
+            echo "::error::Geist/Geist Mono не установились ($faces faces) — рендер даст подменённый шрифт"
+            exit 1
+          fi
+
+      - name: Install renderer (playwright chromium)
+        working-directory: tools/assets
+        run: |
+          set -euo pipefail
+          npm i --no-audit --no-fund --silent playwright@1.49.1
+          npx --yes playwright install --with-deps chromium
+
+      - name: Install Pillow
+        run: python3 -m pip install --quiet --disable-pip-version-check pillow
+
+      - name: Render PNGs
+        working-directory: tools/assets
+        run: node render.js
+
+      - name: Post-process assets
+        working-directory: tools/assets
+        env:
+          DIST_ROOT: ../..
+          SLUG: ${{ inputs.slug || 'meta-muse-spark-open-weights-agents' }}
+        run: python3 postprocess.py
+
+      - name: Commit assets
+        env:
+          SLUG: ${{ inputs.slug || 'meta-muse-spark-open-weights-agents' }}
+        run: |
+          set -euo pipefail
+          git config user.name "leadup-ai"
+          git config user.email "nagin@leadupmarketers.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "no asset changes"
+          else
+            git diff --cached --stat
+            git commit -m "assets: render generated images ($SLUG)"
+            git push
+          fi
