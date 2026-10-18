@@ -169,10 +169,12 @@
     <div class="newsletter" style="margin-bottom:24px;">
       <h3>Подпишитесь на <span class="acc">дайджест startupbase.uno</span></h3>
       <p>Новости ИИ и разборы внедрения ИИ-агентов — раз в неделю. Без воды, без спама.</p>
-      <form class="form" onsubmit="return false;">
-        <input class="input" placeholder="email@company.ru"/>
-        <button class="btn">Подписаться →</button>
+      <form class="form" method="post" action="https://n8n.flowstudio.cloud/webhook/blog-newsletter-subscribe" novalidate>
+        <input class="input" type="email" name="email" autocomplete="email" placeholder="email@company.ru" aria-label="Email" required/>
+        <button class="btn" type="submit">Подписаться →</button>
       </form>
+      <p class="field-err" hidden><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 4.9v3.7M8 10.6v1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Введите корректный email</p>
+      <div class="nl-status" role="status" aria-live="polite"></div>
       <div class="note">Без спама · Отписка в 1 клик</div>
     </div>
   </div>
@@ -185,6 +187,8 @@
     <div style="display:flex; gap:18px;"><a href="mailto:hello@leadup.guru">hello@leadup.guru</a><a href="https://t.me/neurosborka">@neurosborka</a></div>
   </div>
 </footer>
+
+<script src="newsletter.js" defer></script>
 
 </body>
 </html>
