@@ -155,3 +155,54 @@ footer { padding: 32px 0; border-top: 1px solid var(--border-1); margin-top: 64p
     scroll-behavior: auto !important;
   }
 }
+
+/* ——— Логотип M4: знак + печать «startupbase.uno» + мигающий курсор ——— */
+.lg { --lg-type: 1.6s; --lg-blink: 1.2s; }
+.nav-wordmark.lg { display: inline-flex; align-items: center; gap: .52em; }
+.lg__box { display: inline-flex; align-items: center; gap: .52em; white-space: nowrap; }
+.lg__mark { width: 18px; height: 18px; flex: 0 0 auto; }
+.lg__mark path { stroke-linecap: round; stroke-linejoin: round; }
+.lg__mark .panel { fill: var(--bg-3); stroke: var(--border-2); }
+.lg__mark .s { fill: none; stroke: var(--teal); }
+.lg__mark .t { fill: var(--teal); }
+.lg__mark .t.blink { animation: lg-blink var(--lg-blink) steps(1, end) infinite; }
+.lg__type { position: relative; display: inline-block; white-space: nowrap; }
+/* резерв полной ширины слова: навбар не прыгает ни на одном кадре */
+.lg__ghost { visibility: hidden; }
+.lg__clip {
+  position: absolute; left: 0; top: 0; white-space: nowrap;
+  clip-path: inset(0 100% 0 0);
+  animation: lg-type var(--lg-type) steps(15, end) 0s both;
+}
+.lg__caret {
+  position: absolute; top: auto; bottom: .02em; left: 0;
+  width: .14em; height: .1em; border-radius: .02em; background: var(--teal);
+  animation: lg-caret-move var(--lg-type) steps(15, end) 0s both,
+             lg-blink var(--lg-blink) steps(1, end) var(--lg-type) infinite;
+}
+.lg .acc { color: var(--teal); }
+.lg__word { white-space: nowrap; }
+footer .lg__word { font-size: 17px; }
+
+@keyframes lg-type { to { clip-path: inset(0 0 0 0); } }
+@keyframes lg-caret-move { from { left: 0; } to { left: calc(100% - .14em); } }
+@keyframes lg-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+/* статичный лок-ап: слово целиком, курсор видим, мигания нет */
+.lg--static .lg__clip { clip-path: none; animation: none; }
+.lg--static .lg__caret { left: calc(100% - .14em); animation: none; opacity: 1; }
+.lg--static .lg__mark .t { animation: none; }
+.lg--static .lg__mark { width: 24px; height: 24px; }
+
+/* уменьшение движения: финальный кадр без анимации */
+@media (prefers-reduced-motion: reduce) {
+  .lg__clip { clip-path: none; animation: none; }
+  .lg__caret { left: calc(100% - .14em); animation: none; opacity: 1; }
+  /* .lg__mark .t.blink тоже выключаем: его базовая специфичность выше */
+  .lg__mark .t, .lg__mark .t.blink { animation: none; opacity: 1; }
+}
+
+/* мобильный размер знака */
+@media (max-width: 720px) {
+  .lg__mark { width: 16px; height: 16px; }
+}
