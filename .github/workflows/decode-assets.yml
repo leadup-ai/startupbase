@@ -1,11 +1,13 @@
 name: decode-assets
-# ВРЕМЕННЫЙ workflow (v2, с диагностикой): декодирует бинарные ассеты, положенные
-# в репозиторий как base64 (_assets_b64/** зеркалит целевую структуру путей).
-# Если пуш не проходит — причина публикуется как annotation check-run (логи недоступны).
+# ВРЕМЕННЫЙ workflow (v3): декодирует бинарные ассеты, положенные в репозиторий
+# как base64 (_assets_b64/** зеркалит целевую структуру путей).
+# v3: явный refspec (git push origin HEAD:main), -e отключён вокруг push,
+# причина ошибки публикуется как annotation + проверка записи через REST API.
 on:
   push:
     paths:
       - '_assets_b64/**'
+      - '.github/workflows/decode-assets.yml'
   workflow_dispatch:
 
 permissions:
@@ -15,41 +17,74 @@ jobs:
   decode:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Decode base64 assets
+      - name: Debug event
         run: |
-          set -euo pipefail
+          echo "event=$GITHUB_EVENT_NAME ref=$GITHUB_REF ref_name=$GITHUB_REF_NAME sha=$GITHUB_SHA"
+          echo "repo=$GITHUB_REPOSITORY actor=$GITHUB_ACTOR"
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Decode base64 assets
+        shell: bash
+        run: |
+          set -uo pipefail
           n=0
           while IFS= read -r f; do
             out="${f#_assets_b64/}"; out="${out%.b64}"
             mkdir -p "$(dirname "$out")"
-            base64 -d "$f" > "$out"
-            echo "  $f -> $out ($(stat -c%s "$out") bytes, $(file -b --mime-type "$out"))"
-            n=$((n+1))
+            if base64 -d "$f" > "$out"; then
+              echo "  OK $f -> $out ($(stat -c%s "$out") bytes, $(file -b --mime-type "$out" 2>/dev/null))"
+              n=$((n+1))
+            else
+              echo "::error title=DECODE_FAIL::$f"
+            fi
           done < <(find _assets_b64 -name '*.b64' | sort)
           echo "decoded: $n"
-      - name: Commit decoded assets
+
+      - name: Commit and push
+        shell: bash
         run: |
           set -uo pipefail
-          git config user.name  "startupbase-bot"
+          git config user.name "startupbase-bot"
           git config user.email "nagin@leadupmarketers.com"
           git add -A -- ':!_assets_b64'
-          git commit -m "assets: decode binary assets"
-          echo "--- token info ---"
-          echo "GITHUB_TOKEN present: $([ -n "${GITHUB_TOKEN:-}" ] && echo yes || echo no)"
-          echo "repo: $GITHUB_REPOSITORY  actor: $GITHUB_ACTOR"
-          set +e
-          OUT=$(git push 2>&1); RC=$?
-          set -e
-          if [ "$RC" -ne 0 ]; then
-            MSG=$(printf '%s' "$OUT" | tr '\n' ' ' | tr -d '\r' | sed 's/%/%25/g' | cut -c1-900)
-            echo "::error title=DIAG-GITPUSH-RC$RC::$MSG"
-            API=$(curl -s -o /tmp/api.json -w '%{http_code}' -X PUT \
-              -H "Authorization: Bearer $GITHUB_TOKEN" \
-              -H "Accept: application/vnd.github+json" \
-              "https://api.github.com/repos/$GITHUB_REPOSITORY/contents/_diag.txt" \
-              -d '{"message":"diag","content":"ZGln","branch":"main"}')
-            echo "::error title=DIAG-API-HTTP-$API::$(tr '\n' ' ' < /tmp/api.json | tr -d '\r' | sed 's/%/%25/g' | cut -c1-900)"
-            exit 1
+          git commit -m "assets: decode binary assets" > /tmp/commit.log 2>&1
+          echo "commit rc=$? :: $(tr '\n' ' ' < /tmp/commit.log | cut -c1-300)"
+
+          OUT=$(git push origin HEAD:main 2>&1); RC=$?
+          echo "push rc=$RC"
+          echo "$OUT"
+          if [ "$RC" -eq 0 ]; then
+            echo "pushed OK $(git rev-parse HEAD)"
+            exit 0
           fi
-          echo "pushed OK"
+
+          M=$(printf '%s' "$OUT" | tr '\n' ' ' | tr -d '\r' | sed 's/%/%25/g' | cut -c1-850)
+          echo "::error title=GITPUSH_RC$RC::$M"
+
+          API=$(curl -s -o /tmp/api.json -w '%{http_code}' -X PUT \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/contents/_diag.txt" \
+            -d '{"message":"diag","content":"ZGln","branch":"main"}')
+          A=$(tr '\n' ' ' < /tmp/api.json | tr -d '\r' | sed 's/%/%25/g' | cut -c1-850)
+          echo "api http=$API $A"
+          echo "::error title=API_HTTP_$API::$A"
+
+          echo "--- permissions ---"
+          curl -s -o /tmp/perm.json -w 'perm http=%{http_code}\n' \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}"
+          python3 - <<'PY'
+import json
+try:
+    d = json.load(open('/tmp/perm.json'))
+    p = d.get('permissions') or {}
+    print('permissions:', json.dumps(p))
+    print('private:', d.get('private'), 'default_branch:', d.get('default_branch'))
+except Exception as e:
+    print('perm parse fail', e)
+PY
+          exit 1
