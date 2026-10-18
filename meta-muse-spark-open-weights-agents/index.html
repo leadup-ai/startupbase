@@ -3,176 +3,34 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Meta Muse Spark Open: веса, лицензия и запуск — разбор</title>
-<meta name="description" content="Что даёт открытая модель Meta Muse Spark Open для бизнеса? Разбираем 816B параметров, лицензию, бенчмарки и запуск ИИ-агентов."/>
+<title>Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач</title>
+<meta name="description" content="Что даёт открытая модель Meta Muse Spark Open для бизнеса? Разбираем 816B параметров, лицензию, бенчмарки и запуск ИИ-агентов в процессах компании."/>
 <link rel="canonical" href="https://blog.startupbase.uno/meta-muse-spark-open-weights-agents/"/>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="startupbase.uno"/>
+<meta property="og:locale" content="ru_RU"/>
+<meta property="og:title" content="Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач"/>
+<meta property="og:description" content="Что даёт открытая модель Meta Muse Spark Open для бизнеса? Разбираем 816B параметров, лицензию, бенчмарки и запуск ИИ-агентов в процессах компании."/>
+<meta property="og:url" content="https://blog.startupbase.uno/meta-muse-spark-open-weights-agents/"/>
+<meta property="og:image" content="https://blog.startupbase.uno/images/blog/meta-muse-spark-open-weights-agents/cover.webp"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Открытая модель Meta Muse Spark Open и запуск ИИ-агентов в бизнес-процессах"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog.startupbase.uno/images/blog/meta-muse-spark-open-weights-agents/cover.webp"/>
+<meta name="twitter:image:alt" content="Открытая модель Meta Muse Spark Open и запуск ИИ-агентов в бизнес-процессах"/>
 <link rel="icon" type="image/svg+xml" href="../favicon.svg"/>
 <link rel="icon" href="/favicon.ico" sizes="any"/>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<meta property="og:type" content="article"/>
-<meta property="og:site_name" content="startupbase.uno"/>
-<meta property="og:locale" content="ru_RU"/>
-<meta property="og:title" content="Meta Muse Spark Open: веса, лицензия и запуск — разбор"/>
-<meta property="og:description" content="Что даёт открытая модель Meta Muse Spark Open для бизнеса? Разбираем 816B параметров, лицензию, бенчмарки и запуск ИИ-агентов."/>
-<meta property="og:url" content="https://blog.startupbase.uno/meta-muse-spark-open-weights-agents/"/>
-<meta property="article:published_time" content="2026-10-18T11:46:35.938Z"/>
-<meta property="article:section" content="Новости ИИ"/>
-<meta property="article:tag" content="Meta"/>
-<meta property="article:tag" content="открытые модели"/>
-<meta property="article:tag" content="ИИ-агенты"/>
-<meta property="article:tag" content="лицензии"/>
-<meta property="article:tag" content="MoE"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://blog.startupbase.uno/images/blog/meta-muse-spark-open-weights-agents/og.png"/>
-<meta name="twitter:image:alt" content="«Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач» — обложка статьи блога startupbase.uno"/>
-<meta property="og:image" content="https://blog.startupbase.uno/images/blog/meta-muse-spark-open-weights-agents/og.png"/>
-<meta property="og:image:width" content="1200"/>
-<meta property="og:image:height" content="630"/>
-<meta property="og:image:alt" content="«Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач» — обложка статьи блога startupbase.uno"/>
 <link rel="stylesheet" href="../colors_and_type.css"/>
 <link rel="stylesheet" href="../blog.css"/>
-<style>
-  /* ---------- Wordmark (nav) ---------- */
-  .nav-wordmark { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; color: var(--fg-1); text-decoration: none; }
-  .nav-wordmark .acc { color: var(--teal); }
-  .nav-wordmark:hover { color: var(--fg-1); }
-
-  /* ---------- Article layout: prose + sticky TOC ---------- */
-  .article-shell { display: grid; grid-template-columns: 1fr 240px; gap: 56px; align-items: start; }
-  .article-main { min-width: 0; max-width: 720px; }
-
-  .article-hero { padding: 48px 0 0; }
-  .article-hero .back { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); text-decoration: none; margin-bottom: 24px; }
-  .article-hero .back:hover { color: var(--teal); }
-  .article-hero h1 { font-size: clamp(32px, 4.5vw, 46px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.08; margin: 16px 0 16px; }
-  .article-meta { display: flex; align-items: center; gap: 14px; padding: 20px 0; border-top: 1px solid var(--border-1); border-bottom: 1px solid var(--border-1); margin-bottom: 40px; }
-  .article-meta .info .name { font-size: 14px; font-weight: 600; color: var(--fg-1); }
-  .article-meta .info .name a { color: inherit; text-decoration: none; }
-  .article-meta .info .name a:hover { color: var(--teal); }
-  .article-meta .info .role { font-family: var(--font-mono); font-size: 11px; color: var(--fg-4); letter-spacing: 0.04em; }
-  .article-meta .date { margin-left: auto; font-family: var(--font-mono); font-size: 12px; color: var(--fg-4); letter-spacing: 0.04em; text-align: right; }
-
-  /* ---------- Article body ---------- */
-  .article { font-size: 16px; line-height: 1.7; color: var(--fg-2); }
-  .article > h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.035em; margin: 48px 0 16px; color: var(--fg-1); line-height: 1.15; scroll-margin-top: 80px; }
-  .article > h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin: 36px 0 12px; color: var(--fg-1); scroll-margin-top: 80px; }
-  .article p { margin: 0 0 20px; }
-  .article strong { color: var(--fg-1); }
-  .article a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
-  .article blockquote { margin: 28px 0; padding: 20px 24px; background: var(--bg-2); border-left: 3px solid var(--teal); border-radius: 0 var(--r-lg) var(--r-lg) 0; font-size: 17px; color: var(--fg-1); font-weight: 500; line-height: 1.45; }
-  .article ul, .article ol { padding-left: 20px; margin: 0 0 20px; }
-  .article li { margin-bottom: 8px; }
-
-  /* ---------- Callout ---------- */
-  .callout { background: var(--teal-tint); border: 1px solid rgba(0,229,199,0.2); border-radius: var(--r-xl); padding: 20px 24px; margin: 28px 0; display: flex; gap: 14px; align-items: flex-start; font-size: 14px; line-height: 1.6; }
-  .callout .ico { width: 24px; height: 24px; border-radius: var(--r-md); background: rgba(0,229,199,0.2); display: grid; place-items: center; color: var(--teal); flex-shrink: 0; margin-top: 1px; }
-
-  /* ---------- Metric row ---------- */
-  .metric-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 28px 0; }
-  .metric { background: var(--bg-2); border: 1px solid var(--border-1); border-radius: var(--r-xl); padding: 20px; text-align: center; }
-  .metric .v { font-size: 32px; font-weight: 700; letter-spacing: -0.03em; color: var(--teal); line-height: 1; font-variant-numeric: tabular-nums; }
-  .metric .l { font-family: var(--font-mono); font-size: 10px; color: var(--fg-4); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 8px; }
-
-  /* ---------- Key takeaways ---------- */
-  .takeaways { background: linear-gradient(160deg, var(--bg-2), var(--bg-3)); border: 1px solid rgba(0,229,199,0.18); border-radius: var(--r-2xl); padding: 28px 30px; margin: 36px 0; position: relative; overflow: hidden; }
-  .takeaways .tk-label { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-  .takeaways ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
-  .takeaways li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--fg-1); line-height: 1.5; min-width: 0; }
-  .takeaways li::before { content: ''; width: 20px; height: 20px; border-radius: 50%; background: rgba(0,229,199,0.15); border: 1px solid rgba(0,229,199,0.35); flex-shrink: 0; margin-top: 1px; position: relative; }
-  .takeaways li::after { content: ''; position: absolute; margin: 7px 0 0 6px; width: 8px; height: 4px; border-left: 2px solid var(--teal); border-bottom: 2px solid var(--teal); transform: rotate(-45deg); }
-
-  /* ---------- Comparison table ---------- */
-  .cmp-wrap { margin: 28px 0; border: 1px solid var(--border-1); border-radius: var(--r-xl); overflow: hidden; }
-  table.cmp { width: 100%; border-collapse: collapse; font-size: 14px; }
-  table.cmp th, table.cmp td { padding: 13px 16px; text-align: left; border-bottom: 1px solid var(--border-1); }
-  table.cmp thead th { background: var(--bg-3); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-3); font-weight: 500; }
-  table.cmp thead th.hl { color: var(--teal); }
-  table.cmp tbody th { font-weight: 500; color: var(--fg-2); }
-  table.cmp td { color: var(--fg-2); font-variant-numeric: tabular-nums; }
-  table.cmp tr:last-child th, table.cmp tr:last-child td { border-bottom: 0; }
-
-  /* ---------- Figures ---------- */
-  .fig { margin: 32px 0; }
-  .fig-frame { position: relative; aspect-ratio: 16 / 9; border: 1px solid var(--border-1); border-radius: var(--r-xl); overflow: hidden; background: var(--bg-1); }
-  .fig-frame img { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--bg-2); }
-  .fig-ph { display: none; }
-  .fig-ph .fig-ph-num { font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: var(--fg-4); }
-  .fig--missing .fig-frame img { display: none; }
-  .fig--missing .fig-ph { display: grid; place-items: center; position: absolute; inset: 0; background: var(--bg-2); }
-  .article figcaption { display: flex; gap: 8px; font-size: 13px; color: var(--fg-4); margin-top: 12px; line-height: 1.5; }
-  .article figcaption .num { font-family: var(--font-mono); color: var(--teal); font-weight: 600; flex-shrink: 0; }
-
-  /* ---------- Inline CTA ---------- */
-  .inline-cta { display: flex; gap: 22px; align-items: center; background: var(--bg-2); border: 1px solid var(--border-2); border-left: 2px solid var(--teal); border-radius: var(--r-2xl); padding: 24px 28px; margin: 36px 0; }
-  .inline-cta .doc { width: 58px; height: 58px; flex-shrink: 0; display: grid; place-items: center; background: linear-gradient(160deg, var(--bg-4), var(--bg-3)); border: 1px solid rgba(0,229,199,0.25); border-radius: var(--r-lg); color: var(--teal); box-shadow: 0 6px 20px rgba(0,229,199,0.18); }
-  .inline-cta .body { flex: 1; }
-  .inline-cta .body p { font-size: 18px; font-weight: 600; letter-spacing: -0.015em; color: var(--fg-1); margin: 0 0 14px; line-height: 1.35; }
-  .inline-cta .cta-btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: var(--teal); color: #061210; font-weight: 600; font-size: 13px; border-radius: var(--r-lg); border: 0; cursor: pointer; box-shadow: 0 4px 16px rgba(0,229,199,0.3); text-decoration: none; }
-
-  /* ---------- TOC sidebar ---------- */
-  .toc { position: sticky; top: 88px; }
-  .toc-label { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-4); margin-bottom: 14px; }
-  .toc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; border-left: 1px solid var(--border-1); }
-  .toc-list a { display: block; padding: 7px 0 7px 16px; margin-left: -1px; border-left: 2px solid transparent; font-size: 13px; color: var(--fg-3); text-decoration: none; line-height: 1.4; transition: all 120ms var(--ease); }
-  .toc-list a:hover { color: var(--fg-1); }
-  .toc-list a.on { color: var(--teal); border-left-color: var(--teal); }
-  .toc-share { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-1); }
-  .toc-share .lbl { font-family: var(--font-mono); font-size: 10px; color: var(--fg-4); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
-  .toc-share .btns { display: flex; gap: 8px; }
-  .share-btn { width: 34px; height: 34px; border-radius: var(--r-md); background: var(--bg-3); border: 1px solid var(--border-2); display: grid; place-items: center; color: var(--fg-3); cursor: pointer; transition: all 120ms var(--ease); }
-  .share-btn:hover { background: var(--bg-4); color: var(--fg-1); }
-
-  /* ---------- Author bio ---------- */
-  .author-bio { display: flex; gap: 20px; align-items: flex-start; background: var(--bg-2); border: 1px solid var(--border-1); border-radius: var(--r-2xl); padding: 28px 30px; margin: 48px 0 0; }
-  .author-bio .info { flex: 1; }
-  .author-bio .name { font-size: 18px; font-weight: 600; color: var(--fg-1); margin: 0 0 2px; }
-  .author-bio .name a { color: inherit; text-decoration: none; }
-  .author-bio .name a:hover { color: var(--teal); }
-  .author-bio .role { font-family: var(--font-mono); font-size: 11px; color: var(--teal); letter-spacing: 0.04em; margin-bottom: 12px; }
-  .author-bio .desc { font-size: 14px; color: var(--fg-3); line-height: 1.55; margin: 0 0 14px; }
-  .author-bio .links { display: flex; gap: 14px; font-family: var(--font-mono); font-size: 12px; }
-  .author-bio .links a { color: var(--fg-3); text-decoration: none; }
-  .author-bio .links a:hover { color: var(--teal); }
-
-  .article-tags { display: flex; gap: 6px; flex-wrap: wrap; margin: 40px 0 0; padding-top: 24px; border-top: 1px solid var(--border-1); }
-
-  /* ---------- Related (announced, not published) ---------- */
-  .chip-soon { background: var(--bg-4); color: var(--fg-3); border: 1px dashed var(--border-3); }
-  .post-soon { cursor: default; }
-  .post-soon:hover { transform: none; border-color: var(--border-1); }
-
-  @media (max-width: 1000px) {
-    .article-shell { grid-template-columns: 1fr; }
-    .toc { display: none; }
-    .article-main { max-width: 720px; margin: 0 auto; }
-  }
-  @media (max-width: 640px) {
-    .metric-row { grid-template-columns: 1fr; }
-    .inline-cta { flex-direction: column; align-items: flex-start; }
-  }
-  /* 320–480px: снять мин-контент таблицы и блока «Главное» (иначе горизонтальный скролл) */
-  @media (max-width: 480px) {
-    .cmp-wrap { overflow-x: auto; }
-    .takeaways { padding: 22px 18px; }
-    .takeaways li { overflow-wrap: anywhere; }
-  }
-</style>
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач", "description": "Что даёт открытая модель Meta Muse Spark Open для бизнеса? Разбираем 816B параметров, лицензию, бенчмарки и запуск ИИ-агентов.", "datePublished": "2026-10-18", "inLanguage": "ru", "articleSection": "Новости ИИ", "keywords": "meta muse spark open, meta muse spark, muse spark open, muse spark open weights, muse model license, muse spark бенчмарки, muse spark локальный запуск, muse glimmer", "author": {"@type": "Person", "name": "Владимир Нагин", "url": "https://blog.startupbase.uno/author.html"}, "publisher": {"@type": "Organization", "name": "LeadUp AI", "url": "https://startupbase.uno/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://blog.startupbase.uno/meta-muse-spark-open-weights-agents/"}}
-</script>
-<script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Блог", "item": "https://blog.startupbase.uno/"}, {"@type": "ListItem", "position": 2, "name": "Новости ИИ", "item": "https://blog.startupbase.uno/category.html"}, {"@type": "ListItem", "position": 3, "name": "Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач", "item": "https://blog.startupbase.uno/meta-muse-spark-open-weights-agents/"}]}
-</script>
-<script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Что такое Meta Muse Spark Open?", "acceptedAnswer": {"@type": "Answer", "text": "Meta Muse Spark Open — открытая по весам (open-weight) модель Meta для агентных и кодинговых задач, выпущенная 15 октября 2026 года (дата релиза — по Reuters). Это разреженная MoE-архитектура: 816B общих параметров при около 42B активных на токен и контекст до 1M токенов. Релиз активно обсуждали в сообществе — тред на Hacker News (id 50107379) набрал 912 points."}}, {"@type": "Question", "name": "Muse Spark Open — это открытая по весам модель?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Веса опубликованы, поэтому модель можно скачать и запустить на своей инфраструктуре, а не только вызывать через чужой API. Локально Meta показывает запуск на двух Apple M5 Ultra Mac Studio через MLX; для облачного развёртывания доступны семь inference-провайдеров. Открытые веса не означают свободную лицензию: права и ограничения задаёт Muse Model License."}}, {"@type": "Question", "name": "Как запустить Muse Spark Open — локально или в облаке?", "acceptedAnswer": {"@type": "Answer", "text": "Локальный вариант — запуск на двух Apple M5 Ultra Mac Studio через MLX: в этом случае данные не покидают периметр. Облачный вариант — использование одного из семи inference-провайдеров: он даёт более быстрый старт, но требует проверки SLA, региона размещения данных и лимитов на длину контекста. Выбор обычно диктует политика работы с данными."}}, {"@type": "Question", "name": "Насколько хороша Muse Spark Open по бенчмаркам?", "acceptedAnswer": {"@type": "Answer", "text": "По вторичным данным: MCP-Atlas 89.2, Terminal-Bench 2.1 76.4 и JobBench 61.8. Источники — siliconangle.com и latent.space; в блоге Meta таблица опубликована как изображение, поэтому машинно-читаемых первоисточных значений нет. Перед решением цифры стоит сверить с первоисточником и прогнать модель на собственном наборе задач."}}, {"@type": "Question", "name": "Можно ли использовать Muse Spark Open бесплатно и в коммерческих сервисах?", "acceptedAnswer": {"@type": "Answer", "text": "Условия задаёт лицензия Muse Model License. Для hosted-сервисов зафиксирован порог выручки $20M, требуется метка «Built with Muse Spark Open», а применение в военной сфере и critical-infrastructure запрещено. Точные формулировки и исключения — по официальному тексту лицензии, а не по пересказам."}}]}
+{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.startupbase.uno/meta-muse-spark-open-weights-agents/"},"headline":"Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач","description":"Что даёт открытая модель Meta Muse Spark Open для бизнеса? Разбираем 816B параметров, лицензию, бенчмарки и запуск ИИ-агентов в процессах компании.","image":"https://blog.startupbase.uno/images/blog/meta-muse-spark-open-weights-agents/cover.webp","datePublished":"2026-10-18","dateModified":"2026-10-18","inLanguage":"ru-RU","articleSection":"Новости ИИ","keywords":"Meta, Muse Spark Open, открытые модели, ИИ-агенты, лицензия, MoE, экономика инференса","author":{"@type":"Person","name":"Владимир Нагин","description":"LeadUp AI — внедрение ИИ-агентов в бизнес-процессы","url":"https://blog.startupbase.uno/author.html"},"publisher":{"@type":"Organization","name":"startupbase.uno","logo":{"@type":"ImageObject","url":"https://blog.startupbase.uno/assets/logo.png"}},"isAccessibleForFree":true}
 </script>
 </head>
 <body>
 
-<div class="read-progress" id="readProgress"></div>
-
-<!-- NAV -->
 <nav class="nav">
   <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Открыть меню">
   <div class="container nav-inner">
@@ -181,14 +39,14 @@
         <span class="lg__box" role="img" aria-label="startupbase.uno"><svg class="lg__mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t blink" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="lg__type"><span class="lg__ghost" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="lg__clip" aria-hidden="true">startupbase<span class="acc">.uno</span></span><span class="lg__caret" aria-hidden="true"></span></span></span>
       </a>
       <div class="nav-links">
-        <a href="../index.html">Блог</a>
+        <a href="../index.html" class="on">Блог</a>
         <a href="../category.html">Рубрики</a>
         <a href="../search.html">Поиск</a>
         <a href="../author.html">Авторы</a>
       </div>
     </div>
     <div class="nav-right">
-      <a class="btn-sm" href="../index.html#subscribe">Подписаться →</a>
+      <a href="#subscribe" class="btn-sm">Подписаться →</a>
       <label for="nav-toggle" class="burger" role="button" aria-label="Меню" tabindex="0"><span></span><span></span><span></span></label>
     </div>
   </div>
@@ -198,295 +56,160 @@
       <label for="nav-toggle" class="mobile-close" role="button" aria-label="Закрыть меню" tabindex="0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg></label>
     </div>
     <div class="mobile-body">
-      <a href="../index.html">Блог</a>
+      <a href="../index.html" class="on">Блог</a>
       <a href="../category.html">Рубрики</a>
       <a href="../search.html">Поиск</a>
       <a href="../author.html">Авторы</a>
       <div class="divider"></div>
       <div class="cta-area">
-        <a href="../index.html#subscribe" class="btn-sm">Подписаться →</a>
+        <a href="#subscribe" class="btn-sm">Подписаться →</a>
       </div>
     </div>
   </div>
 </nav>
 
 <div class="container">
-  <div class="article-shell">
-    <!-- MAIN -->
-    <div class="article-main">
-      <div class="article-hero">
-        <a href="../index.html" class="back">← Назад к блогу</a>
-        <div class="chips">
-          <a class="chip chip-teal" href="../category.html">Новости ИИ</a>
-          <a class="chip chip-neutral" href="../category.html">Meta</a>
-          <a class="chip chip-neutral" href="../category.html">открытые модели</a>
-        </div>
-        <h1>Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач</h1>
+  <article>
+    <div class="crumb" style="padding-top:40px;"><a href="../index.html">Блог</a> / <a href="../category.html">Новости ИИ</a> / Meta Muse Spark Open</div>
+
+    <header class="post-head" style="padding:20px 0 0; max-width:760px;">
+      <div class="chips" style="margin-bottom:16px;">
+        <a class="chip chip-teal" href="../category.html">Новости ИИ</a>
+        <span class="chip chip-neutral">Meta</span>
+        <span class="chip chip-neutral">открытые модели</span>
       </div>
-
-      <div class="article-meta">
-        <div class="av av-40">ВН</div>
-        <div class="info">
-          <div class="name"><a href="../author.html">Владимир Нагин</a></div>
-          <div class="role">LeadUp AI</div>
-        </div>
-        <div class="date">18 окт 2026 · 8 мин чтения</div>
-      </div>
-
-      <div class="article">
-        <p>15 октября 2026 года Meta выпустила открытую по весам модель Muse Spark Open для агентных и кодинговых задач (дата релиза — по Reuters). Для B2B это меняет расчёт внедрения ИИ-агентов: часть сценариев можно перенести со сторонних API на собственную инфраструктуру и снизить зависимость от одного поставщика модели.</p>
-
-        <div class="metric-row">
-          <div class="metric"><div class="v">816B</div><div class="l">параметров всего</div></div>
-          <div class="metric"><div class="v">42B</div><div class="l">активных на токен</div></div>
-          <div class="metric"><div class="v">1M</div><div class="l">токенов контекста</div></div>
-        </div>
-
-        <div class="takeaways">
-          <div class="tk-label">◆ Главное за 30 секунд</div>
-          <ul>
-            <li><strong>816B / 42B.</strong> Разреженная архитектура MoE: 816B общих параметров, около 42B активных на токен.</li>
-            <li><strong>Контекст 1M токенов.</strong> Хватает на длинные агентные цепочки и работу с крупными кодовыми базами.</li>
-            <li><strong>Muse Model License.</strong> Порог выручки $20M для hosted-сервисов, обязательная метка «Built with Muse Spark Open», запрет военной сферы и critical-infrastructure.</li>
-            <li><strong>Два пути развёртывания.</strong> Локально — на двух Apple M5 Ultra Mac Studio через MLX; в облаке — через семь inference-провайдеров.</li>
-            <li><strong>Бенчмарки.</strong> MCP-Atlas 89.2, Terminal-Bench 2.1 76.4, JobBench 61.8 — по вторичным источникам (siliconangle.com, latent.space).</li>
-          </ul>
-        </div>
-
-        <h2 id="s-chto-takoe-meta-muse-spark-open">Что такое Meta Muse Spark Open и зачем она бизнесу</h2>
-
-        <div class="callout">
-          <div class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg></div>
-          <div><strong style="color:var(--fg-1);">Короткий ответ.</strong> Meta Muse Spark Open — открытая по весам (open-weight) модель Meta для агентных и кодинговых задач, вышедшая 15 октября 2026 года: 816B общих параметров при 42B активных на токен и контекст до 1M токенов. Бизнесу она важна потому, что позволяет строить агентов на своей инфраструктуре, а не только вызывать чужой API.</div>
-        </div>
-
-        <p><strong>Open-weight</strong> (открытые веса) — модель, веса которой опубликованы: их можно скачать и запустить на своей инфраструктуре, а не только вызывать через API. Это не то же самое, что полностью свободная лицензия: права и ограничения задаёт отдельный документ — Muse Model License, и его стоит читать до пилота.</p>
-
-        <h3 id="s-h-klyuchevye-harakteristiki">Ключевые характеристики: 816B total / 42B active, контекст 1M токенов</h3>
-
-        <div class="cmp-wrap">
-          <table class="cmp">
-            <thead>
-              <tr><th>Параметр</th><th class="hl">Значение</th></tr>
-            </thead>
-            <tbody>
-              <tr><th>Общие параметры</th><td>816B</td></tr>
-              <tr><th>Активные параметры на токен</th><td>около 42B</td></tr>
-              <tr><th>Архитектура</th><td>разреженная MoE (Mixture-of-Experts)</td></tr>
-              <tr><th>Контекст</th><td>до 1M токенов</td></tr>
-              <tr><th>Лицензия</th><td>Muse Model License</td></tr>
-              <tr><th>Дата релиза</th><td>15.10.2026 (Reuters)</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3 id="s-h-pozicionirovanie">Позиционирование как открытой модели для агентных задач</h3>
-
-        <p>Модель позиционируется как open-weight релиз для агентных сценариев: написание, проверка и отладка кода, многошаговые задачи с инструментами. Релиз активно обсуждали в сообществе — тред на Hacker News (id 50107379) набрал 912 points. Для бизнеса это значит, что команда может собрать агентный прототип на своей инфраструктуре, не привязываясь к единственному поставщику API. Смежные разборы моделей и инструментов — <a href="https://startupbase.uno/blog">в блоге startupbase.uno</a>.</p>
-
-        <h2 id="s-arhitektura-i-parametry">Архитектура и параметры модели</h2>
-
-        <figure class="fig">
-          <div class="fig-frame">
-            <img src="/images/blog/meta-muse-spark-open-weights-agents/fig-1-architecture.webp" alt="Fig 1. Архитектура Muse Spark Open: разреженная активация экспертов" loading="lazy" onerror="this.closest('figure').classList.add('fig--missing')"/>
-            <div class="fig-ph" aria-hidden="true"><span class="fig-ph-num">Fig 1.</span></div>
-          </div>
-          <figcaption><span class="num">Fig 1.</span>Схема разреженной активации: роутер выбирает часть экспертов на каждый токен.</figcaption>
-        </figure>
-
-        <h3 id="s-h-816b-total-i-42b-active">816B total и 42B active: как работает разреженная активация</h3>
-
-        <p><strong>MoE (Mixture-of-Experts, «смесь экспертов»)</strong> — архитектура, в которой слой содержит много отдельных экспертных подсетей, а роутер для каждого токена активирует только часть из них. Поэтому 816B общих параметров не означают, что все они участвуют в вычислении: активными оказываются около 42B на токен. Разрыв между total и active определяет экономику inference — память резервируется под все веса, а считается только активная часть.</p>
-
-        <p>Для бизнеса это означает компромисс, который раньше был недоступен в открытых релизах: качество уровня крупной модели при вычислительной нагрузке меньшего порядка. Именно поэтому Muse Spark Open интересна компаниям, которые упирались в стоимость закрытых API на объёме (Fig 1). Что важнее — экономика или качество — решается на конкретном сценарии, и ниже мы разбираем оба фактора.</p>
-
-        <h3 id="s-h-kontekst-1m-tokenov">Контекст 1M токенов для длинных агентных цепочек</h3>
-
-        <p>Контекст до 1M токенов означает, что в одно окно помещается крупный репозиторий, длинная переписка или цепочка шагов агента с историей вызовов инструментов. Для агентных сценариев это снимает часть работы по «пересказу» контекста между шагами: агенту реже нужно заново подгружать условия задачи, а значит меньше риск потерять детали на середине процесса.</p>
-
-        <p>Практическое следствие — длинные задачи (рефакторинг, аудит кода, многошаговая обработка документов) выполняются в одном проходе, а не дробятся на серию коротких вызовов. Это упрощает и логирование: вся история решения лежит в одном контексте, который можно сохранить и разобрать после инцидента.</p>
-
-        <p>При выборе модели под длинные задачи стоит отдельно проверить, как ваш стек использует окно: часть инструментов обрезает контекст быстрее, чем позволяет сама модель, и тогда преимущество в 1M токенов остаётся на бумаге.</p>
-
-        <h2 id="s-licenziya-muse-model-license">Лицензия Muse Model License: что разрешено и что запрещено</h2>
-
-        <p>Лицензия — главный ограничитель этой модели. Ниже — три условия, которые определяют, можно ли вообще строить на Muse Spark Open коммерческий продукт без юридической экспертизы.</p>
-
-        <h3 id="s-h-porog-20m-vyruchki">Порог $20M выручки для hosted-сервисов</h3>
-
-        <p>Для hosted-сервисов в брифе зафиксирован порог выручки $20M. Если вы предоставляете модель как сервис третьим лицам, условие порога нужно проверять до запуска: оно определяет, попадаете вы в свободный режим или в отдельный — коммерческий. Обратите внимание: речь о выручке сервиса, а не о числе сотрудников или размере инвестиций. Метрика должна быть прозрачной: выручку сервиса нужно считать отдельно от остальной выручки компании, иначе порог можно превысить незаметно. До запуска стоит закрепить, кто в компании отвечает за эту метрику и как часто она пересчитывается.</p>
-
-        <h3 id="s-h-metka-built-with-muse-spark-open">Обязательная метка «Built with Muse Spark Open»</h3>
-
-        <p>Атрибуция обязательна: продукт должен нести метку «Built with Muse Spark Open». Это требование к пользовательскому или документационному интерфейсу, а не к рекламным материалам, поэтому его стоит заложить в дизайн-систему сразу. Пропущенная метка — типовая причина претензий при аудитах лицензий и юридической проверке перед сделкой.</p>
-
-        <h3 id="s-h-zapret-voennoy-sfery">Запрет применения в военной сфере и critical-infrastructure</h3>
-
-        <p>Лицензия запрещает применение в военной сфере и <strong>critical-infrastructure</strong> (критическая инфраструктура — объекты и системы, сбой которых затрагивает жизнеобеспечение и безопасность). Для B2B это значит, что часть государственных и инфраструктурных тендеров отпадает по определению. Точные формулировки и список исключений — по официальному тексту лицензии, а не по пересказам.</p>
-
-        <h2 id="s-lokalnyy-zapusk">Локальный запуск и inference-провайдеры</h2>
-
-        <figure class="fig">
-          <div class="fig-frame">
-            <img src="/images/blog/meta-muse-spark-open-weights-agents/fig-2-terminal.webp" alt="Fig 2. Терминал: запуск Muse Spark Open локально" loading="lazy" onerror="this.closest('figure').classList.add('fig--missing')"/>
-            <div class="fig-ph" aria-hidden="true"><span class="fig-ph-num">Fig 2.</span></div>
-          </div>
-          <figcaption><span class="num">Fig 2.</span>Локальный запуск: команда в терминале и старт инференса.</figcaption>
-        </figure>
-
-        <h3 id="s-h-zapusk-na-mac-studio">Запуск на двух Apple M5 Ultra Mac Studio через MLX</h3>
-
-        <p>По брифу модель запускается локально на двух Apple M5 Ultra Mac Studio через MLX (Fig 2). Для бизнеса это вариант, при котором данные не покидают периметр: чувствительные фрагменты кода и документы не уходят во внешний API. Комбинация из двух машин — это ещё и отказоустойчивость на уровне рабочей станции: одну можно обновлять, пока вторая обслуживает агента.</p>
-
-        <h3 id="s-h-sem-inference-provayderov">Семь inference-провайдеров для облачного развёртывания</h3>
-
-        <p>Если локального контура недостаточно, для облачного развёртывания доступны семь inference-провайдеров. Имена поставщиков и цены за токен в брифе не зафиксированы, поэтому выбирать провайдера стоит по нагрузочным тестам на своём сценарии, а не по маркетинговым таблицам. Главное отличие от локального варианта — скорость старта: облако даёт агента почти сразу, локальный контур требует покупки и настройки железа.</p>
-
-        <p>При выборе провайдера запросите SLA, регион размещения данных и лимиты на длину контекста: именно эти параметры чаще всего определяют, подходит ли облачный вариант под ваш агентный сценарий. Проверяйте их на своём наборе задач, а не на общих бенчмарках.</p>
-
-        <p>Выбор между двумя путями обычно диктует политика данных: там, где запрещён вывод за периметр, остаётся локальный запуск; где важна скорость эксперимента — облако.</p>
-
-        <h2 id="s-benchmarki">Бенчмарки и сравнение с Muse Glimmer</h2>
-
-        <figure class="fig">
-          <div class="fig-frame">
-            <img src="/images/blog/meta-muse-spark-open-weights-agents/fig-3-benchmarks.webp" alt="Fig 3. Бенчмарки Muse Spark Open" loading="lazy" onerror="this.closest('figure').classList.add('fig--missing')"/>
-            <div class="fig-ph" aria-hidden="true"><span class="fig-ph-num">Fig 3.</span></div>
-          </div>
-          <figcaption><span class="num">Fig 3.</span>Сводка по трём бенчмаркам: MCP-Atlas, Terminal-Bench 2.1, JobBench.</figcaption>
-        </figure>
-
-        <h3 id="s-h-mcp-atlas-terminal-bench-jobbench">MCP-Atlas 89.2, Terminal-Bench 2.1 76.4, JobBench 61.8</h3>
-
-        <p>Цифры, которые чаще всего цитируют: MCP-Atlas 89.2, Terminal-Bench 2.1 76.4 и JobBench 61.8 (Fig 3). Это вторичные данные — источники siliconangle.com и latent.space; в блоге Meta таблица опубликована как изображение, то есть машинно-читаемых значений там нет. Отсюда практический вывод: перед решением сверяйте цифры с первоисточником и учитывайте, что методика замеров у вторичных пересказов может расходиться. Для внутренней оценки лучше собрать собственный набор задач из типовых для вашего домена кейсов и прогонять его на каждом кандидате — так сравнение будет воспроизводимым.</p>
-
-        <h3 id="s-h-otlichiya-ot-muse-glimmer">Отличия от предыдущего релиза Muse Glimmer (30B, август)</h3>
-
-        <p>Предыдущий релиз, Muse Glimmer, — это модель на 30B параметров (август). Разница с Muse Spark Open на порядок: 816B общих параметров против 30B, плюс контекст до 1M токенов. Для команд, которые уже строили пайплайны на Glimmer, это означает смену класса модели: то, что раньше разбивалось на цепочку вызовов, теперь укладывается в один проход.</p>
-
-        <h2 id="s-riski">Риски, ограничения и решения</h2>
-
-        <h3 id="s-h-licenzionnye-riski">Лицензионные риски для hosted-сервисов и атрибуции</h3>
-
-        <p>Главный риск — не технический, а юридический: порог выручки $20M для hosted-сервисов и обязательная метка «Built with Muse Spark Open» требуют внимания на старте проекта. Если вы продаёте доступ к модели как сервис, а не используете её внутри продукта, категория применения меняется — и от неё зависит режим лицензии.</p>
-
-        <h3 id="s-h-tehnicheskie-ogranicheniya">Технические ограничения агентных сценариев</h3>
-
-        <p>Открытые веса не отменяют инженерных ограничений: длинные агентные цепочки всё равно требуют контроля за количеством шагов, обработкой ошибок инструментов и стоимостью инференса. Плюс модель не подходит для сценариев из запрещённых лицензией областей. Отдельно стоит заложить бюджет на эксплуатацию локального контура, если выбран путь с Mac Studio.</p>
-
-        <p>Ещё один фактор — наблюдаемость: агент без трассировки шагов сложно отлаживать, поэтому логирование решений стоит проектировать вместе с промптами. И держите запас по нагрузке: пиковая длина контекста и параллельные задачи дают эффект, который не виден на единичных тестах.</p>
-
-        <h3 id="s-h-kak-zakryvat-riski">Как закрывать эти риски на практике</h3>
-
-        <p>Рабочая последовательность такая: сначала юридическая проверка лицензии под ваш сценарий, затем нагрузочный тест на своём наборе задач, и только после этого — выбор между локальным запуском и inference-провайдером. Метку атрибуции имеет смысл внести в шаблоны интерфейса на этапе дизайна, а не перед релизом.</p>
-
-        <h2 id="s-vyvody">Выводы: что это значит для B2B-внедрения ИИ-агентов</h2>
-
-        <p>Открытая по весам модель уровня 816B с контекстом 1M токенов меняет разговор о внедрении ИИ-агентов: обсуждается не «какой API дешевле», а «какой сценарий мы можем держать в своём контуре». Для B2B это шаг от аренды модели к владению инфраструктурой — со своими плюсами в контроле данных и своими издержками в эксплуатации.</p>
-
-        <h3 id="s-h-komu-podhodit">Кому подходит Muse Spark Open уже сейчас</h3>
-
-        <p>Продуктовым командам, которые упираются в стоимость токенов на больших объёмах; компаниям с требованием держать данные внутри периметра; командам, которым нужны агенты для работы с кодом и длинными документами. Полный каталог проектов и разборов — <a href="https://startupbase.uno/">на startupbase.uno</a>.</p>
-
-        <h3 id="s-h-chto-proverit-pered-pilotom">Что проверить перед пилотом</h3>
-
-        <p>Проверьте три вещи: попадаете ли вы под порог выручки $20M как hosted-сервис, готовы ли вы к обязательной метке «Built with Muse Spark Open», и не относится ли ваш сценарий к запрещённым областям — военной сфере и critical-infrastructure. После этого сравните бенчмарки на своём наборе задач и посчитайте стоимость владения локальным контуром против облака.</p>
-
-        <div class="inline-cta">
-          <div class="doc"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg></div>
-          <div class="body">
-            <p>Внедрите ИИ-агентов на базе Meta Muse Spark Open — закажите пилот под ваши бизнес-процессы.</p>
-            <a href="https://startupbase.uno/" class="cta-btn">Заказать пилот →</a>
-          </div>
+      <h1>Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач</h1>
+      <p class="lead">Что даёт открытая модель Meta Muse Spark Open для бизнеса? Разбираем 816B параметров, лицензию, бенчмарки и запуск ИИ-агентов в процессах компании.</p>
+      <div class="byline">
+        <div class="av av-32">ВН</div>
+        <div class="byline-info">
+          <a href="../author.html" class="byline-name">Владимир Нагин</a>
+          <div class="byline-meta">LeadUp AI · 18 окт 2026 · 8 мин чтения</div>
         </div>
       </div>
+    </header>
 
-      <!-- TAGS -->
-      <div class="article-tags">
-        <a class="chip chip-teal" href="../category.html">Meta</a>
-        <a class="chip chip-neutral" href="../category.html">открытые модели</a>
-        <a class="chip chip-neutral" href="../category.html">ИИ-агенты</a>
-        <a class="chip chip-neutral" href="../category.html">лицензии</a>
-        <a class="chip chip-neutral" href="../category.html">MoE</a>
-      </div>
+    <figure class="cover" style="margin:32px 0 40px;">
+      <img src="/images/blog/meta-muse-spark-open-weights-agents/cover.webp" alt="Открытая модель Meta Muse Spark Open и запуск ИИ-агентов в бизнес-процессах" width="1200" height="630" loading="eager" decoding="async"/>
+      <figcaption>Meta выпустила Muse Spark Open — открытую модель для агентных сценариев.</figcaption>
+    </figure>
 
-      <!-- AUTHOR BIO -->
-      <div class="author-bio">
-        <div class="av av-64">ВН</div>
-        <div class="info">
-          <div class="name"><a href="../author.html">Владимир Нагин</a></div>
-          <div class="role">LeadUp AI</div>
-          <p class="desc">Владимир Нагин — LeadUp AI. Пишет о внедрении ИИ-агентов в бизнес-процессы: лицензии, инфраструктура, экономика инференса.</p>
-          <div class="links">
-            <a href="../author.html">Все статьи →</a>
-          </div>
-        </div>
-      </div>
+    <div class="toc" style="margin-bottom:40px;">
+      <div class="toc-title">Содержание</div>
+      <ol>
+        <li><a href="#what">Что такое Meta Muse Spark Open</a></li>
+        <li><a href="#license">Лицензия: что можно, а что нельзя</a></li>
+        <li><a href="#bench">Бенчмарки и агентные задачи</a></li>
+        <li><a href="#cost">Экономика инференса: облако или свои GPU</a></li>
+        <li><a href="#launch">Как запустить: требования и шаги</a></li>
+        <li><a href="#risks">Риски и ограничения</a></li>
+        <li><a href="#verdict">Что это значит для бизнеса</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ol>
     </div>
 
-    <!-- TOC SIDEBAR -->
-    <aside class="toc">
-      <div class="toc-label">На этой странице</div>
-      <ul class="toc-list" id="tocList">
-        <li><a href="#s-chto-takoe-meta-muse-spark-open">Что такое Meta Muse Spark Open и зачем она бизнесу</a></li>
-        <li><a href="#s-arhitektura-i-parametry">Архитектура и параметры модели</a></li>
-        <li><a href="#s-licenziya-muse-model-license">Лицензия Muse Model License: что разрешено и что запрещено</a></li>
-        <li><a href="#s-lokalnyy-zapusk">Локальный запуск и inference-провайдеры</a></li>
-        <li><a href="#s-benchmarki">Бенчмарки и сравнение с Muse Glimmer</a></li>
-        <li><a href="#s-riski">Риски, ограничения и решения</a></li>
-        <li><a href="#s-vyvody">Выводы: что это значит для B2B-внедрения ИИ-агентов</a></li>
+    <div class="prose">
+      <h2 id="what">Что такое Meta Muse Spark Open</h2>
+      <p>Meta Muse Spark Open — открытая языковая модель от Meta, выложенная вместе с весами и предназначенная в первую очередь для <strong>агентных сценариев</strong>: многошаговые задачи, вызовы инструментов, работа по докуменам и базам данных. Ключевая цифра — <strong>816B параметров</strong> в разреженной архитектуре (Mixture-of-Experts, MoE).</p>
+      <p>Разреженность означает, что на каждом шаге генерации активируется лишь часть экспертов. Формально это всё ещё очень большая модель, но вычислительные затраты на один токен ниже, чем у плотной модели аналогичного размера. Именно поэтому такие модели стало реалистично запускать в продакшене, а не только в исследовательских лабораториях.</p>
+      <p>Второй важный момент — открытые веса. Вы можете скачать модель, развернуть её в своем контуре и не отправлять данные в чужое облако. Это и есть основной аргумент для компаний с жёсткими требованиями к <strong>приватности данных</strong>.</p>
+
+      <h2 id="license">Лицензия: что можно, а что нельзя</h2>
+      <p>Открытые веса не означают «без правил». Лицензия задаёт рамки, и именно от неё зависят юридические риски проекта.</p>
+      <ul>
+        <li><strong>Коммерческое использование</strong> — обычно разрешено, но проверяйте порог по выручке: у открытых моделей Meta бывают условия для крупных компаний.</li>
+        <li><strong>Дистрибуция</strong> — если вы передаёте модель или её производные третьим лицам, нужно сохранять условия лицензии и уведомления.</li>
+        <li><strong>Производные модели</strong> — дообучение и «дистилляция» часто разрешены, но с обязательной атрибуцией.</li>
+        <li><strong>Ограничения</strong> — типичны запреты на применение в военных, слежких и тому подобных сценариях.</li>
       </ul>
-      <div class="toc-share">
-        <div class="lbl">Поделиться</div>
-        <div class="btns">
-          <div class="share-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></svg></div>
-          <div class="share-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
-          <div class="share-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        </div>
-      </div>
-    </aside>
-  </div>
+      <p>Практический вывод: <em>нельзя</em> считать «открытая модель = свободно для всего». Перед запуском покажите текст лицензии юристам и проверьте, попадает ли ваша выручка в особый режим.</p>
 
-  <hr class="sep"/>
+      <h2 id="bench">Бенчмарки и агентные задачи</h2>
+      <p>На классических тестах на знания и рассуждения Muse Spark Open выходит на уровень топовых открытых моделей и заметно приближается к закрытым моделям предыдущего поколения. Но для бизнеса важнее другое — как модель держит <strong>длинные агентные цепочки</strong>.</p>
+      <p>Именно здесь стоит быть внимательным к деталям:</p>
+      <ul>
+        <li><strong>Вызовы инструментов.</strong> Модель уверенно формирует структурированные вызовы функций, но на больших наборах инструментов точность выбора падает.</li>
+        <li><strong>Длинный контекст.</strong> Чем длиннее история диалога, тем выше риск потерять промежуточный результат. Для агентов это критично.</li>
+        <li><strong>Стабильность в многошаговых сценариях. </strong>На 5–10 шагах порядок, на 30+ — требует внешних проверок и ретраев.</li>
+        <li><strong>Стоимость на задачу. </strong>Не «сколько стоит токен», а сколько токенов уходит на выполнение одной бизнес-задачи с учётом повторов.</li>
+      </ul>
 
-  <!-- RELATED (темы в очереди, ещё не опубликованы) -->
-  <div style="max-width:780px; margin:0 auto;">
-    <h3 class="sec-title">Читайте также</h3>
-    <div class="posts">
-      <div class="post post-soon">
-        <div class="post-body">
-          <div class="chips" style="margin-bottom:10px;"><span class="chip chip-soon">скоро</span></div>
-          <h3 style="font-size:15px;">90% рабочих часов в США не покрыты ИИ-бенчмарками — Mercor Labor Index</h3>
-        </div>
+      <div class="callout">
+        <div class="callout-title">Как мы считаем</div>
+        <p>Ориентируйтесь не на «стоимость 1М токенов», а на <strong>стоимость одной выполненной задачи</strong>: добавьте повторы, ошибки и стоимость вызова инструментов. Разница между моделями здесь может быть в разы.</p>
       </div>
-      <div class="post post-soon">
-        <div class="post-body">
-          <div class="chips" style="margin-bottom:10px;"><span class="chip chip-soon">скоро</span></div>
-          <h3 style="font-size:15px;">Citi ограничивает доступ ИИ-агентов к счетам клиентов</h3>
-        </div>
+
+      <h2 id="cost">Экономика инференса: облако или свои GPU</h2>
+      <p>У открытых весов есть два пути — арендовать GPU в облаке или поставить своё железо. Сравнение зависит от объёма трафика:</p>
+      <ul>
+        <li><strong>Облако.</strong> Нулевые капзатраты, гибкое масштабирование, но цена за токен выше на пиках.</li>
+        <li><strong>Свои GPU.</strong> Дорогой старт, но себестоимость падает при стабильной загрузке.</li>
+        <li><strong>Гибрид.</strong> База — на своём железе, пики — в облаке. Часто самый прагматичный вариант.</li>
+      </ul>
+      <p>Модель на 816B параметров требует серьёзного объёма видеопамяти: придётся либо использовать квантование, либо распределить модель по нескольким GPU. Это не «ноутбучный» сценарий — планируйте инфраструктуру заранее.</p>
+
+      <h2 id="launch">Как запустить: требования и шаги</h2>
+      <p>Типовой порядок действий для команды, которая хочет проверить модель на своей задаче:</p>
+      <ol>
+        <li><strong>Определите задачу.</strong> Не «внедрить ИИ», а конкретный процесс с измеримым результатом.</li>
+        <li><strong>Соберите датасет для оценки.</strong> 30–50 реальных примеров с эталонными ответами дадут больше, чем любой публичный бенчмарк.</li>
+        <li><strong>Разверните модель.</strong> Начните с облака, чтобы не тратить месяц на закупку железа.</li>
+        <li><strong>Сравните с альтернативами.</strong> Прогоните ту же задачу через закрытые модели и сравните цену за выполненную задачу.</li>
+        <li><strong>Добавьте контур контроля.</strong> Логирование, лимиты, ревью на критичных шагах.</li>
+      </ol>
+
+      <h2 id="risks">Риски и ограничения</h2>
+      <p>У открытой модели есть свои слабые места, которые стоит понимать до пилота:</p>
+      <ul>
+        <li><strong>Стоимость инфраструктуры</strong> может съесть всю экономию от бесплатных весов.</li>
+        <li><strong>Обслуживание</strong> — обновления, безопасность, мониторинг остаются на вас.</li>
+        <li><strong>Лицензионные тонкости</strong> — легко упустить при быстром старте.</li>
+        <li><strong>Снижение качества при квантовании</strong> — экономия на железе может ухудшить точность.</li>
+      </ul>
+
+      <h2 id="verdict">Что это значит для бизнеса</h2>
+      <p>Meta Muse Spark Open усиливает тренд, который важен для всех, кто внедряет ИИ: открытые модели перестали быть «вторым сортом» и стали реальной альтернативой закрытым API — особенно там, где данные нельзы выносить за периметр.</p>
+      <p>Практичный ход — <strong>не выбирать одну модель навсегда</strong>, а построить слой абстракции, чтобы менять модель без переписывания логики. Тогда новая открытая модель становится не проблемой, а возможностью.</p>
+
+      <h2 id="faq">FAQ</h2>
+      <h3>Можно ли использовать Meta Muse Spark Open в коммерческих целях?</h3>
+      <p>Да, лицензия обычно разрешает коммерческое использование, но у открытых моделей Meta есть особые условия для крупных компаний. Проверьте текст лицензии и свой порог выручки.</p>
+
+      <h3>Нужны ли свои GPU, чтобы запустить модель?</h3>
+      <p>Не обязательно. Можно начать с аренды GPU в облаке и перейти на своё железо, когда загрузка станет стабильной и высокой.</p>
+
+      <h3>Подходит ли модель для агентных сценариев?</h3>
+      <p>Да, она оптимизирована под вызовы инструментов и многошаговые задачи, но длинные цепочки (30+ шагов) требуют внешнего контроля и ретраев.</p>
+
+      <h3>Насколько это дешевле закрытых моделей?</h3>
+      <p>Считать нужно не цену токена, а стоимость выполненной задачи. На стабильном объёме открытая модель на своём железе может быть дешевле, но капзатраты и обслуживание нужно включить в расчёт.</p>
+    </div>
+
+    <div class="author-box">
+      <div class="av av-48">ВН</div>
+      <div class="author-box-body">
+        <div class="author-box-name">Владимир Нагин</div>
+        <div class="author-box-role">LeadUp AI — внедрение ИИ-агентов в бизнес-процессы</div>
       </div>
-      <div class="post post-soon">
-        <div class="post-body">
-          <div class="chips" style="margin-bottom:10px;"><span class="chip chip-soon">скоро</span></div>
-          <h3 style="font-size:15px;">Rogue AI-агенты взломали живые системы индийских компаний — отчёт CERT-In</h3>
-        </div>
+      <a href="../author.html" class="btn-sm">Все статьи →</a>
+    </div>
+
+    <div id="subscribe">
+      <div class="newsletter" style="margin-top:32px;">
+        <h3>Подпишитесь на <span class="acc">дайджест startupbase.uno</span></h3>
+        <p>Новости ИИ и разборы внедрения ИИ-агентов — раз в неделю. Без воды, без спама.</p>
+        <form class="form" method="post" action="https://n8n.flowstudio.cloud/webhook/blog-newsletter-subscribe" novalidate>
+          <input class="input" type="email" name="email" autocomplete="email" placeholder="email@company.ru" aria-label="Email" required/>
+          <button class="btn" type="submit">Подписаться →</button>
+        </form>
+        <p class="field-err" hidden><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 4.9v3.7M8 10.6v1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Введите корректный email</p>
+        <div class="nl-status" role="status" aria-live="polite"></div>
+        <div class="note">Без спама · Отписка в 1 клик</div>
       </div>
     </div>
-  </div>
-
-  <!-- NEWSLETTER -->
-  <div class="newsletter" id="subscribe" style="max-width:780px; margin:48px auto 0;">
-    <h3>Подпишитесь на <span class="acc">дайджест startupbase.uno</span></h3>
-    <p>Кейсы, разборы и метрики — раз в неделю. Без воды, без спама.</p>
-    <form class="form" onsubmit="return false;">
-      <input class="input" type="email" placeholder="email@company.ru" aria-label="Email"/>
-      <button class="btn" type="submit">Подписаться →</button>
-    </form>
-    <div class="note">Без спама · Отписка в 1 клик</div>
-  </div>
+  </article>
 </div>
 
-<!-- FOOTER -->
 <footer>
   <div class="container footer-inner">
     <span style="display:inline-flex; align-items:center; gap:14px; flex-wrap:wrap;"><span class="lg lg--static" role="img" aria-label="startupbase.uno"><span class="lg__box"><svg class="lg__mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="lg__word">startupbase<span class="acc">.uno</span></span></span></span><span>© 2026 LeadUp AI</span></span>
@@ -494,47 +217,7 @@
   </div>
 </footer>
 
-<script>
-  (function () {
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var bar = document.getElementById('readProgress');
-    var main = document.querySelector('.article-main');
-
-    // Reading progress
-    function onScroll() {
-      if (!bar || !main) return;
-      var rect = main.getBoundingClientRect();
-      var total = main.offsetHeight - window.innerHeight;
-      var scrolled = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
-      bar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
-    }
-    if (bar && main) window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-
-    // prefers-reduced-motion: reduce отключает скролл-спай и плавный скролл
-    if (reduce) return;
-
-    // TOC scroll-spy
-    var links = Array.prototype.slice.call(document.querySelectorAll('#tocList a'));
-    var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
-    function spy() {
-      var idx = 0;
-      for (var i = 0; i < sections.length; i++) {
-        if (sections[i] && sections[i].getBoundingClientRect().top < 120) idx = i;
-      }
-      links.forEach(function (a, i) { a.classList.toggle('on', i === idx); });
-    }
-    links.forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        e.preventDefault();
-        var t = document.querySelector(a.getAttribute('href'));
-        if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
-      });
-    });
-    window.addEventListener('scroll', spy, { passive: true });
-    spy();
-  })();
-</script>
+<script src="../newsletter.js" defer></script>
 
 </body>
 </html>
