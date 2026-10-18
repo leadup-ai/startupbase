@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Поиск по статьям — блог startupbase.uno</title>
+<meta name="description" content="Поиск по материалам блога startupbase.uno: разборы моделей, ИИ-агенты, инструменты и кейсы внедрения. Ищите по заголовку, рубрике и тегам."/>
+<link rel="canonical" href="https://blog.startupbase.uno/search.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="startupbase.uno"/>
+<meta property="og:locale" content="ru_RU"/>
+<meta property="og:title" content="Поиск по статьям — блог startupbase.uno"/>
+<meta property="og:description" content="Поиск по материалам блога startupbase.uno: разборы моделей, ИИ-агенты, инструменты и кейсы внедрения. Ищите по заголовку, рубрике и тегам."/>
+<meta property="og:url" content="https://blog.startupbase.uno/search.html"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23050807'/%3E%3Cpath d='M16 7l7 9-7 9-7-9z' fill='%2300E5C7'/%3E%3C/svg%3E"/>
+<link rel="stylesheet" href="colors_and_type.css"/>
+<link rel="stylesheet" href="blog.css"/>
+<style>
+  .search-head { padding: 56px 0 32px; }
+  .search-big { display: flex; align-items: center; gap: 12px; background: var(--bg-3); border: 1px solid var(--border-2); border-radius: var(--r-xl); padding: 16px 20px; max-width: 680px; }
+  .search-big:focus-within { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(0,229,199,0.12); }
+  .search-big svg { width: 20px; height: 20px; color: var(--fg-4); flex-shrink: 0; }
+  .search-big input { flex: 1; background: transparent; border: 0; outline: 0; color: var(--fg-1); font-size: 18px; font-weight: 500; }
+  .search-big input::placeholder { color: var(--fg-4); font-weight: 400; }
+  .search-big kbd { font-family: var(--font-mono); font-size: 11px; padding: 2px 7px; background: var(--bg-4); border: 1px solid var(--border-2); border-radius: var(--r-sm); color: var(--fg-3); }
+
+  .result-count { font-family: var(--font-mono); font-size: 13px; color: var(--fg-3); margin: 28px 0 20px; }
+  .result-count b { color: var(--fg-1); }
+  .result-count .q { color: var(--teal); }
+
+  .results-list { display: flex; flex-direction: column; gap: 4px; }
+  .result { display: flex; gap: 18px; padding: 20px; border: 1px solid transparent; border-radius: var(--r-xl); text-decoration: none; color: inherit; transition: all 150ms var(--ease); }
+  .result:hover { background: var(--bg-2); border-color: var(--border-1); }
+  .result-thumb { width: 120px; height: 80px; flex-shrink: 0; border-radius: var(--r-md); background: var(--bg-3); position: relative; overflow: hidden; border: 1px solid var(--border-1); }
+  .result-thumb .grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 18px 18px; }
+  .result-thumb .glow { position: absolute; width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle, rgba(0,229,199,0.14), transparent 55%); filter: blur(12px); top: -10px; right: -10px; }
+  .result-body { flex: 1; min-width: 0; }
+  .result-body .chips { margin-bottom: 8px; }
+  .result-body h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 6px; color: var(--fg-1); line-height: 1.25; }
+  .result-body h3 mark { background: var(--teal-tint); color: var(--teal); border-radius: 3px; padding: 0 2px; }
+  .result-body p { font-size: 13px; color: var(--fg-3); margin: 0 0 8px; line-height: 1.5; }
+  .result-body .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-4); letter-spacing: 0.04em; }
+
+  .empty { text-align: center; padding: 64px 24px; max-width: 460px; margin: 0 auto; }
+  .empty-ico { width: 72px; height: 72px; border-radius: 50%; background: var(--bg-3); border: 1px solid var(--border-2); display: grid; place-items: center; color: var(--fg-4); margin: 0 auto 24px; }
+  .empty h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 8px; color: var(--fg-1); }
+  .empty h3 .q { color: var(--teal); }
+  .empty p { font-size: 14px; color: var(--fg-3); line-height: 1.6; margin: 0 0 24px; }
+  .empty .suggest { font-family: var(--font-mono); font-size: 11px; color: var(--fg-4); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
+  .empty .sug-chips { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+
+  .popular { margin-top: 8px; }
+  .popular-label { font-family: var(--font-mono); font-size: 11px; color: var(--fg-4); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px; }
+  .popular-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  @media (max-width: 640px) {
+    .result { flex-direction: column; gap: 12px; }
+    .result-thumb { width: 100%; height: 140px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <div class="nav-left">
+      <a class="nav-wordmark" href="index.html">startupbase<span class="acc">.uno</span></a>
+      <div class="nav-links">
+        <a href="index.html">Блог</a>
+        <a href="category.html">Рубрики</a>
+        <a href="search.html" class="on">Поиск</a>
+        <a href="author.html">Авторы</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <a class="nav-login" href="https://startupbase.uno/">startupbase.uno</a>
+      <a class="btn-sm" href="index.html#subscribe">Подписаться →</a>
+    </div>
+  </div>
+</nav>
+
+<section class="search-head">
+  <div class="container">
+    <div class="search-big">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="searchInput" placeholder="Поиск по статьям…" value="Meta" autocomplete="off" aria-label="Поиск по статьям"/>
+      <kbd>esc</kbd>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div id="resultsState">
+    <div class="result-count">Найдено <b id="resCount">1</b> по запросу «<span class="q" id="resQuery">Meta</span>»</div>
+    <div class="results-list" id="resultsList">
+      <a class="result" href="meta-muse-spark-open-weights-agents/" data-title="meta muse spark open открытая модель для агентных задач новости ии meta открытые модели ии-агенты лицензии moe открытая модель лицензия бенчмарки запуск ии-агентов 816b параметров">
+        <div class="result-thumb"><div class="grid-bg"></div><div class="glow"></div></div>
+        <div class="result-body">
+          <div class="chips"><span class="chip chip-teal">Новости ИИ</span><span class="chip chip-neutral">Meta</span><span class="chip chip-neutral">MoE</span></div>
+          <h3><mark>Meta</mark> Muse Spark Open: открытая модель для агентных задач</h3>
+          <p>816B параметров, лицензия, бенчмарки и запуск ИИ-агентов в бизнес-процессах.</p>
+          <div class="meta">Владимир Нагин · 18 окт 2026 · 8 мин</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div id="emptyState" style="display:none;">
+    <div class="result-count">Найдено <b>0</b> по запросу «<span class="q" id="emptyQuery">блокчейн</span>»</div>
+    <div class="empty">
+      <div class="empty-ico">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6" opacity="0.5"/></svg>
+      </div>
+      <h3>Ничего не нашлось по «<span class="q" id="emptyQuery2">блокчейн</span>»</h3>
+      <p>Попробуйте другие слова или загляните в популярные темы — возможно, материал вышел под другим названием.</p>
+      <div class="suggest">Популярные темы</div>
+      <div class="sug-chips">
+        <a class="chip chip-teal" href="category.html">Новости ИИ</a>
+        <span class="chip chip-neutral" title="Скоро">ИИ-агенты</span>
+        <span class="chip chip-neutral" title="Скоро">Инструменты</span>
+        <span class="chip chip-neutral" title="Скоро">Eval</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep" style="margin:48px 0;"/>
+  <div class="popular" style="margin-bottom:24px;">
+    <div class="popular-label">Популярные темы</div>
+    <div class="popular-tags">
+      <a class="filter" href="category.html">Новости ИИ</a>
+      <span class="filter" title="Скоро">ИИ-агенты</span>
+      <span class="filter" title="Скоро">Инструменты</span>
+      <span class="filter" title="Скоро">Кейсы</span>
+      <span class="filter" title="Скоро">Стратегия</span>
+      <span class="filter" title="Скоро">Eval</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 LeadUp AI · startupbase.uno</span>
+    <div style="display:flex; gap:18px;"><a href="mailto:hello@leadup.guru">hello@leadup.guru</a><a href="https://t.me/neurosborka">@neurosborka</a></div>
+  </div>
+</footer>
+
+<script>
+  var input = document.getElementById('searchInput');
+  var resultsState = document.getElementById('resultsState');
+  var emptyState = document.getElementById('emptyState');
+  var rows = Array.prototype.slice.call(document.querySelectorAll('#resultsList .result'));
+  var resCount = document.getElementById('resCount');
+  var resQuery = document.getElementById('resQuery');
+
+  function render() {
+    var q = input.value.trim().toLowerCase();
+    if (!q) {
+      resultsState.style.display = 'none';
+      emptyState.style.display = 'none';
+      return;
+    }
+    var matches = rows.filter(function(r){ return r.getAttribute('data-title').indexOf(q) !== -1; });
+    if (matches.length) {
+      resultsState.style.display = '';
+      emptyState.style.display = 'none';
+      rows.forEach(function(r){ r.style.display = matches.indexOf(r) !== -1 ? '' : 'none'; });
+      resCount.textContent = matches.length;
+      resQuery.textContent = input.value.trim();
+    } else {
+      resultsState.style.display = 'none';
+      emptyState.style.display = '';
+      document.getElementById('emptyQuery').textContent = input.value.trim();
+      document.getElementById('emptyQuery2').textContent = input.value.trim();
+    }
+  }
+  input.addEventListener('input', render);
+  input.addEventListener('keydown', function(e){ if (e.key === 'Escape') { input.value = ''; render(); } });
+  render();
+</script>
+
+</body>
+</html>
