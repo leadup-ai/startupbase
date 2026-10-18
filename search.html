@@ -6,6 +6,7 @@
 <title>Поиск по статьям — блог startupbase.uno</title>
 <meta name="description" content="Поиск по материалам блога startupbase.uno: разборы моделей, ИИ-агенты, инструменты и кейсы внедрения. Ищите по заголовку, рубрике и тегам."/>
 <link rel="canonical" href="https://blog.startupbase.uno/search.html"/>
+<meta name="robots" content="noindex,follow"/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="startupbase.uno"/>
 <meta property="og:locale" content="ru_RU"/>
@@ -74,8 +75,8 @@
       </div>
     </div>
     <div class="nav-right">
-      <a class="nav-login" href="https://startupbase.uno/">startupbase.uno</a>
-      <a class="btn-sm" href="index.html#subscribe">Подписаться →</a>
+      <a href="https://startupbase.uno/" class="nav-login">startupbase.uno</a>
+      <a href="index.html#subscribe" class="btn-sm">Подписаться →</a>
     </div>
   </div>
 </nav>
@@ -84,7 +85,7 @@
   <div class="container">
     <div class="search-big">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      <input id="searchInput" placeholder="Поиск по статьям…" value="Meta" autocomplete="off" aria-label="Поиск по статьям"/>
+      <input id="searchInput" placeholder="Поиск по статьям…" autocomplete="off" aria-label="Поиск по статьям"/>
       <kbd>esc</kbd>
     </div>
   </div>
@@ -92,7 +93,7 @@
 
 <div class="container">
   <div id="resultsState">
-    <div class="result-count">Найдено <b id="resCount">1</b> по запросу «<span class="q" id="resQuery">Meta</span>»</div>
+    <div class="result-count">Найдено <b id="resCount">1</b> по запросу «<span class="q" id="resQuery"></span>»</div>
     <div class="results-list" id="resultsList">
       <a class="result" href="meta-muse-spark-open-weights-agents/" data-title="meta muse spark open открытая модель для агентных задач новости ии meta открытые модели ии-агенты лицензии moe открытая модель лицензия бенчмарки запуск ии-агентов 816b параметров">
         <div class="result-thumb"><div class="grid-bg"></div><div class="glow"></div></div>
@@ -107,12 +108,12 @@
   </div>
 
   <div id="emptyState" style="display:none;">
-    <div class="result-count">Найдено <b>0</b> по запросу «<span class="q" id="emptyQuery">блокчейн</span>»</div>
+    <div class="result-count">Найдено <b>0</b> по запросу «<span class="q" id="emptyQuery"></span>»</div>
     <div class="empty">
       <div class="empty-ico">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6" opacity="0.5"/></svg>
       </div>
-      <h3>Ничего не нашлось по «<span class="q" id="emptyQuery2">блокчейн</span>»</h3>
+      <h3>Ничего не нашлось по «<span class="q" id="emptyQuery2"></span>»</h3>
       <p>Попробуйте другие слова или загляните в популярные темы — возможно, материал вышел под другим названием.</p>
       <div class="suggest">Популярные темы</div>
       <div class="sug-chips">
@@ -134,6 +135,18 @@
       <span class="filter" title="Скоро">Кейсы</span>
       <span class="filter" title="Скоро">Стратегия</span>
       <span class="filter" title="Скоро">Eval</span>
+    </div>
+  </div>
+
+  <div id="subscribe">
+    <div class="newsletter" style="margin-bottom:24px;">
+      <h3>Подпишитесь на <span class="acc">дайджест startupbase.uno</span></h3>
+      <p>Новости ИИ и разборы внедрения ИИ-агентов — раз в неделю. Без воды, без спама.</p>
+      <form class="form" onsubmit="return false;">
+        <input class="input" placeholder="email@company.ru"/>
+        <button class="btn">Подписаться →</button>
+      </form>
+      <div class="note">Без спама · Отписка в 1 клик</div>
     </div>
   </div>
 </div>
