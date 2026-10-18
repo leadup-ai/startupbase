@@ -1,8 +1,8 @@
 name: decode-assets
-# ВРЕМЕННЫЙ workflow (v3): декодирует бинарные ассеты, положенные в репозиторий
+# ВРЕМЕННЫЙ workflow (v4): декодирует бинарные ассеты, положенные в репозиторий
 # как base64 (_assets_b64/** зеркалит целевую структуру путей).
-# v3: явный refspec (git push origin HEAD:main), -e отключён вокруг push,
-# причина ошибки публикуется как annotation + проверка записи через REST API.
+# v4: явный refspec (git push origin HEAD:main), без heredoc, причина ошибки
+# публикуется как annotation + проверка записи через REST API.
 on:
   push:
     paths:
@@ -18,7 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Debug event
+        shell: bash
         run: |
+          set -uo pipefail
           echo "event=$GITHUB_EVENT_NAME ref=$GITHUB_REF ref_name=$GITHUB_REF_NAME sha=$GITHUB_SHA"
           echo "repo=$GITHUB_REPOSITORY actor=$GITHUB_ACTOR"
 
@@ -51,7 +53,9 @@ jobs:
           git config user.email "nagin@leadupmarketers.com"
           git add -A -- ':!_assets_b64'
           git commit -m "assets: decode binary assets" > /tmp/commit.log 2>&1
-          echo "commit rc=$? :: $(tr '\n' ' ' < /tmp/commit.log | cut -c1-300)"
+          echo "commit rc=$?"
+          head -c 300 /tmp/commit.log
+          echo
 
           OUT=$(git push origin HEAD:main 2>&1); RC=$?
           echo "push rc=$RC"
@@ -64,27 +68,12 @@ jobs:
           M=$(printf '%s' "$OUT" | tr '\n' ' ' | tr -d '\r' | sed 's/%/%25/g' | cut -c1-850)
           echo "::error title=GITPUSH_RC$RC::$M"
 
-          API=$(curl -s -o /tmp/api.json -w '%{http_code}' -X PUT \
-            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/contents/_diag.txt" \
-            -d '{"message":"diag","content":"ZGln","branch":"main"}')
+          API=$(curl -s -o /tmp/api.json -w '%{http_code}' -X PUT -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/contents/_diag.txt" -d '{"message":"diag","content":"ZGln","branch":"main"}')
           A=$(tr '\n' ' ' < /tmp/api.json | tr -d '\r' | sed 's/%/%25/g' | cut -c1-850)
           echo "api http=$API $A"
           echo "::error title=API_HTTP_$API::$A"
 
-          echo "--- permissions ---"
-          curl -s -o /tmp/perm.json -w 'perm http=%{http_code}\n' \
-            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}"
-          python3 - <<'PY'
-import json
-try:
-    d = json.load(open('/tmp/perm.json'))
-    p = d.get('permissions') or {}
-    print('permissions:', json.dumps(p))
-    print('private:', d.get('private'), 'default_branch:', d.get('default_branch'))
-except Exception as e:
-    print('perm parse fail', e)
-PY
+          echo "--- repo permissions seen by token ---"
+          curl -s -o /tmp/perm.json -w 'perm http=%{http_code}\n' -H "Authorization: Bearer ${GITHUB_TOKEN}" "https://api.github.com/repos/${GITHUB_REPOSITORY}"
+          python3 -c 'import json;d=json.load(open("/tmp/perm.json"));print("permissions:",json.dumps(d.get("permissions")));print("private:",d.get("private"),"default_branch:",d.get("default_branch"))'
           exit 1
