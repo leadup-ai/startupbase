@@ -70,7 +70,7 @@
   .takeaways { background: linear-gradient(160deg, var(--bg-2), var(--bg-3)); border: 1px solid rgba(0,229,199,0.18); border-radius: var(--r-2xl); padding: 28px 30px; margin: 36px 0; position: relative; overflow: hidden; }
   .takeaways .tk-label { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
   .takeaways ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
-  .takeaways li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--fg-1); line-height: 1.5; }
+  .takeaways li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--fg-1); line-height: 1.5; min-width: 0; }
   .takeaways li::before { content: ''; width: 20px; height: 20px; border-radius: 50%; background: rgba(0,229,199,0.15); border: 1px solid rgba(0,229,199,0.35); flex-shrink: 0; margin-top: 1px; position: relative; }
   .takeaways li::after { content: ''; position: absolute; margin: 7px 0 0 6px; width: 8px; height: 4px; border-left: 2px solid var(--teal); border-bottom: 2px solid var(--teal); transform: rotate(-45deg); }
 
@@ -142,6 +142,12 @@
   @media (max-width: 640px) {
     .metric-row { grid-template-columns: 1fr; }
     .inline-cta { flex-direction: column; align-items: flex-start; }
+  }
+  /* 320–480px: снять мин-контент таблицы и блока «Главное» (иначе горизонтальный скролл) */
+  @media (max-width: 480px) {
+    .cmp-wrap { overflow-x: auto; }
+    .takeaways { padding: 22px 18px; }
+    .takeaways li { overflow-wrap: anywhere; }
   }
 </style>
 <script type="application/ld+json">
