@@ -33,12 +33,6 @@
   .author-stat .v { font-size: 30px; font-weight: 700; color: var(--teal); letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
   .author-stat .l { font-family: var(--font-mono); font-size: 10px; color: var(--fg-4); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 8px; }
 
-  .note-block { border: 1px solid var(--border-1); border-radius: var(--r-2xl); background: var(--bg-2); padding: 28px; margin: 0 0 24px; }
-  .note-block .lbl { font-family: var(--font-mono); font-size: 11px; color: var(--fg-4); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
-  .note-block p { font-size: 14px; color: var(--fg-3); margin: 0 0 16px; line-height: 1.6; max-width: 620px; }
-  .note-block .cta { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--teal); text-decoration: none; }
-  .note-block .cta:hover { color: var(--teal-hover); }
-
   @media (max-width: 640px) {
     .author-head-inner { flex-direction: column; gap: 16px; }
     .author-stats { flex-wrap: wrap; }
@@ -60,8 +54,8 @@
       </div>
     </div>
     <div class="nav-right">
-      <a class="nav-login" href="https://startupbase.uno/">startupbase.uno</a>
-      <a class="btn-sm" href="index.html#subscribe">Подписаться →</a>
+      <a href="https://startupbase.uno/" class="nav-login">startupbase.uno</a>
+      <a href="index.html#subscribe" class="btn-sm">Подписаться →</a>
     </div>
   </div>
 </nav>
@@ -104,10 +98,16 @@
     </a>
   </div>
 
-  <div class="note-block">
-    <div class="lbl">Новые материалы автора</div>
-    <p>Разборы выходят в рубрике «Новости ИИ». Подписка присылает их в почту — без спама и с отпиской в один клик.</p>
-    <a class="cta" href="index.html#subscribe">Подписаться на новые материалы →</a>
+  <div id="subscribe">
+    <div class="newsletter" style="margin-bottom:24px;">
+      <h3>Подпишитесь на <span class="acc">дайджест startupbase.uno</span></h3>
+      <p>Новости ИИ и разборы внедрения ИИ-агентов — раз в неделю. Без воды, без спама.</p>
+      <form class="form" onsubmit="return false;">
+        <input class="input" placeholder="email@company.ru"/>
+        <button class="btn">Подписаться →</button>
+      </form>
+      <div class="note">Без спама · Отписка в 1 клик</div>
+    </div>
   </div>
 </div>
 
