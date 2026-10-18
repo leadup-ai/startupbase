@@ -1,0 +1,5 @@
+node_modules/
+out/
+check*/
+package.json
+package-lock.json
