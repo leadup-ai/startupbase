@@ -1,0 +1,146 @@
+/* ============================================================
+   LeadUp AI — Blog shared styles
+   Imported by every blog page. Builds on colors_and_type.css tokens.
+   ============================================================ */
+
+body { background: var(--bg-1); }
+
+.container        { max-width: var(--container);        margin: 0 auto; padding: 0 24px; }
+.container-narrow { max-width: 780px;                   margin: 0 auto; padding: 0 24px; }
+.container-prose  { max-width: var(--container-prose);  margin: 0 auto; padding: 0 24px; }
+
+/* ---------- Reading progress bar ---------- */
+.read-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--teal), var(--teal-hover));
+  z-index: var(--z-header);
+  box-shadow: 0 0 8px rgba(0,229,199,0.5);
+  transition: width 80ms linear;
+}
+
+/* ---------- NAV ---------- */
+.nav {
+  position: sticky; top: 0; z-index: var(--z-header);
+  background: rgba(10,15,13,0.72);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--border-1);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+.nav-left { display: flex; align-items: center; gap: 28px; }
+.nav-logo { filter: brightness(10); display: block; }
+.nav-links { display: flex; gap: 2px; font-size: 13px; }
+.nav-links a { color: var(--fg-3); padding: 7px 14px; border-radius: var(--r-md); font-weight: 500; text-decoration: none; transition: all 120ms var(--ease); }
+.nav-links a:hover { color: var(--fg-1); background: var(--bg-4); }
+.nav-links a.on { color: var(--fg-1); background: var(--bg-4); }
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.nav-login { color: var(--fg-3); font-size: 13px; text-decoration: none; }
+.nav-login:hover { color: var(--fg-1); }
+.btn-sm { display: inline-flex; align-items: center; gap: 6px; background: var(--teal); color: #061210; font-weight: 600; font-size: 13px; padding: 8px 16px; border-radius: var(--r-lg); border: 0; cursor: pointer; text-decoration: none; }
+.btn-sm:hover { background: var(--teal-hover); }
+
+/* ---------- Chips ---------- */
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { font-family: var(--font-mono); font-size: 10px; padding: 3px 8px; border-radius: 9999px; font-weight: 500; letter-spacing: 0.04em; text-decoration: none; transition: all 120ms var(--ease); }
+.chip-teal { background: var(--teal-tint); color: var(--teal); border: 1px solid rgba(0,229,199,0.2); }
+.chip-neutral { background: var(--bg-4); color: var(--fg-3); border: 1px solid var(--border-1); }
+a.chip:hover { border-color: var(--border-3); }
+
+/* ---------- Filter tabs ---------- */
+.filters { display: flex; gap: 6px; padding: 0 0 24px; border-bottom: 1px solid var(--border-1); margin-bottom: 32px; flex-wrap: wrap; }
+.filter { font-family: var(--font-mono); font-size: 12px; padding: 6px 14px; border-radius: var(--r-full); background: var(--bg-3); border: 1px solid var(--border-1); color: var(--fg-3); cursor: pointer; font-weight: 500; letter-spacing: 0.04em; transition: all 120ms var(--ease); text-decoration: none; }
+.filter:hover { border-color: var(--border-3); color: var(--fg-1); }
+.filter.on { background: var(--teal-tint); border-color: rgba(0,229,199,0.25); color: var(--teal); }
+
+/* ---------- Post cards ---------- */
+.posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.post { background: var(--bg-2); border: 1px solid var(--border-1); border-radius: var(--r-xl); overflow: hidden; transition: all 200ms var(--ease); text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+.post:hover { border-color: var(--border-3); transform: translateY(-2px); }
+.post-img { height: 160px; background: var(--bg-3); position: relative; overflow: hidden; }
+.post-img .grid-bg, .feat-img .grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 24px 24px; }
+.post-img .glow { position: absolute; width: 160px; height: 160px; border-radius: 50%; background: radial-gradient(circle, rgba(0,229,199,0.12), transparent 55%); filter: blur(16px); }
+.post-img .num { position: absolute; bottom: 12px; right: 14px; font-family: var(--font-mono); font-size: 36px; font-weight: 700; color: rgba(255,255,255,0.04); letter-spacing: -0.03em; }
+.post-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+.post-body .chips { margin-bottom: 10px; }
+.post-body h3 { font-size: 17px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; margin: 0 0 8px; color: var(--fg-1); }
+.post-body p { font-size: 13px; color: var(--fg-3); margin: 0; line-height: 1.5; flex: 1; }
+.post-body .meta { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-1); font-family: var(--font-mono); font-size: 10px; color: var(--fg-4); letter-spacing: 0.04em; }
+
+/* ---------- Search box ---------- */
+.search { display: flex; align-items: center; gap: 8px; background: var(--bg-3); border: 1px solid var(--border-1); border-radius: var(--r-lg); padding: 9px 14px; min-width: 280px; }
+.search input { background: transparent; border: 0; outline: 0; color: var(--fg-1); font-size: 14px; flex: 1; }
+.search input::placeholder { color: var(--fg-4); }
+.search svg { color: var(--fg-4); width: 16px; height: 16px; flex-shrink: 0; }
+
+/* ---------- Pagination ---------- */
+.pagination { display: flex; justify-content: center; gap: 4px; }
+.pg { min-width: 36px; height: 36px; padding: 0 6px; border-radius: var(--r-md); display: grid; place-items: center; font-size: 13px; font-weight: 500; color: var(--fg-3); cursor: pointer; transition: all 120ms var(--ease); text-decoration: none; }
+.pg:hover { background: var(--bg-4); color: var(--fg-1); }
+.pg.on { background: var(--teal-tint); color: var(--teal); }
+.pg.arr { color: var(--fg-4); }
+
+/* ---------- Avatars ---------- */
+.av { border-radius: 50%; background: linear-gradient(135deg, #00E5C7, #0F1512); display: grid; place-items: center; color: #061210; font-weight: 700; flex-shrink: 0; }
+.av-28 { width: 28px; height: 28px; font-size: 10px; }
+.av-40 { width: 40px; height: 40px; font-size: 14px; }
+.av-64 { width: 64px; height: 64px; font-size: 22px; }
+.av-96 { width: 96px; height: 96px; font-size: 32px; }
+
+/* ---------- Newsletter block ---------- */
+.newsletter { background: var(--bg-2); border: 1px solid var(--border-1); border-radius: var(--r-2xl); padding: 40px; text-align: center; position: relative; overflow: hidden; }
+.newsletter::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 500px; height: 400px; background: radial-gradient(circle, rgba(0,229,199,0.1), transparent 55%); pointer-events: none; }
+.newsletter h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; position: relative; }
+.newsletter h3 .acc { color: var(--teal); }
+.newsletter p { font-size: 14px; color: var(--fg-3); margin: 0 0 20px; position: relative; }
+.newsletter .form { display: flex; gap: 8px; justify-content: center; position: relative; }
+.newsletter .input { background: var(--bg-4); border: 1px solid var(--border-2); border-radius: var(--r-lg); padding: 10px 16px; color: var(--fg-1); font-size: 14px; width: 280px; outline: none; }
+.newsletter .input::placeholder { color: var(--fg-4); }
+.newsletter .input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(0,229,199,0.12); }
+.newsletter .btn { background: var(--teal); color: #061210; font-weight: 700; font-size: 14px; padding: 10px 20px; border-radius: var(--r-lg); border: 0; cursor: pointer; white-space: nowrap; }
+.newsletter .btn:hover { background: var(--teal-hover); }
+.newsletter .note { font-family: var(--font-mono); font-size: 10px; color: var(--fg-4); margin-top: 10px; position: relative; }
+
+/* ---------- Section heading ---------- */
+.sec-title { font-size: 20px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 20px; }
+
+/* ---------- Separator ---------- */
+.sep { height: 4px; background: linear-gradient(90deg, transparent, var(--teal), transparent); opacity: 0.2; margin: 64px 0; border: 0; border-radius: 2px; }
+
+/* ---------- Page hero (listing pages) ---------- */
+.page-hero { padding: 56px 0 40px; position: relative; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(ellipse at 50% 60%, black 20%, transparent 65%); pointer-events: none; }
+.page-hero-inner { position: relative; }
+.page-hero h1 { font-size: clamp(36px, 5vw, 52px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.04; margin: 0; }
+.page-hero h1 .acc { color: var(--teal); }
+.page-hero .lead { font-size: 16px; color: var(--fg-2); max-width: 540px; margin: 12px 0 0; line-height: 1.55; }
+.eyebrow-mono { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; }
+
+/* ---------- Footer ---------- */
+footer { padding: 32px 0; border-top: 1px solid var(--border-1); margin-top: 64px; }
+.footer-inner { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: var(--fg-4); letter-spacing: 0.04em; }
+.footer-inner a { color: var(--fg-4); text-decoration: none; }
+.footer-inner a:hover { color: var(--teal); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .posts { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .posts { grid-template-columns: 1fr; }
+  .newsletter .form { flex-direction: column; align-items: stretch; }
+  .newsletter .input { width: 100%; box-sizing: border-box; }
+}
+
+/* === startupbase.uno additions (LeadUp AI DS v3) === */
+
+/* Text wordmark instead of the PNG nav logo (binary asset not copied) */
+.nav-wordmark { display: inline-flex; align-items: center; font-size: 17px; font-weight: 600; letter-spacing: -0.02em; color: var(--fg-1); text-decoration: none; white-space: nowrap; }
+.nav-wordmark:hover { color: var(--fg-1); }
+.nav-wordmark .acc { color: var(--teal); }
+
+/* Non-clickable "coming soon" post card: no hover lift, no border change */
+.post--soon { cursor: default; }
+.post--soon:hover { border-color: var(--border-1); transform: none; }
+
+/* "скоро" mono chip */
+.chip-soon { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 9999px; border: 1px dashed var(--border-1); color: var(--fg-4); }
