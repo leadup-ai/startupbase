@@ -26,3 +26,14 @@
 
 Опубликованной считается статья, у которой есть и markdown-источник в `content/posts/`,
 и HTML-страница в `<slug>/index.html`. Обновляй `sitemap.xml` при добавлении страницы.
+
+## Публикация статьи
+
+1. Текст статьи — `content/posts/<slug>.md` с YAML frontmatter (title, slug, locale, description, meta_title, meta_description, primary_keyword, secondary_keywords, category, author, reading_minutes, tags).
+2. Канонический URL — `https://blog.startupbase.uno/<slug>/`; страница статьи лежит в `/<slug>/index.html`.
+3. Заголовок H1 и все заголовки в списках берутся из `title` во frontmatter; `<title>`/`og:title` — из `meta_title`.
+4. Картинки статьи — `images/blog/<slug>/` (cover.webp 16:9, fig-N-*.webp, og.png 1200×630).
+5. OG-карточки — `assets/og/default.png` (страницы блога) и `images/blog/<slug>/og.png` (статья).
+6. Иконки в корне — `favicon.svg`, `favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`.
+7. После публикации: добавить URL в `sitemap.xml` и обновить карточки в index.html / category.html / author.html / search.html / 404.html.
+8. Бинарные ассеты пересобираются workflow `.github/workflows/render-assets.yml` из `tools/assets/`.
