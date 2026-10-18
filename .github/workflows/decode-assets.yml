@@ -1,0 +1,42 @@
+name: decode-assets
+# ВРЕМЕННЫЙ workflow: декодирует бинарные ассеты, положенные в репозиторий как base64
+# (_assets_b64/** зеркалит целевую структуру путей) и коммитит результат.
+# Удаляется сразу после заливки ассетов.
+on:
+  push:
+    paths:
+      - '_assets_b64/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  decode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decode base64 assets
+        run: |
+          set -euo pipefail
+          n=0
+          while IFS= read -r f; do
+            out="${f#_assets_b64/}"; out="${out%.b64}"
+            mkdir -p "$(dirname "$out")"
+            base64 -d "$f" > "$out"
+            echo "  $f -> $out ($(stat -c%s "$out") bytes, $(file -b --mime-type "$out"))"
+            n=$((n+1))
+          done < <(find _assets_b64 -name '*.b64' | sort)
+          echo "decoded: $n"
+      - name: Commit decoded assets
+        run: |
+          set -euo pipefail
+          git config user.name  "startupbase-bot"
+          git config user.email "nagin@leadupmarketers.com"
+          git add -- ':!_assets_b64'
+          if git diff --cached --quiet; then
+            echo "nothing to commit"
+          else
+            git commit -m "assets: decode binary assets (probe)"
+            git push
+          fi
