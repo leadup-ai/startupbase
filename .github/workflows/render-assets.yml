@@ -5,6 +5,9 @@ name: render-assets
 #
 # Запуск: автоматически на push в tools/assets/**, либо вручную через
 # Actions -> render-assets -> Run workflow (можно указать slug статьи).
+#
+# Если прогон падает, шаг «Publish diagnostics on failure» коммитит полный лог
+# в _diag/render-assets.log — по нему видно причину без доступа к логам Actions.
 
 on:
   workflow_dispatch:
@@ -46,43 +49,41 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install Geist fonts
-        working-directory: tools/assets
-        run: |
-          set -euo pipefail
-          npm i --no-audit --no-fund --silent geist@1.8.1
-          mkdir -p "$HOME/.local/share/fonts/geist"
-          find node_modules/geist -name '*.ttf' -path '*geist-sans*' -exec cp {} "$HOME/.local/share/fonts/geist/" \;
-          find node_modules/geist -name '*.ttf' -path '*geist-mono*' -exec cp {} "$HOME/.local/share/fonts/geist/" \;
-          fc-cache -f >/dev/null
-          faces=$(fc-list | grep -ci geist || true)
-          echo "geist faces: $faces"
-          fc-list | grep -i geist | head -5
-          if [ "$faces" -lt 5 ]; then
-            echo "::error::Geist/Geist Mono не установились ($faces faces) — рендер даст подменённый шрифт"
-            exit 1
-          fi
-
-      - name: Install renderer (playwright chromium)
-        working-directory: tools/assets
-        run: |
-          set -euo pipefail
-          npm i --no-audit --no-fund --silent playwright@1.49.1
-          npx --yes playwright install --with-deps chromium
-
-      - name: Install Pillow
-        run: python3 -m pip install --quiet --disable-pip-version-check pillow
-
-      - name: Render PNGs
-        working-directory: tools/assets
-        run: node render.js
-
-      - name: Post-process assets
+      - name: Render and post-process
         working-directory: tools/assets
         env:
           DIST_ROOT: ../..
           SLUG: ${{ inputs.slug || 'meta-muse-spark-open-weights-agents' }}
-        run: python3 postprocess.py
+        run: |
+          exec > >(tee /tmp/render-assets.log) 2>&1
+          set -euxo pipefail
+
+          # --- шрифты Geist (те же файлы, что использовались при локальном рендере) ---
+          npm i --no-audit --no-fund --silent geist@1.8.1
+          dest="$HOME/.local/share/fonts/geist"
+          mkdir -p "$dest"
+          for w in Regular Medium SemiBold Bold Black; do
+            cp "node_modules/geist/dist/fonts/geist-sans/Geist-$w.ttf" "$dest/"
+          done
+          for w in Regular Medium Bold; do
+            cp "node_modules/geist/dist/fonts/geist-mono/GeistMono-$w.ttf" "$dest/"
+          done
+          fc-cache -f >/dev/null
+          echo "Geist   -> $(fc-match Geist)"
+          echo "Mono    -> $(fc-match 'Geist Mono')"
+          faces=$(fc-list | grep -ci geist || true)
+          echo "geist faces: $faces"
+          test "${faces:-0}" -ge 5
+
+          # --- рендерер ---
+          npm i --no-audit --no-fund --silent playwright@1.49.1
+          npx --yes playwright install --with-deps chromium
+          python3 -m pip install --quiet --disable-pip-version-check pillow
+
+          # --- рендер + раскладка по путям сайта ---
+          node render.js
+          ls -la out
+          python3 postprocess.py
 
       - name: Commit assets
         env:
@@ -99,3 +100,23 @@ jobs:
             git commit -m "assets: render generated images ($SLUG)"
             git push
           fi
+
+      - name: Publish diagnostics on failure
+        if: failure()
+        run: |
+          set -euo pipefail
+          git config user.name "leadup-ai"
+          git config user.email "nagin@leadupmarketers.com"
+          mkdir -p _diag
+          {
+            echo "run: $GITHUB_RUN_ID  attempt: $GITHUB_RUN_ATTEMPT  actor: $GITHUB_ACTOR"
+            echo "head: $GITHUB_SHA  ref: $GITHUB_REF  event: $GITHUB_EVENT_NAME"
+            date -u
+            echo "--- fonts ---"
+            fc-list | grep -i geist || true
+            echo "--- log ---"
+            cat /tmp/render-assets.log 2>/dev/null || echo "(no log captured)"
+          } > _diag/render-assets.log
+          git add -f _diag/render-assets.log
+          git commit -m "diag: render-assets failure (run $GITHUB_RUN_ID)" || exit 0
+          git push || exit 0
