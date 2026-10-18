@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><link rel="stylesheet" href="ds.css">
+<style>
+  .head{position:absolute;top:52px;left:64px;right:64px;display:flex;align-items:center;justify-content:space-between}
+  .h-title{margin:112px 64px 0;font-size:46px;max-width:1180px}
+  .term{position:absolute;left:64px;top:288px;width:830px;background:var(--bg-0);border:1px solid var(--border-2);border-radius:var(--r-lg);overflow:hidden}
+  .term__bar{display:flex;align-items:center;gap:8px;padding:14px 18px;background:var(--bg-3);border-bottom:1px solid var(--border-1)}
+  .dot{width:11px;height:11px;border-radius:50%;background:var(--bg-5)}
+  .term__name{margin-left:10px;font-family:var(--font-mono);font-size:14px;color:var(--text-3)}
+  .term__body{padding:22px 24px 26px;font-family:var(--font-mono);font-size:17px;line-height:1.75}
+  .p{color:var(--teal)} .c{color:var(--text-1)} .o{color:var(--text-2)} .ok{color:var(--teal)}
+  .side{position:absolute;right:64px;top:288px;width:400px;display:flex;flex-direction:column;gap:16px}
+  .side .card{padding:22px 22px}
+  .side .node__s{font-family:var(--font-mono);font-size:13px;color:var(--text-3);margin-top:8px;line-height:1.6}
+  .side .t{font-weight:600;font-size:21px;letter-spacing:-.02em}
+  .hosts{display:flex;gap:14px;align-items:center}
+  .host{flex:1;text-align:center;padding:16px 10px;background:var(--bg-2);border:1px solid var(--border-1);border-radius:var(--r-md);font-family:var(--font-mono);font-size:13px;color:var(--text-2)}
+  .host b{display:block;color:var(--text-1);font-family:var(--font-sans);font-size:16px;font-weight:600;margin-bottom:4px}
+</style></head>
+<body><div class="canvas canvas--16x9">
+  <div class="grid-bg"></div><div class="glow" style="width:560px;height:560px;left:-200px;bottom:-240px;opacity:.55"></div>
+
+  <div class="head">
+    <div class="logo"><svg class="mk" viewBox="0 0 32 32" role="img" aria-label="M4"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="logo__word">startupbase<span class="up">.uno</span></span></div>
+    <div class="eyebrow">Fig 2 · Локальный запуск</div>
+  </div>
+
+  <h1 class="title h-title">Данные не покидают периметр: инференс на двух рабочих станциях</h1>
+
+  <div class="term">
+    <div class="term__bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="term__name">mlx · локальный запуск</span></div>
+    <div class="term__body">
+      <div><span class="p">$</span> <span class="c">mlx_lm.server --model muse-spark-open --port 8080</span></div>
+      <div><span class="o">→ загрузка весов: 816B total / 42B active</span></div>
+      <div><span class="o">→ контекст: 1 000 000 токенов</span></div>
+      <div><span class="ok">✓ сервер готов — http://127.0.0.1:8080</span></div>
+    </div>
+  </div>
+
+  <div class="side">
+    <div class="card">
+      <div class="t">2 × Apple M5 Ultra Mac Studio</div>
+      <div class="node__s">MLX · чувствительные данные остаются внутри</div>
+      <div class="hosts" style="margin-top:14px"><div class="host"><b>Узел 1</b>inference</div><div class="host"><b>Узел 2</b>реплика</div></div>
+    </div>
+    <div class="card">
+      <div class="t">Отказоустойчивость</div>
+      <div class="node__s">одну машину можно обновлять, пока вторая обслуживает агента</div>
+    </div>
+  </div>
+</div></body></html>

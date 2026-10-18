@@ -1,0 +1,85 @@
+/* LeadUp AI Design System v3 — tokens (subset, for image rendering)
+   Source of truth: leadup-ai/startupbase@main colors_and_type.css (verbatim tokens) */
+
+:root{
+  color-scheme: dark;
+  --teal:#00E5C7; --teal-hover:#14F5D7; --teal-pressed:#00CBB0;
+  --teal-tint:rgba(0,229,199,.12); --teal-tint-2:rgba(0,229,199,.20);
+  --teal-glow:0 0 24px rgba(0,229,199,.45);
+  --bg-0:#050807; --bg-1:#0A0F0D; --bg-2:#0F1512; --bg-3:#141B18; --bg-4:#1B2420; --bg-5:#253029;
+  --text-1:#F3F7F5; --text-2:#A9B7B1; --text-3:#6F7D77;
+  --border-1:rgba(255,255,255,.08); --border-2:rgba(255,255,255,.14);
+  --grid-line:rgba(255,255,255,.035); --grid-size:48px;
+  /* light-mode tokens (verbatim from colors_and_type.css [data-theme="light"]) */
+  --bg-light-1:#FAFBFA; --bg-light-2:#F2F4F3; --bg-light-3:#E6EAE8;
+  --fg-light-1:#0A0F0D; --fg-light-2:#3A4440;
+  --border-light-1:rgba(10,15,13,.08); --border-light-2:rgba(10,15,13,.14);
+  --teal-on-light:#009E8A;
+  --r-sm:6px; --r-md:8px; --r-lg:10px;
+  --font-sans:'Geist','Geist Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'Geist Mono','GeistMono',ui-monospace,monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:transparent}
+body{
+  font-family:var(--font-sans);
+  color:var(--text-1);
+  font-feature-settings:"ss01" 1,"cv01" 1;
+  -webkit-font-smoothing:antialiased;
+}
+.canvas{position:relative;overflow:hidden;background:var(--bg-1)}
+.canvas--16x9{width:1440px;height:810px}
+.canvas--og{width:1200px;height:630px}
+.og-scale{transform:scale(2);transform-origin:top left}
+
+/* subtle technical grid — max one per image */
+.grid-bg{
+  position:absolute;inset:0;
+  background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+  background-size:var(--grid-size) var(--grid-size);
+}
+.glow{position:absolute;border-radius:50%;filter:blur(60px);background:var(--teal-tint);pointer-events:none}
+
+.eyebrow{
+  font-family:var(--font-mono);font-size:15px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--teal);
+}
+.title{font-weight:600;letter-spacing:-.035em;line-height:1.04}
+.sub{color:var(--text-2);font-weight:400;line-height:1.5}
+.mono{font-family:var(--font-mono)}
+
+.card{background:var(--bg-3);border:1px solid var(--border-1);border-radius:var(--r-lg)}
+.chip{
+  font-family:var(--font-mono);font-size:14px;font-weight:500;color:var(--text-2);
+  border:1px solid var(--border-1);background:var(--bg-2);border-radius:var(--r-sm);padding:6px 12px;white-space:nowrap
+}
+.chip--on{color:var(--teal);border-color:rgba(0,229,199,.45);background:var(--teal-tint)}
+.num{font-weight:600;letter-spacing:-.04em;color:var(--teal);line-height:1}
+.label{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+.footer-note{font-family:var(--font-mono);font-size:13px;color:var(--text-3)}
+
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--teal);color:#04120F;font-weight:600;font-size:16px;
+  border-radius:var(--r-md);padding:12px 20px;
+  box-shadow:0 4px 16px rgba(0,229,199,.35);
+}
+/* logo lockup */
+.logo{display:flex;align-items:center;gap:12px}
+.logo__mark{width:38px;height:38px;flex:0 0 auto} /* legacy chevron mark — kept for pages that still use it */
+.logo__word{font-weight:600;font-size:26px;letter-spacing:-.03em;color:var(--text-1)}
+.logo__word .up{color:var(--teal)}
+
+/* mark M4 — variant "Промпт": panel + caret + underline cursor.
+   Single source of truth for every lockup in the mockups: <svg class="mk">…</svg> */
+.mk{display:block;width:36px;height:36px;flex:0 0 auto}
+.mk path{stroke-linecap:round;stroke-linejoin:round}
+.mk .panel{fill:var(--bg-3);stroke:var(--border-2)}
+.mk .s{fill:none;stroke:var(--teal)}
+.mk .t{fill:var(--teal)}
+/* M4 on light surfaces (logo-light and any light OG) */
+.mk--on-light .panel{fill:var(--bg-light-2);stroke:var(--border-light-2)}
+.mk--on-light .s{stroke:var(--teal-on-light)}
+.mk--on-light .t{fill:var(--teal-on-light)}
