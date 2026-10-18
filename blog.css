@@ -239,6 +239,8 @@ footer .lg__word { font-size: 17px; }
   width: 16px; height: 2px;
   border-radius: 2px;
   background: currentColor;
+  transform-origin: 50% 50%;
+  transition: transform 160ms var(--ease), opacity 160ms var(--ease);
 }
 
 .mobile-menu {
@@ -258,6 +260,12 @@ footer .lg__word { font-size: 17px; }
   display: flex;
   animation: menu-in 160ms var(--ease) both;
 }
+/* бургер → крестик при открытой панели (3 полоски с шагом 5px) */
+#nav-toggle:focus-visible ~ .container .burger { outline: 2px solid var(--teal); outline-offset: 2px; }
+#nav-toggle:checked ~ .container .burger span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+#nav-toggle:checked ~ .container .burger span:nth-child(2) { opacity: 0; }
+#nav-toggle:checked ~ .container .burger span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+
 @keyframes menu-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
 
 .mobile-header {
@@ -303,6 +311,8 @@ footer .lg__word { font-size: 17px; }
   .filters::-webkit-scrollbar { display: none; }
   .filters > * { flex: 0 0 auto; }
   .featured { grid-template-columns: 1fr !important; }
+  .nav-right .btn-sm { display: none; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
 }
 
 @media (min-width: 721px) {
@@ -312,4 +322,5 @@ footer .lg__word { font-size: 17px; }
 @media (prefers-reduced-motion: reduce) {
   .mobile-menu { animation: none; }
   .burger, .mobile-close { transition: none; }
+  .burger span { transition: none; }
 }
