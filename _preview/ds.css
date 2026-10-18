@@ -11,6 +11,11 @@
   --text-1:#F3F7F5; --text-2:#A9B7B1; --text-3:#6F7D77;
   --border-1:rgba(255,255,255,.08); --border-2:rgba(255,255,255,.14);
   --grid-line:rgba(255,255,255,.035); --grid-size:48px;
+  /* light-mode tokens (verbatim from colors_and_type.css [data-theme="light"]) */
+  --bg-light-1:#FAFBFA; --bg-light-2:#F2F4F3; --bg-light-3:#E6EAE8;
+  --fg-light-1:#0A0F0D; --fg-light-2:#3A4440;
+  --border-light-1:rgba(10,15,13,.08); --border-light-2:rgba(10,15,13,.14);
+  --teal-on-light:#009E8A;
   --r-sm:6px; --r-md:8px; --r-lg:10px;
   --font-sans:'Geist','Geist Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
   --font-mono:'Geist Mono','GeistMono',ui-monospace,monospace;
@@ -64,7 +69,19 @@ body{
 }
 /* logo lockup */
 .logo{display:flex;align-items:center;gap:12px}
-.logo__mark{width:38px;height:38px;flex:0 0 auto}
+.logo__mark{width:38px;height:38px;flex:0 0 auto} /* legacy chevron mark — kept for pages that still use it */
 .logo__word{font-weight:600;font-size:26px;letter-spacing:-.03em;color:var(--text-1)}
 .logo__word .up{color:var(--teal)}
+
+/* mark M4 — variant "Промпт": panel + caret + underline cursor.
+   Single source of truth for every lockup in the mockups: <svg class="mk">…</svg> */
+.mk{display:block;width:36px;height:36px;flex:0 0 auto}
+.mk path{stroke-linecap:round;stroke-linejoin:round}
+.mk .panel{fill:var(--bg-3);stroke:var(--border-2)}
+.mk .s{fill:none;stroke:var(--teal)}
+.mk .t{fill:var(--teal)}
+/* M4 on light surfaces (logo-light and any light OG) */
+.mk--on-light .panel{fill:var(--bg-light-2);stroke:var(--border-light-2)}
+.mk--on-light .s{stroke:var(--teal-on-light)}
+.mk--on-light .t{fill:var(--teal-on-light)}
 
