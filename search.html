@@ -65,6 +65,7 @@
 <body>
 
 <nav class="nav">
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Открыть меню">
   <div class="container nav-inner">
     <div class="nav-left">
       <a class="nav-wordmark lg" href="index.html">
@@ -79,6 +80,23 @@
     </div>
     <div class="nav-right">
       <a href="index.html#subscribe" class="btn-sm">Подписаться →</a>
+      <label for="nav-toggle" class="burger" role="button" aria-label="Меню" tabindex="0"><span></span><span></span><span></span></label>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-header">
+      <span class="mobile-brand lg lg--static" role="img" aria-label="startupbase.uno"><span class="lg__box"><svg class="lg__mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="lg__word">startupbase<span class="acc">.uno</span></span></span></span>
+      <label for="nav-toggle" class="mobile-close" role="button" aria-label="Закрыть меню" tabindex="0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg></label>
+    </div>
+    <div class="mobile-body">
+      <a href="index.html">Блог</a>
+      <a href="category.html">Рубрики</a>
+      <a href="search.html" class="on">Поиск</a>
+      <a href="author.html">Авторы</a>
+      <div class="divider"></div>
+      <div class="cta-area">
+        <a href="index.html#subscribe" class="btn-sm">Подписаться →</a>
+      </div>
     </div>
   </div>
 </nav>
