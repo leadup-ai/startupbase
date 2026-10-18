@@ -206,3 +206,110 @@ footer .lg__word { font-size: 17px; }
 @media (max-width: 720px) {
   .lg__mark { width: 16px; height: 16px; }
 }
+
+
+/* ——— Мобильное меню (CSS-only): бургер + выезжающая панель ——— */
+.nav-toggle {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.burger {
+  display: none;
+  width: 34px; height: 34px;
+  border-radius: var(--r-md);
+  background: var(--bg-4);
+  border: 1px solid var(--border-2);
+  color: var(--fg-2);
+  cursor: pointer;
+  justify-items: center;
+  align-content: center;
+  gap: 3px;
+  transition: background 120ms var(--ease), border-color 120ms var(--ease);
+  -webkit-tap-highlight-color: transparent;
+}
+.burger:hover { background: var(--bg-3); border-color: var(--border-3); }
+.burger span {
+  width: 16px; height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%; left: 0; right: 0;
+  max-height: calc(100vh - 72px);
+  max-height: calc(100dvh - 72px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--bg-1);
+  border-bottom: 1px solid var(--border-1);
+  box-shadow: var(--shadow-3);
+  flex-direction: column;
+}
+#nav-toggle:checked ~ .mobile-menu {
+  display: flex;
+  animation: menu-in 160ms var(--ease) both;
+}
+@keyframes menu-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+.mobile-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border-1);
+}
+.mobile-brand {
+  display: inline-flex; align-items: center;
+  font-size: 16px; font-weight: 600; letter-spacing: -0.02em;
+  color: var(--fg-1); white-space: nowrap;
+}
+.mobile-close {
+  width: 34px; height: 34px;
+  border-radius: var(--r-md);
+  background: var(--bg-4);
+  border: 1px solid var(--border-2);
+  display: grid; place-items: center;
+  color: var(--fg-2);
+  cursor: pointer;
+  transition: background 120ms var(--ease), border-color 120ms var(--ease);
+}
+.mobile-close:hover { background: var(--bg-3); border-color: var(--border-3); }
+.mobile-body { padding: 14px 16px 18px; }
+.mobile-body > a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px;
+  color: var(--fg-2); font-size: 15px; font-weight: 500;
+  border-radius: var(--r-md); text-decoration: none;
+  transition: all 120ms var(--ease);
+}
+.mobile-body > a:hover { background: var(--bg-3); color: var(--fg-1); }
+.mobile-body > a.on { background: var(--bg-3); color: var(--fg-1); box-shadow: inset 2px 0 0 var(--teal); }
+.mobile-body .divider { height: 1px; background: var(--border-1); margin: 10px 0; }
+.mobile-body .cta-area { padding: 14px 0 0; display: flex; flex-direction: column; gap: 8px; }
+.mobile-body .cta-area .btn-sm { width: 100%; justify-content: center; }
+
+@media (max-width: 720px) {
+  .burger { display: grid; }
+  .nav-links { display: none; }
+  /* фильтры: горизонтальный скролл вместо переноса; сетка на одной колонке */
+  .filters { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .filters::-webkit-scrollbar { display: none; }
+  .filters > * { flex: 0 0 auto; }
+  .featured { grid-template-columns: 1fr !important; }
+}
+
+@media (min-width: 721px) {
+  .mobile-menu { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu { animation: none; }
+  .burger, .mobile-close { transition: none; }
+}
