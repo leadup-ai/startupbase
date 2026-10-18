@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><link rel="stylesheet" href="ds.css">
+<style>
+  .canvas--og{background:var(--bg-1)}
+  .head{position:absolute;top:44px;left:56px;right:56px;display:flex;align-items:center;justify-content:space-between}
+  .logo__mark{width:32px;height:32px}
+  .logo__word{font-size:22px}
+  .body{position:absolute;left:56px;right:56px;top:150px}
+  .eyebrow{font-size:13px;margin-bottom:22px}
+  .h1{font-size:64px;letter-spacing:-.04em;line-height:1.05}
+  .h1 em{font-style:normal;color:var(--teal)}
+  .lead{margin-top:20px;font-size:21px;color:var(--text-2);max-width:820px}
+  .strip{position:absolute;left:56px;right:56px;bottom:44px;display:flex;align-items:center;gap:12px}
+  .chip{font-size:13px;padding:6px 12px}
+  .url{margin-left:auto;font-family:var(--font-mono);font-size:15px;color:var(--text-3)}
+</style></head>
+<body><div class="canvas canvas--og">
+  <div class="grid-bg"></div><div class="glow" style="width:560px;height:560px;left:-200px;bottom:-240px;opacity:.6"></div>
+
+  <div class="head">
+    <div class="logo"><svg class="logo__mark" viewBox="0 0 64 64"><rect x="1.5" y="1.5" width="61" height="61" rx="14" fill="#141B18" stroke="#00E5C7" stroke-opacity=".45" stroke-width="2"/><path d="M18 40.5 L32 24 L46 40.5" fill="none" stroke="#00E5C7" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 47.5 H44" fill="none" stroke="#00E5C7" stroke-opacity=".55" stroke-width="4.5" stroke-linecap="round"/></svg><span class="logo__word">startupbase<span class="up">.uno</span></span></div>
+    <div class="eyebrow">◆ Блог</div>
+  </div>
+
+  <div class="body">
+    <h1 class="title h1">Блог <em>startupbase.uno</em></h1>
+    <p class="lead">Новости ИИ и разборы ИИ-агентов для бизнеса: что вышло, что это значит и как внедрять</p>
+  </div>
+
+  <div class="strip">
+    <span class="chip chip--on">Новости ИИ</span>
+    <span class="chip">Разборы</span>
+    <span class="chip">Внедрение</span>
+    <div class="url">blog.startupbase.uno</div>
+  </div>
+</div></body></html>

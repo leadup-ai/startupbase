@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><link rel="stylesheet" href="ds.css">
+<style>
+  .head{position:absolute;top:52px;left:64px;right:64px;display:flex;align-items:center;justify-content:space-between}
+  .h-title{margin:112px 64px 0;font-size:46px;max-width:1180px}
+  .diagram{position:absolute;left:64px;right:64px;top:262px;display:flex;align-items:center;gap:20px}
+  .node{background:var(--bg-3);border:1px solid var(--border-1);border-radius:var(--r-lg);padding:22px 20px}
+  .node--core{border-color:rgba(0,229,199,.45);background:var(--bg-2);box-shadow:var(--teal-glow)}
+  .node__t{font-weight:600;font-size:22px;letter-spacing:-.02em}
+  .node__s{font-family:var(--font-mono);font-size:13px;color:var(--text-3);margin-top:6px}
+  .arrow{flex:0 0 auto;color:var(--text-3);font-size:22px;font-family:var(--font-mono)}
+  .experts{flex:1;background:var(--bg-2);border:1px solid var(--border-1);border-radius:var(--r-lg);padding:22px 24px}
+  .experts__head{display:flex;justify-content:space-between;align-items:baseline}
+  .row{display:flex;gap:10px;margin-top:14px}
+  .row .chip{flex:1;text-align:center}
+  .stats{position:absolute;left:64px;right:64px;bottom:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .stat{padding:20px 22px;border-left:1px solid rgba(0,229,199,.35)}
+  .stat .num{font-size:44px}
+  .stat .cap{font-family:var(--font-mono);font-size:13px;color:var(--text-2);margin-top:8px}
+</style></head>
+<body><div class="canvas canvas--16x9">
+  <div class="grid-bg"></div><div class="glow" style="width:520px;height:520px;right:-160px;top:-180px;opacity:.6"></div>
+
+  <div class="head">
+    <div class="logo"><svg class="logo__mark" viewBox="0 0 64 64"><rect x="1.5" y="1.5" width="61" height="61" rx="14" fill="#141B18" stroke="#00E5C7" stroke-opacity=".45" stroke-width="2"/><path d="M18 40.5 L32 24 L46 40.5" fill="none" stroke="#00E5C7" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 47.5 H44" fill="none" stroke="#00E5C7" stroke-opacity=".55" stroke-width="4.5" stroke-linecap="round"/></svg><span class="logo__word">startupbase<span class="up">.uno</span></span></div>
+    <div class="eyebrow">Fig 1 · Архитектура</div>
+  </div>
+
+  <h1 class="title h-title">Разреженная активация: роутер выбирает часть экспертов на каждый токен</h1>
+  <div class="diagram">
+    <div class="node"><div class="node__t">Токены</div><div class="node__s">вход агентной цепочки</div></div>
+    <div class="arrow">→</div>
+    <div class="node node--core"><div class="node__t">Роутер</div><div class="node__s">выбор топ-k экспертов</div></div>
+    <div class="arrow">→</div>
+    <div class="experts">
+      <div class="experts__head"><div class="node__t">Пул экспертов</div><div class="node__s">816B total параметров</div></div>
+      <div class="row"><span class="chip chip--on">E1</span><span class="chip">E2</span><span class="chip chip--on">E3</span><span class="chip">E4</span><span class="chip">E5</span><span class="chip chip--on">E6</span></div>
+      <div class="row"><span class="chip">E7</span><span class="chip">E8</span><span class="chip">E9</span><span class="chip">E10</span><span class="chip">E11</span><span class="chip">E12</span></div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="node__t">Ответ</div><div class="node__s">42B active на токен</div></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="num">816B</div><div class="cap">total параметров в пуле</div></div>
+    <div class="stat"><div class="num">42B</div><div class="cap">active на каждый токен</div></div>
+    <div class="stat"><div class="num">1M</div><div class="cap">токенов контекста</div></div>
+  </div>
+</div></body></html>
