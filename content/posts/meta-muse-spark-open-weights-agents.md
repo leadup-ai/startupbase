@@ -1,12 +1,11 @@
 ---
-author: vladimir-nagin
-category: Новости ИИ
-description: Что даёт открытая модель Meta Muse Spark Open для бизнеса? Разбираем 816B параметров, лицензию, бенчмарки и запуск ИИ-агентов.
+title: "Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач"
+slug: meta-muse-spark-open-weights-agents
 locale: ru
-meta_description: Что даёт открытая модель Meta Muse Spark Open для бизнеса? Разбираем 816B параметров, лицензию, бенчмарки и запуск ИИ-агентов.
-meta_title: Meta Muse Spark Open: веса, лицензия и запуск — разбор
+description: "Что даёт открытая модель Meta Muse Spark Open для бизнеса? Разбираем 816B параметров, лицензию, бенчмарки и запуск ИИ-агентов."
+meta_title: "Meta Muse Spark Open: веса, лицензия и запуск — разбор"
+meta_description: "Что даёт открытая модель Meta Muse Spark Open для бизнеса? Разбираем 816B параметров, лицензию, бенчмарки и запуск ИИ-агентов."
 primary_keyword: meta muse spark open
-reading_minutes: 8
 secondary_keywords:
   - meta muse spark
   - muse spark open
@@ -15,15 +14,15 @@ secondary_keywords:
   - muse spark бенчмарки
   - muse spark локальный запуск
   - muse glimmer
-slug: meta-muse-spark-open-weights-agents
+category: "Новости ИИ"
+author: vladimir-nagin
+reading_minutes: 8
 tags:
   - Meta
   - открытые модели
   - ИИ-агенты
   - лицензии
   - MoE
-title: Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач
-draft: true
 ---
 
 # Meta Muse Spark Open: открытые веса, лицензия и запуск для агентных задач
