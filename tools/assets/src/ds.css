@@ -6,6 +6,7 @@
   --teal:#00E5C7; --teal-hover:#14F5D7; --teal-pressed:#00CBB0;
   --teal-tint:rgba(0,229,199,.12); --teal-tint-2:rgba(0,229,199,.20);
   --teal-glow:0 0 24px rgba(0,229,199,.45);
+  --warning:#F5B544; --warning-tint:rgba(245,181,68,.14);
   --bg-0:#050807; --bg-1:#0A0F0D; --bg-2:#0F1512; --bg-3:#141B18; --bg-4:#1B2420; --bg-5:#253029;
   --text-1:#F3F7F5; --text-2:#A9B7B1; --text-3:#6F7D77;
   --border-1:rgba(255,255,255,.08); --border-2:rgba(255,255,255,.14);
@@ -56,6 +57,7 @@ body{
   border:1px solid var(--border-1);background:var(--bg-2);border-radius:var(--r-sm);padding:6px 12px;white-space:nowrap
 }
 .chip--on{color:var(--teal);border-color:rgba(0,229,199,.45);background:var(--teal-tint)}
+.chip--warn{color:var(--warning);border-color:rgba(245,181,68,.45);background:var(--warning-tint)}
 .num{font-weight:600;letter-spacing:-.04em;color:var(--teal);line-height:1}
 .label{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
 .footer-note{font-family:var(--font-mono);font-size:13px;color:var(--text-3)}

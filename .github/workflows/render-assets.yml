@@ -1,10 +1,11 @@
 name: render-assets
 
-# Рендерит бинарные ассеты блога (иллюстрации статьи, OG-карточки, логотип, фавиконы)
-# из исходников tools/assets/src и коммитит их в main.
+# Рендерит бинарные ассеты блога (иллюстрации статей, OG-карточки, логотип, фавиконы)
+# из исходников tools/assets (см. tools/assets/README.md) и коммитит их в main.
 #
 # Запуск: автоматически на push в tools/assets/**, либо вручную через
-# Actions -> render-assets -> Run workflow (можно указать slug статьи).
+# Actions -> render-assets -> Run workflow (slug — необязательный фильтр:
+# пусто = все статьи из tools/assets/src/articles/*).
 #
 # Если прогон падает, шаг «Publish diagnostics on failure» коммитит полный лог
 # в _diag/render-assets.log — по нему видно причину без доступа к логам Actions.
@@ -13,9 +14,9 @@ on:
   workflow_dispatch:
     inputs:
       slug:
-        description: 'Slug статьи (папка images/blog/<slug>/)'
+        description: 'Slug статьи (папка images/blog/<slug>/); пусто = все статьи'
         required: false
-        default: 'meta-muse-spark-open-weights-agents'
+        default: ''
   push:
     branches: [main]
     paths:
@@ -53,7 +54,7 @@ jobs:
         working-directory: tools/assets
         env:
           DIST_ROOT: ../..
-          SLUG: ${{ inputs.slug || 'meta-muse-spark-open-weights-agents' }}
+          SLUG: ${{ inputs.slug }}
         run: |
           exec > >(tee /tmp/render-assets.log) 2>&1
           set -euxo pipefail
@@ -87,17 +88,19 @@ jobs:
 
       - name: Commit assets
         env:
-          SLUG: ${{ inputs.slug || 'meta-muse-spark-open-weights-agents' }}
+          SLUG: ${{ inputs.slug }}
         run: |
           set -euo pipefail
           git config user.name "leadup-ai"
           git config user.email "nagin@leadupmarketers.com"
+          msg="assets: render generated images"
+          if [ -n "${SLUG:-}" ]; then msg="$msg ($SLUG)"; fi
           git add -A
           if git diff --cached --quiet; then
             echo "no asset changes"
           else
             git diff --cached --stat
-            git commit -m "assets: render generated images ($SLUG)"
+            git commit -m "$msg"
             git push
           fi
 

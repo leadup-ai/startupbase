@@ -7,19 +7,22 @@ OG-карточки, логотип/марка и фавиконы. Пайпла
 ## Как это работает
 
 ```
-tools/assets/src/*.html   →   render.js (playwright, viewport ×2)   →   out/*.png
-out/*.png                 →   postprocess.py (Pillow)               →   файлы в репозитории
+tools/assets/src/*.html                       →  render.js (playwright, viewport ×2)  →  out/*.png
+tools/assets/src/articles/<slug>/*.html       →  render.js                          →  out/<slug>--*.png
+out/*.png                                     →  postprocess.py (Pillow)            →  файлы в репозитории
 ```
 
 Workflow `.github/workflows/render-assets.yml` запускается:
 
-* автоматически на push в `tools/assets/**` или в сам файл workflow;
-* вручную через **Actions → render-assets → Run workflow** (можно задать `slug`).
+* автоматически на push в `tools/assets/**` или в сам файл workflow — **все** статьи;
+* вручную через **Actions → render-assets → Run workflow** (необязательный фильтр `slug`:
+  пусто = все статьи, иначе только одна папка `src/articles/<slug>`, остальные файлы не трогаются).
 
 Он ставит Geist (npm-пакет `geist`, семейства Geist / Geist Mono), Playwright Chromium
 и Pillow, рендерит PNG, раскладывает их по путям сайта и коммитит результат в `main`
-(сообщение коммита: `assets: render generated images (<slug>)`). Если ничего не
-изменилось — шаг коммита просто пишет `no asset changes`.
+(сообщение коммита: `assets: render generated images` или
+`assets: render generated images (<slug>)` при ручном запуске с фильтром). Если ничего
+не изменилось — шаг коммита просто пишет `no asset changes`.
 
 ## Структура
 
@@ -28,25 +31,38 @@ Workflow `.github/workflows/render-assets.yml` запускается:
 | `src/ds.css` | подмножество токенов LeadUp AI Design System v3, нужное картинкам (тёмная тема, Geist, teal `#00E5C7`) |
 | `src/mark-m4.svg` | марка M4 в 32×32 grid (panel + chevron + caret), она же уезжает в `assets/logo/startupbase-mark.svg` |
 | `src/mark-512.html` | обёртка: разворачивает M4 на весь холст 512×512, чтобы PNG вышел 1024×1024 из настоящего вектора (не апскейл) |
-| `src/fig1..fig3.html`, `src/cover.html` | иллюстрации статьи 1440×810 (@2 → 2880×1620) |
-| `src/og-article.html`, `src/og-blog.html` | OG-карточки 1200×630 (@2 → 2400×1260, потом даунскейл до 1200×630) |
+| `src/og-blog.html` | общая OG-карточка блога 1200×630 (@2 → 2400×1260, потом даунскейл до 1200×630) |
 | `src/logo-dark.html`, `src/logo-light.html` | лок-апы словаря 900×160, прозрачный фон, обрезка по ink |
 | `src/appicon.html` | app icon 512×512 на `--bg-1` |
-| `render.js` | таблица JOBS: шаблон → размер → имя PNG |
+| `src/articles/<slug>/article.json` | метаданные статьи: `slug`, `figures[]` (имена webp-файлов по порядку fig1/fig2/fig3), `og_default: true` — если карточка этой статьи идёт в `assets/og/article-default*` |
+| `src/articles/<slug>/{fig1,fig2,fig3,cover}.html` | иллюстрации статьи 1440×810 (@2 → 2880×1620) |
+| `src/articles/<slug>/og.html` | OG-карточка статьи 1200×630 (@2 → 2400×1260, потом даунскейл) |
+| `render.js` | таблицы `SHARED_JOBS` (общие шаблоны) и `ARTICLE_JOBS` (шаблоны статьи); перебирает `src/articles/*/` |
 | `postprocess.py` | webp q90/88, PNG-даунскейл OG, contain-fit лок-апов 312×48, фавиконы/ico, apple-touch-icon |
 
-## Что попадает в репозиторий (21 файл)
+Правила именования вывода рендера: общие шаблоны → `out/<имя>.png`, шаблоны статьи →
+`out/<slug>--fig1.png`, `out/<slug>--fig2.png`, `out/<slug>--fig3.png`,
+`out/<slug>--cover.png`, `out/<slug>--og.png`.
+
+## Что попадает в репозиторий
+
+На каждую статью в `src/articles/<slug>/`:
 
 ```
-images/blog/<slug>/fig-1-architecture.webp   2880×1620
-images/blog/<slug>/fig-2-terminal.webp       2880×1620
-images/blog/<slug>/fig-3-benchmarks.webp     2880×1620
-images/blog/<slug>/cover.webp                2880×1620
-images/blog/<slug>/og.png                    1200×630
+images/blog/<slug>/<figures[0]>.webp   2880×1620
+images/blog/<slug>/<figures[1]>.webp   2880×1620
+images/blog/<slug>/<figures[2]>.webp   2880×1620
+images/blog/<slug>/cover.webp          2880×1620
+images/blog/<slug>/og.png              1200×630
+```
+
+Плюс общие файлы (пересобираются всегда, независимо от статей):
+
+```
 assets/og/default.png                        1200×630
 assets/og/default@2x.png                     2400×1260
-assets/og/article-default.png                1200×630
-assets/og/article-default@2x.png             2400×1260
+assets/og/article-default.png                1200×630        ← из <slug> с "og_default": true
+assets/og/article-default@2x.png             2400×1260       ← из <slug> с "og_default": true
 assets/logo/startupbase-mark.svg             M4, вектор
 assets/logo/startupbase-mark-512.png         512×512
 assets/logo/startupbase-mark-128.png         128×128
@@ -63,12 +79,22 @@ favicon-64.png                               64×64
 
 ## Как добавить иллюстрации для новой статьи
 
-1. Скопировать `src/fig1.html` → `src/<что-то>.html` и поправить разметку/текст.
-2. Добавить строку в `JOBS` в `render.js` (`['<что-то>.html', 1440, 810, 2, '<имя>.png', false]`).
-3. Добавить вызов в `postprocess.py`:
-   `webp('<имя>.png', f'{IMG}/<имя>.webp')`.
-4. Запушить — workflow отрендерит и закоммитит; для другого slug запускать вручную
-   с параметром `slug`.
+1. Создать `src/articles/<slug>/` и скопировать туда шаблоны из соседней статьи
+   (`fig1.html`, `fig2.html`, `fig3.html`, `cover.html`, `og.html`) — пути к общим
+   ассетам внутри них идут на два уровня вверх (`../../ds.css`).
+2. Поправить разметку/текст, при необходимости уменьшить/увеличить число `figN.html`.
+3. Завести `src/articles/<slug>/article.json`:
+   `{"slug": "<slug>", "figures": ["fig-1-...", "fig-2-...", "fig-3-..."]}`;
+   `"og_default": true` — только у одной статьи (её OG-карточка обновляет
+   `assets/og/article-default*`).
+4. Запушить — workflow отрендерит и закоммитит **все** статьи из `src/articles/*/`;
+   для одной статьи можно запустить вручную с параметром `slug`.
+5. Файлы `images/blog/<slug>/*` больше нигде не перечисляются: пока статьи нет в
+   `src/articles/`, её ассеты не перегенерируются и не удаляются.
+
+`render.js` и `postprocess.py` под новую статью править не нужно — они читают
+`src/articles/*/article.json`. Править их нужно только если меняется набор
+шаблонов статьи (`ARTICLE_JOBS`) или появляется новая общая картинка (`SHARED_JOBS`).
 
 ## Правила дизайн-системы, которые соблюдают шаблоны
 
