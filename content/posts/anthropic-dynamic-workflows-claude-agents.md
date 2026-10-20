@@ -1,28 +1,28 @@
 ---
-title: Claude Dynamic Workflows: как Anthropic координирует агентов
-slug: anthropic-dynamic-workflows-claude-agents
-locale: ru
-description: Anthropic представила Dynamic Workflows в Claude Code: Claude пишет JavaScript-скрипт, который оркеструет десятки и сотни субагентов, а рантайм исполняет его в фоне. Разбираем механику, лимиты, экономику и место рядом с субагентами и agent teams.
-meta_title: Claude Dynamic Workflows: оркестрация агентов в Claude Code
-meta_description: Dynamic Workflows в Claude Code: Claude пишет JS-скрипт и запускает десятки агентов параллельно. Что это значит для вашей команды?
-primary_keyword: claude dynamic workflows
+title: "Claude Dynamic Workflows: как Anthropic координирует агентов"
+slug: "anthropic-dynamic-workflows-claude-agents"
+locale: "ru"
+description: "Anthropic представила Dynamic Workflows в Claude Code: Claude пишет JavaScript-скрипт, который оркеструет десятки и сотни субагентов, а рантайм исполняет его в фоне. Разбираем механику, лимиты, экономику и место рядом с субагентами и agent teams."
+meta_title: "Claude Dynamic Workflows: оркестрация агентов в Claude Code"
+meta_description: "Dynamic Workflows в Claude Code: Claude пишет JS-скрипт и запускает десятки агентов параллельно. Что это значит для вашей команды?"
+primary_keyword: "claude dynamic workflows"
 secondary_keywords:
-  - claude code workflows
-  - dynamic workflows claude code
-  - оркестрация агентов Claude
-  - ultracode Claude Code
-  - субагенты Claude Code
-  - Claude Opus 4.8
-  - deep-research Claude Code
-category: Новости ИИ
-author: vladimir-nagin
+  - "claude code workflows"
+  - "dynamic workflows claude code"
+  - "оркестрация агентов Claude"
+  - "ultracode Claude Code"
+  - "субагенты Claude Code"
+  - "Claude Opus 4.8"
+  - "deep-research Claude Code"
+category: "Новости ИИ"
+author: "vladimir-nagin"
 reading_minutes: 8
 tags:
-  - anthropic
-  - claude code
-  - ии-агенты
-  - оркестрация
-cover: /images/blog/anthropic-dynamic-workflows-claude-agents/cover.webp
+  - "anthropic"
+  - "claude code"
+  - "ии-агенты"
+  - "оркестрация"
+cover: "/images/blog/anthropic-dynamic-workflows-claude-agents/cover.webp"
 draft: true
 ---
 
