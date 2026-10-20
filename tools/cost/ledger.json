@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "currency": "USD",
+  "method": "tools/cost/README.md",
+  "articles": [
+    {
+      "slug": "meta-muse-spark-open-weights-agents",
+      "status": "draft",
+      "period": "2026-10-17T17:00Z/2026-10-18T12:00Z",
+      "runs": [
+        {
+          "run_id": "intake-2026-10-17",
+          "step": "trend_intake",
+          "agent": "seo-researcher",
+          "model": "openrouter/deepseek/deepseek-v4.1-flash",
+          "tokens_in": 90000,
+          "tokens_out": 6000,
+          "dataforseo_calls": 1,
+          "retries": 0,
+          "quality": "estimated",
+          "note": "5 тем, Hacker News + firecrawl; агент не вернул цифру токенов. 1 вызов DataForSEO — аудит инструментов Researcher"
+        },
+        {
+          "run_id": "run_007f1790-5862-46e8-8772-6152915f4120",
+          "step": "researcher_brief_v1",
+          "agent": "seo-researcher",
+          "model": "openrouter/deepseek/deepseek-v4.1-flash",
+          "tokens_in": 193240,
+          "tokens_out": 8000,
+          "dataforseo_calls": 3,
+          "retries": 0,
+          "quality": "measured_in_only",
+          "note": "агент вернул единое tokens_used=193240 — трактуется как вход/контекст"
+        },
+        {
+          "run_id": "run_ea6026bd-e159-4e59-ba17-f5b0b6db0b9d",
+          "step": "researcher_brief_v2_fixes",
+          "agent": "seo-researcher",
+          "model": "openrouter/deepseek/deepseek-v4.1-flash",
+          "tokens_in": 160000,
+          "tokens_out": 8000,
+          "dataforseo_calls": 4,
+          "retries": 1,
+          "quality": "estimated",
+          "note": "переделка брифа по приёмке (4 правки), цифра не залогирована"
+        },
+        {
+          "run_id": "run_7296aafb-7d17-4696-8a2e-be84d0fff0c6",
+          "step": "writer",
+          "agent": "seo-writer",
+          "model": "seo-writer",
+          "tokens_in": 5460,
+          "tokens_out": 5000,
+          "dataforseo_calls": 0,
+          "retries": 0,
+          "quality": "measured_in_only",
+          "note": "tokens_used=5460; на выходе статья 1895 слов (~3.5k токенов)"
+        },
+        {
+          "run_id": "run_4b4d4b01-5430-4712-9105-07295b4dc336",
+          "step": "optimizer_v1",
+          "agent": "seo-aeo-optimizer",
+          "model": "openrouter/deepseek/deepseek-v4.1-flash",
+          "tokens_in": 3480,
+          "tokens_out": 5000,
+          "dataforseo_calls": 0,
+          "retries": 0,
+          "quality": "measured_in_only"
+        },
+        {
+          "run_id": "run_b7b5b49d-b51d-47f5-9a74-2f9cef3c3dd0",
+          "step": "optimizer_v2_redo",
+          "agent": "seo-aeo-optimizer",
+          "model": "openrouter/deepseek/deepseek-v4.1-flash",
+          "tokens_in": 3480,
+          "tokens_out": 5000,
+          "dataforseo_calls": 0,
+          "retries": 1,
+          "quality": "measured_in_only",
+          "note": "повторный прогон: чистка фактов вне разрешённого списка"
+        },
+        {
+          "run_id": "orchestrator-content-phase",
+          "step": "orchestration",
+          "agent": "seo-lead",
+          "model": "orchestrator",
+          "tokens_in": 1200000,
+          "tokens_out": 45000,
+          "dataforseo_calls": 0,
+          "retries": 3,
+          "quality": "estimated",
+          "note": "~27 ходов: приёмка по дизайн-системе, передача JSON, 3 неудачных save_draft, ремонт YAML фронтматтера. Оценка = ходы x средний контекст, не измерение"
+        },
+        {
+          "run_id": "qa-publish-article1",
+          "step": "qa_publish",
+          "agent": "inline subagents",
+          "model": "orchestrator",
+          "tokens_in": 240000,
+          "tokens_out": 10000,
+          "dataforseo_calls": 0,
+          "retries": 0,
+          "quality": "estimated",
+          "note": "верификация файла статьи и сборка страницы статьи"
+        }
+      ],
+      "totals": {
+        "tokens_in": 1895660,
+        "tokens_out": 92000,
+        "tokens_total": 1987660,
+        "api_calls": 8,
+        "dataforseo_calls": 8,
+        "retries": 5,
+        "cost_usd": null
+      },
+      "notes": [
+        "Из 8 прогонов измерены 4 (Researcher v1, Writer, AEO x2) — и то без разделения вход/выход.",
+        "Оркестрация и QA — оценка: у харнесса нет счётчика собственных токенов.",
+        "Изображения: платных image-API 0; рендер векторный (Chromium + PIL), маржинальная стоимость картинок на статью ~0.",
+        "GitHub Actions для публичного репо бесплатны."
+      ]
+    }
+  ]
+}

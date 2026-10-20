@@ -1,0 +1,14 @@
+{
+  "_note": "Тариф DataForSEO. Если цена за вызов отличается по эндпоинтам — заполни их отдельно; иначе достаточно default_call_price.",
+  "currency": "USD",
+  "unit": "per_call",
+  "default_call_price": null,
+  "endpoints": {
+    "serp": null,
+    "keyword_volume": null,
+    "keyword_difficulty": null,
+    "keyword_ideas": null,
+    "ai_keyword_volume": null,
+    "search_suggestions": null
+  }
+}

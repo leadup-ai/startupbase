@@ -1,0 +1,24 @@
+{
+  "_note": "Цены за 1M токенов в USD. Заполни price_in / price_out — aggregate.py посчитает cost_usd без правок кода.",
+  "currency": "USD",
+  "unit": "per_1m_tokens",
+  "models": {
+    "openrouter/deepseek/deepseek-v4.1-flash": {
+      "price_in": null,
+      "price_out": null,
+      "used_for": "SEO Researcher, SEO AEO Optimizer, trend intake"
+    },
+    "orchestrator": {
+      "model_id": null,
+      "price_in": null,
+      "price_out": null,
+      "used_for": "SEO Lead — оркестрация: приёмка шагов, передача JSON, ремонт frontmatter, публикация"
+    },
+    "seo-writer": {
+      "model_id": null,
+      "price_in": null,
+      "price_out": null,
+      "used_for": "SEO Writer"
+    }
+  }
+}
