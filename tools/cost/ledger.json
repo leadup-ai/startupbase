@@ -119,6 +119,127 @@
         "Изображения: платных image-API 0; рендер векторный (Chromium + PIL), маржинальная стоимость картинок на статью ~0.",
         "GitHub Actions для публичного репо бесплатны."
       ]
+    },
+    {
+      "slug": "anthropic-dynamic-workflows-claude-agents",
+      "status": "published",
+      "period": "2026-10-20T18:50Z/2026-10-20T20:05Z",
+      "runs": [
+        {
+          "run_id": "a2-researcher-brief-v1",
+          "step": "researcher_brief_v1",
+          "agent": "seo-researcher",
+          "model": "openrouter/deepseek/deepseek-v4.1-flash",
+          "tokens_in": 187882,
+          "tokens_out": 13748,
+          "dataforseo_calls": 3,
+          "retries": 0,
+          "quality": "measured_in_only",
+          "note": "in и out из счётчика харнесса; 3 вызова DataForSEO (справки по объёму)"
+        },
+        {
+          "run_id": "a2-researcher-brief-v2-fixes",
+          "step": "researcher_brief_v2_fixes",
+          "agent": "seo-researcher",
+          "model": "openrouter/deepseek/deepseek-v4.1-flash",
+          "tokens_in": 118152,
+          "tokens_out": 18743,
+          "dataforseo_calls": 0,
+          "retries": 1,
+          "quality": "measured_in_only",
+          "note": "переделка брифа по приёмке; сессия песочницы 77bf04fa-83df-4852-a908-434b0e5c61d0"
+        },
+        {
+          "run_id": "a2-writer",
+          "step": "writer",
+          "agent": "seo-writer",
+          "model": "seo-writer",
+          "tokens_in": 270931,
+          "tokens_out": 19392,
+          "dataforseo_calls": 0,
+          "retries": 0,
+          "quality": "measured_in_only",
+          "note": "измерение харнесса; самоотчёт агента в out.json — единое tokens_used=3950 (сессия cafb3cf9-89e8-472c-b62d-d241d622d274)"
+        },
+        {
+          "run_id": "a2-aeo-optimizer",
+          "step": "aeo_optimizer",
+          "agent": "seo-aeo-optimizer",
+          "model": "openrouter/deepseek/deepseek-v4.1-flash",
+          "tokens_in": 350966,
+          "tokens_out": 19629,
+          "dataforseo_calls": 2,
+          "retries": 0,
+          "quality": "measured_in_only",
+          "note": "2 вызова DataForSEO; самоотчёт агента в final_out.json — единое tokens_used=2400 (сессия f76f622e-e1ed-4e22-a43d-c1db2c5da5ee)"
+        },
+        {
+          "run_id": "a2-image-render",
+          "step": "image_render",
+          "agent": "inline subagents",
+          "model": "openrouter/deepseek/deepseek-v4.1-flash",
+          "tokens_in": 690615,
+          "tokens_out": 8144,
+          "dataforseo_calls": 0,
+          "retries": 0,
+          "quality": "measured_in_only",
+          "note": "рендер 3 фигур + обложка + og.png через CI render-assets; платных image-API 0 (сессия f97bb652-5059-4ef4-a020-d551d083cd32)"
+        },
+        {
+          "run_id": "a2-article-page-build-failed",
+          "step": "article_page_build_failed",
+          "agent": "inline subagents",
+          "model": "openrouter/deepseek/deepseek-v4.1-flash",
+          "tokens_in": 5550593,
+          "tokens_out": 77166,
+          "dataforseo_calls": 0,
+          "retries": 1,
+          "quality": "measured_in_only",
+          "note": "субагент сборки страницы статьи упал по max-iterations и заменён; самый дорогой шаг (сессия 93ea701b-a88e-486c-8431-159705a89b64)"
+        },
+        {
+          "run_id": "a2-qa-publish",
+          "step": "qa_publish",
+          "agent": "inline subagents",
+          "model": "openrouter/deepseek/deepseek-v4.1-flash",
+          "tokens_in": 1856372,
+          "tokens_out": 65041,
+          "dataforseo_calls": 0,
+          "retries": 3,
+          "quality": "measured_in_only",
+          "note": "пуш файлов сайта + попытка публикации + восстановление тела из orig_draft и публикация (сессии f4c4f641-62d0-4003-93d7-bb9a9cb12492 и 41f22fd6-825e-451f-9094-8ed4d3608aaf)"
+        },
+        {
+          "run_id": "a2-orchestration",
+          "step": "orchestration",
+          "agent": "seo-lead",
+          "model": "orchestrator",
+          "tokens_in": 0,
+          "tokens_out": 0,
+          "dataforseo_calls": 0,
+          "retries": 0,
+          "quality": "estimated",
+          "note": "оркестратор в текущей среде НЕ измеряется (у харнесса нет счётчика токенов SEO Lead). 0/0 => вклад в cost_usd = $0.00, то есть оркестрация НЕ УЧТЕНА в cost_usd"
+        }
+      ],
+      "totals": {
+        "tokens_in": 9025511,
+        "tokens_out": 221863,
+        "tokens_total": 9247374,
+        "api_calls": 5,
+        "dataforseo_calls": 5,
+        "retries": 5,
+        "cost_usd": 0.693
+      },
+      "notes": [
+        "Период выведен из времени артефактов прогонов (брифы 18:58–18:59, тело 19:05–19:09, сборка страницы 19:37) и коммита публикации 20:01Z.",
+        "Все 7 рабочих шагов измерены: in и out пришли из счётчика харнесса. quality=measured_in_only проставлено по требованию приёмки и совместимости с форматом статьи №1; по определению README это измерение обеих величин, а не только входа.",
+        "Стоимость LLM: все 7 шагов по прайсу openrouter/deepseek/deepseek-v4.1-flash ($0.04 за 1M in, $0.144 за 1M out) = $0.392969.",
+        "DataForSEO: 5 вызовов x default_call_price $0.06 = $0.30 (3 в Researcher v1, 2 в AEO Optimizer). Если вызовы были SERP/live_serp, стоимость ниже: 5 x $0.002 = $0.01.",
+        "Оркестрация (SEO Lead) НЕ измеряется и в cost_usd НЕ учтена: строка 0/0 даёт вклад $0.00. Реальная стоимость статьи выше на неучтённые ходы оркестратора.",
+        "Сборка страницы статьи упала по max-iterations и заменена: 5.63M входных токенов на неудачную попытку — самый дорогой шаг статьи.",
+        "GitHub Actions для публичного репо и image-API: $0."
+      ]
     }
   ]
 }
