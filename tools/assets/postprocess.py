@@ -1,23 +1,37 @@
 #!/usr/bin/env python3
 """Post-process the rendered PNGs in ./out into the site's binary assets.
 
+Article assets are driven by src/articles/<dir>/article.json:
+
+    {"slug": "<slug>", "figures": ["fig-1-...", "fig-2-...", "fig-3-..."],
+     "og_default": true}
+
+`figures[i]` is written to images/blog/<slug>/<figures[i]>.webp from the render
+out/<slug>--fig{i+1}.png; `og_default: true` additionally refreshes the generic
+OG card (assets/og/article-default*) from that article's out/<slug>--og.png.
+
 Targets (relative to DIST_ROOT, which defaults to the repo root):
-  images/blog/<SLUG>/fig-1-architecture.webp, fig-2-terminal.webp,
-                      fig-3-benchmarks.webp, cover.webp, og.png
+  images/blog/<slug>/<figures[i]>.webp, cover.webp, og.png
   assets/og/default.png, default@2x.png, article-default.png, article-default@2x.png
   assets/logo/startupbase-mark.svg, -mark-512.png, -mark-128.png,
               -logo-dark@1x.png, -logo-dark@2x.png,
               -logo-light@1x.png, -logo-light@2x.png, -app-icon-512.png
   favicon.ico, favicon-32.png, favicon-64.png, apple-touch-icon.png
+
+SLUG env var limits the run to one article (folder name or slug); empty = all.
 """
+import json
 import os
 import shutil
 from PIL import Image
 
 OUT = "out"
 DIST = os.environ.get("DIST_ROOT", "..")
-SLUG = os.environ.get("SLUG", "meta-muse-spark-open-weights-agents")
-IMG = os.path.join("images", "blog", SLUG)
+ONLY = (os.environ.get("SLUG") or "").strip()
+ARTICLES = os.path.join("src", "articles")
+
+FIG = (2880, 1620)
+OG2X = (2400, 1260)
 
 
 def _mkdir(p):
@@ -74,22 +88,51 @@ def png_fit(src, rel, box=(312, 48), trim=True):
     return canvas
 
 
-# ---------- article figures + cover (16:9) ----------
-FIG = (2880, 1620)
-webp("fig-1-architecture.png", f"{IMG}/fig-1-architecture.webp", expect=FIG)
-webp("fig-2-terminal.png", f"{IMG}/fig-2-terminal.webp", expect=FIG)
-webp("fig-3-benchmarks.png", f"{IMG}/fig-3-benchmarks.webp", expect=FIG)
-webp("cover.png", f"{IMG}/cover.webp", q=88, expect=FIG)
+def articles():
+    """[(dir, slug, meta)] for every src/articles/<dir>/article.json (after the SLUG filter)."""
+    found = []
+    if not os.path.isdir(ARTICLES):
+        return found
+    for d in sorted(os.listdir(ARTICLES)):
+        cfg = os.path.join(ARTICLES, d, "article.json")
+        if not os.path.isfile(cfg):
+            continue
+        with open(cfg, encoding="utf-8") as fh:
+            meta = json.load(fh)
+        slug = meta.get("slug") or d
+        if ONLY and ONLY not in (d, slug):
+            continue
+        found.append((d, slug, meta))
+    if ONLY and not found:
+        raise SystemExit(f"SLUG={ONLY}: no src/articles/*/article.json matches this slug")
+    return found
 
-# ---------- OG cards ----------
-OG2X = (2400, 1260)
-for src in ("og-article@2x.png", "og-blog@2x.png"):
-    im = Image.open(os.path.join(OUT, src))
+
+# ---------- article figures + cover (16:9) + per-article OG card ----------
+for _dir, slug, meta in articles():
+    img = os.path.join("images", "blog", slug)
+
+    figures = meta.get("figures") or []
+    for i, fig in enumerate(figures, start=1):
+        webp(f"{slug}--fig{i}.png", f"{img}/{fig}.webp", expect=FIG)
+
+    webp(f"{slug}--cover.png", f"{img}/cover.webp", q=88, expect=FIG)
+
+    og_src = f"{slug}--og.png"
+    im = Image.open(os.path.join(OUT, og_src))
     if im.size != OG2X:
-        raise SystemExit(f"{src}: unexpected render size {im.size}, expected {OG2X}")
-png("og-article@2x.png", "assets/og/article-default@2x.png")
-png("og-article@2x.png", "assets/og/article-default.png", size=(1200, 630))
-png("og-article@2x.png", f"{IMG}/og.png", size=(1200, 630))
+        raise SystemExit(f"{og_src}: unexpected render size {im.size}, expected {OG2X}")
+    png(og_src, f"{img}/og.png", size=(1200, 630))
+
+    # только статья, помеченная og_default, обновляет общую OG-карточку блога
+    if meta.get("og_default"):
+        png(og_src, "assets/og/article-default@2x.png")
+        png(og_src, "assets/og/article-default.png", size=(1200, 630))
+
+# ---------- blog OG card ----------
+im = Image.open(os.path.join(OUT, "og-blog@2x.png"))
+if im.size != OG2X:
+    raise SystemExit(f"og-blog@2x.png: unexpected render size {im.size}, expected {OG2X}")
 png("og-blog@2x.png", "assets/og/default@2x.png")
 png("og-blog@2x.png", "assets/og/default.png", size=(1200, 630))
 
