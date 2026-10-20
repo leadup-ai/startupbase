@@ -1,24 +1,44 @@
 {
   "_note": "Цены за 1M токенов в USD. Заполни price_in / price_out — aggregate.py посчитает cost_usd без правок кода.",
+  "_source": "Прайс владельца (Telegram, 2026-10-21): deepseek-v4.1-flash $0.04/M in, $0.144/M out; deepseek-v4-pro $0.21/M in, $0.42/M out.",
   "currency": "USD",
   "unit": "per_1m_tokens",
   "models": {
+    "deepseek-v4.1-flash": {
+      "model_id": "deepseek-v4.1-flash",
+      "price_in": 0.04,
+      "price_out": 0.144,
+      "price_quality": "stated",
+      "used_for": "Researcher, AEO Optimizer, trend intake, Writer"
+    },
+    "deepseek-v4-pro": {
+      "model_id": "deepseek-v4-pro",
+      "price_in": 0.21,
+      "price_out": 0.42,
+      "price_quality": "stated",
+      "used_for": "резерв — уточнить, какие шаги конвейера идут на нём"
+    },
     "openrouter/deepseek/deepseek-v4.1-flash": {
-      "price_in": null,
-      "price_out": null,
+      "model_id": "deepseek-v4.1-flash",
+      "price_in": 0.04,
+      "price_out": 0.144,
+      "price_quality": "stated",
       "used_for": "SEO Researcher, SEO AEO Optimizer, trend intake"
+    },
+    "seo-writer": {
+      "model_id": "deepseek-v4.1-flash",
+      "price_in": 0.04,
+      "price_out": 0.144,
+      "price_quality": "assumption",
+      "used_for": "SEO Writer"
     },
     "orchestrator": {
       "model_id": null,
-      "price_in": null,
-      "price_out": null,
+      "assumed_model_id": "deepseek-v4-pro",
+      "price_in": 0.21,
+      "price_out": 0.42,
+      "price_quality": "assumption",
       "used_for": "SEO Lead — оркестрация: приёмка шагов, передача JSON, ремонт frontmatter, публикация"
-    },
-    "seo-writer": {
-      "model_id": null,
-      "price_in": null,
-      "price_out": null,
-      "used_for": "SEO Writer"
     }
   }
 }
