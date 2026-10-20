@@ -1,0 +1,4 @@
+{
+  "slug": "anthropic-dynamic-workflows-claude-agents",
+  "figures": ["fig-1-orchestration", "fig-2-workflows-panel", "fig-3-runtime-limits"]
+}

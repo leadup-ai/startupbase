@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><link rel="stylesheet" href="../../ds.css">
+<style>
+  .head{position:absolute;top:52px;left:64px;right:64px;display:flex;align-items:center;justify-content:space-between}
+  .h-title{margin:118px 64px 0;font-size:56px;max-width:1040px}
+  .cards{position:absolute;left:64px;right:64px;top:322px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card2{padding:34px 30px 30px}
+  .card2 .num{font-size:92px}
+  .card2 .word{margin-top:12px;font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+  .card2 .cap{margin-top:14px;font-size:19px;line-height:1.35;color:var(--text-2)}
+  .note{position:absolute;left:64px;right:64px;bottom:54px;display:flex;align-items:center;gap:14px;border-top:1px solid var(--border-1);padding-top:20px}
+  .note .footer-note:last-child{margin-left:auto}
+</style></head>
+<body><div class="canvas canvas--16x9">
+  <div class="grid-bg"></div><div class="glow" style="width:520px;height:520px;right:-180px;bottom:-200px;opacity:.5"></div>
+
+  <div class="head">
+    <div class="logo"><svg class="mk" viewBox="0 0 32 32" role="img" aria-label="M4"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="logo__word">startupbase<span class="up">.uno</span></span></div>
+    <div class="eyebrow">Fig 3 · Лимиты рантайма</div>
+  </div>
+
+  <h1 class="title h-title">Три жёстких предела рантайма Dynamic Workflows</h1>
+
+  <div class="cards">
+    <div class="card card2">
+      <div class="num">16</div>
+      <div class="word">parallel agents</div>
+      <div class="cap">параллельных агентов по умолчанию</div>
+    </div>
+    <div class="card card2">
+      <div class="num">1000</div>
+      <div class="word">agents / run</div>
+      <div class="cap">агентов за один запуск</div>
+    </div>
+    <div class="card card2">
+      <div class="num">4096</div>
+      <div class="word">items</div>
+      <div class="cap">элементов в параллельном проходе</div>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="chip chip--warn">Large workflow</span>
+    <div class="footer-note">свыше 25 агентов или проекция больше 1,5 млн токенов</div>
+    <div class="footer-note">runtime limits</div>
+  </div>
+</div></body></html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><link rel="stylesheet" href="../../ds.css">
+<style>
+  .head{position:absolute;top:52px;left:64px;right:64px;display:flex;align-items:center;justify-content:space-between}
+  .h-title{margin:112px 64px 0;font-size:46px;max-width:1180px}
+  .panel{position:absolute;left:64px;right:64px;top:256px;background:var(--bg-2);border:1px solid var(--border-1);border-radius:var(--r-lg);padding:26px 30px 28px}
+  .panel__h{display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .panel__name{font-family:var(--font-mono);font-size:26px;letter-spacing:-.02em;color:var(--teal)}
+  .bar{margin-top:34px}
+  .bar__lbl{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:13px;color:var(--text-3);margin-bottom:12px}
+  .track{position:relative;height:3px;background:var(--bg-5);border-radius:2px}
+  .fill{position:absolute;left:0;top:-1px;height:5px;width:64%;background:var(--teal);border-radius:3px;box-shadow:0 0 12px rgba(0,229,199,.35)}
+  .phases{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .ph{display:flex;align-items:center;gap:14px;background:var(--bg-3);border:1px solid var(--border-1);border-radius:var(--r-md);padding:18px 20px;font-family:var(--font-mono);font-size:15px;color:var(--text-1);white-space:nowrap}
+  .ph__c{margin-left:auto;color:var(--teal)}
+  .note{position:absolute;left:64px;right:64px;bottom:56px;padding-top:20px;border-top:1px solid var(--border-1)}
+</style></head>
+<body><div class="canvas canvas--16x9">
+  <div class="grid-bg"></div><div class="glow" style="width:560px;height:560px;left:-200px;top:-260px;opacity:.55"></div>
+
+  <div class="head">
+    <div class="logo"><svg class="mk" viewBox="0 0 32 32" role="img" aria-label="M4"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="logo__word">startupbase<span class="up">.uno</span></span></div>
+    <div class="eyebrow">Fig 2 · Панель /workflows</div>
+  </div>
+
+  <h1 class="title h-title">Панель /workflows: фазы, прогресс и число агентов</h1>
+
+  <div class="panel">
+    <div class="panel__h">
+      <div class="panel__name">/workflows</div>
+      <div class="panel__h"><span class="chip chip--on">running</span><span class="chip chip--warn">Large workflow</span></div>
+    </div>
+
+    <div class="bar">
+      <div class="bar__lbl"><span>progress</span><span>фаза 3 из 4</span></div>
+      <div class="track"><div class="fill"></div></div>
+    </div>
+
+    <div class="phases">
+      <div class="ph"><span>Фаза 1 · Разведка</span><span class="ph__c">6 агентов</span></div>
+      <div class="ph"><span>Фаза 2 · Сбор данных</span><span class="ph__c">10 агентов</span></div>
+      <div class="ph"><span>Фаза 3 · Проверка</span><span class="ph__c">4 агента</span></div>
+      <div class="ph"><span>Фаза 4 · Сводка</span><span class="ph__c">2 агента</span></div>
+    </div>
+  </div>
+
+  <div class="note"><div class="footer-note">Источник: документация Claude Code</div></div>
+</div></body></html>

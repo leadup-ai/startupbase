@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><link rel="stylesheet" href="../../ds.css">
+<style>
+  .head{position:absolute;top:52px;left:64px;right:64px;display:flex;align-items:center;justify-content:space-between}
+  .h-title{margin:112px 64px 0;font-size:46px;max-width:1180px}
+  .panes{position:absolute;left:64px;right:64px;top:256px;bottom:64px;display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .pane{position:relative;background:var(--bg-2);border:1px solid var(--border-1);border-radius:var(--r-lg);padding:24px 26px 22px;display:flex;flex-direction:column}
+  .pane--wl{border-color:rgba(0,229,199,.35)}
+  .pane__top{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+  .pane__t{font-weight:600;font-size:25px;letter-spacing:-.02em}
+  .pane__body{flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px}
+  .pane__cap{font-family:var(--font-mono);font-size:13px;color:var(--text-3)}
+  .node{background:var(--bg-3);border:1px solid var(--border-1);border-radius:var(--r-lg);padding:22px 20px}
+  .node--solo{width:300px;margin:0 auto;text-align:center}
+  .node__t{font-weight:600;font-size:22px;letter-spacing:-.02em}
+  .node__s{font-family:var(--font-mono);font-size:13px;color:var(--text-3);margin-top:6px}
+  .script{align-self:center;background:var(--bg-0);border:1px solid rgba(0,229,199,.45);border-radius:var(--r-md);padding:13px 20px;font-family:var(--font-mono);font-size:17px;color:var(--teal);box-shadow:var(--teal-glow)}
+  .fan{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  .agent{height:54px;display:flex;align-items:center;justify-content:center;background:var(--teal-tint);border:1px solid rgba(0,229,199,.45);border-radius:var(--r-md);font-family:var(--font-mono);font-size:13px;color:var(--teal)}
+</style></head>
+<body><div class="canvas canvas--16x9">
+  <div class="grid-bg"></div><div class="glow" style="width:560px;height:560px;right:-180px;top:-260px;opacity:.6"></div>
+
+  <div class="head">
+    <div class="logo"><svg class="mk" viewBox="0 0 32 32" role="img" aria-label="M4"><rect class="panel" x="3" y="3" width="26" height="26" rx="8" stroke-width="1.5"/><path class="s" d="M11 12 L16 16 L11 20" stroke-width="2.6"/><rect class="t" x="17" y="19.4" width="6" height="2.4" rx="1.2"/></svg><span class="logo__word">startupbase<span class="up">.uno</span></span></div>
+    <div class="eyebrow">Fig 1 · Оркестрация</div>
+  </div>
+
+  <h1 class="title h-title">Один агент в диалоге против workflow из десятков агентов</h1>
+
+  <div class="panes">
+    <div class="pane">
+      <div class="pane__top">
+        <div class="pane__t">Один агент</div>
+        <div class="label">single context</div>
+      </div>
+      <div class="pane__body">
+        <div class="node node--solo">
+          <div class="node__t">Агент</div>
+          <div class="node__s">один контекст · один диалог</div>
+        </div>
+      </div>
+      <div class="pane__cap">План живёт в диалоге · один запуск — одна задача</div>
+    </div>
+
+    <div class="pane pane--wl">
+      <div class="pane__top">
+        <div class="pane__t">Workflow</div>
+        <div class="label">script runtime</div>
+      </div>
+      <div class="pane__body">
+        <div class="script">orchestrate.js</div>
+        <div class="fan">
+          <div class="agent">agent-1</div>
+          <div class="agent">agent-2</div>
+          <div class="agent">agent-3</div>
+          <div class="agent">agent-4</div>
+          <div class="agent">agent-5</div>
+          <div class="agent">agent-6</div>
+          <div class="agent">agent-7</div>
+          <div class="agent">agent-8</div>
+          <div class="agent">agent-9</div>
+          <div class="agent">agent-10</div>
+        </div>
+      </div>
+      <div class="pane__cap">План живёт в скрипте · десятки агентов за один запуск</div>
+    </div>
+  </div>
+</div></body></html>
