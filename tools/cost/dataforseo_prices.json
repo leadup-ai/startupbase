@@ -1,14 +1,26 @@
 {
   "_note": "Тариф DataForSEO. Если цена за вызов отличается по эндпоинтам — заполни их отдельно; иначе достаточно default_call_price.",
+  "_source": "Прайс владельца (Telegram, 2026-10-21): SERP $0.0006–0.002 за выдачу; keyword volume $0.06; ideas / ranked keywords / search intent / page audit / parse — цена не указана.",
   "currency": "USD",
   "unit": "per_call",
-  "default_call_price": null,
+  "default_call_price": 0.06,
+  "_default_call_price_assumption": "default = keyword_volume ($0.06) — доминирующий эндпоинт в ledger (справки по объёму). Если часть из 8 вызовов была SERP/live_serp, сумма ниже: 8 x $0.002 = $0.016.",
+  "sensitivity_per_call": {
+    "serp_min": 0.0006,
+    "serp_max": 0.002,
+    "keyword_volume": 0.06
+  },
   "endpoints": {
-    "serp": null,
-    "keyword_volume": null,
+    "serp": 0.002,
+    "keyword_volume": 0.06,
     "keyword_difficulty": null,
     "keyword_ideas": null,
+    "ranked_keywords": null,
+    "search_intent": null,
+    "page_audit": null,
+    "parse": null,
     "ai_keyword_volume": null,
     "search_suggestions": null
-  }
+  },
+  "_endpoints_note": "endpoints пока не используются aggregate.py (там плоский default_call_price) — заполнены, чтобы разложить 8 вызовов по эндпоинтам, когда станет известен состав вызовов. Для SERP зафиксирован верх диапазона $0.002."
 }
